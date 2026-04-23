@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# Maximum number of workspaces to consider
+MAX_DESKTOPS=20
+
+# Get all currently existing workspaces
+EXISTING_WORKSPACES=$(i3-msg -t get_workspaces | tr ',' '\n' | grep -oP 'num":\K([0-9]+)')
+
+# Find the first available workspace number
+for ((i=1; i<=MAX_DESKTOPS; i++)); do
+    if ! echo "$EXISTING_WORKSPACES" | grep -q "^$i$"; then
+        EMPTY_WORKSPACE=$i
+        break
+    fi
+done
+
+# If found, switch to it, otherwise use the highest available number + 1
+if [ -n "$EMPTY_WORKSPACE" ]; then
+    i3-msg workspace number "$EMPTY_WORKSPACE"
+else
+    # Find the highest workspace number and add 1
+    NEXT_WS=$(($(echo "$EXISTING_WORKSPACES" | sort -n | tail -1) + 1))
+    # Limit to MAX_DESKTOPS
+    if [ "$NEXT_WS" -gt "$MAX_DESKTOPS" ]; then
+        NEXT_WS=$MAX_DESKTOPS
+    fi
+    i3-msg workspace number "$NEXT_WS"
+fi

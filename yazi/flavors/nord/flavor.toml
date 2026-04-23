@@ -1,0 +1,154 @@
+# vim:fileencoding=utf-8:foldmethod=marker
+# Nord flavor - uses colors from colors/nord.toml
+
+# : Manager {{{
+
+[manager]
+cwd = { fg = "${colors.cyan}" }
+
+# Hovered
+hovered         = { reversed = true }
+preview_hovered = { underline = true }
+
+# Find
+find_keyword  = { fg = "${colors.yellow}", bold = true, italic = true, underline = true }
+find_position = { fg = "${colors.magenta}", bg = "reset", bold = true, italic = true }
+
+# Marker
+marker_copied   = { fg = "${colors.lightgreen}",  bg = "${colors.lightgreen}" }
+marker_cut      = { fg = "${colors.lightred}",    bg = "${colors.lightred}" }
+marker_marked   = { fg = "${colors.lightcyan}",   bg = "${colors.lightcyan}" }
+marker_selected = { fg = "${colors.lightyellow}", bg = "${colors.lightyellow}" }
+
+# Tab
+tab_active   = { reversed = true }
+tab_inactive = {}
+tab_width    = 1
+
+# Count
+count_copied   = { fg = "${colors.bg}", bg = "${colors.green}" }
+count_cut      = { fg = "${colors.bg}", bg = "${colors.red}" }
+count_selected = { fg = "${colors.bg}", bg = "${colors.yellow}" }
+
+# Border
+border_symbol = "│"
+border_style  = { fg = "${colors.gray}" }
+
+# : }}}
+
+# : Status {{{
+
+[status]
+separator_open  = ""
+separator_close = ""
+separator_style = { fg = "${colors.darkgray}", bg = "${colors.darkgray}" }
+
+# Mode
+mode_normal = { fg = "${colors.bg}", bg = "${colors.blue}", bold = true }
+mode_select = { fg = "${colors.bg}", bg = "${colors.green}", bold = true }
+mode_unset  = { fg = "${colors.bg}", bg = "${colors.red}", bold = true }
+
+# Progress
+progress_label  = { fg = "${colors.fg}", bold = true }
+progress_normal = { fg = "${colors.blue}", bg = "${colors.darkgray}" }
+progress_error  = { fg = "${colors.red}", bg = "${colors.darkgray}" }
+
+# Permissions
+permissions_t = { fg = "${colors.blue}" }
+permissions_r = { fg = "${colors.yellow}" }
+permissions_w = { fg = "${colors.red}" }
+permissions_x = { fg = "${colors.green}" }
+permissions_s = { fg = "${colors.gray}" }
+
+# : }}}
+
+# : Select {{{
+
+[select]
+border   = { fg = "${colors.blue}" }
+active   = { fg = "${colors.magenta}", bold = true }
+inactive = {}
+
+# : }}}
+
+# : Input {{{
+
+[input]
+border   = { fg = "${colors.blue}" }
+title    = {}
+value    = {}
+selected = { reversed = true }
+
+# : }}}
+
+# : Completion {{{
+
+[completion]
+border = { fg = "${colors.blue}" }
+
+# : }}}
+
+# : Tasks {{{
+
+[tasks]
+border  = { fg = "${colors.blue}" }
+title   = {}
+hovered = { fg = "${colors.magenta}", underline = true }
+
+# : }}}
+
+# : Which {{{
+
+[which]
+mask            = { bg = "${colors.surface0}" }
+cand            = { fg = "${colors.cyan}" }
+rest            = { fg = "${colors.gray}" }
+desc            = { fg = "${colors.magenta}" }
+separator       = "  "
+separator_style = { fg = "${colors.surface2}" }
+
+# : }}}
+
+# : Help {{{
+
+[help]
+on      = { fg = "${colors.cyan}" }
+run     = { fg = "${colors.magenta}" }
+hovered = { reversed = true, bold = true }
+footer  = { fg = "${colors.darkgray}", bg = "${colors.fg}" }
+
+# : }}}
+
+# : Notify {{{
+
+[notify]
+title_info  = { fg = "${colors.green}" }
+title_warn  = { fg = "${colors.yellow}" }
+title_error = { fg = "${colors.red}" }
+
+# : }}}
+
+# : File-specific styles {{{
+
+[filetype]
+
+rules = [
+	# Images
+	{ mime = "image/*", fg = "${colors.cyan}" },
+
+	# Media
+	{ mime = "{audio,video}/*", fg = "${colors.yellow}" },
+
+	# Archives
+	{ mime = "application/*zip", fg = "${colors.magenta}" },
+	{ mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", fg = "${colors.magenta}" },
+
+	# Documents
+	{ mime = "application/{pdf,doc,rtf,vnd.*}", fg = "${colors.green}" },
+
+	# Fallback
+	{ name = "*", fg = "${colors.fg}" },
+	{ name = "*/", fg = "${colors.blue}" }
+]
+
+# : }}}

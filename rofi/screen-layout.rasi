@@ -1,0 +1,60 @@
+/*******************************************************
+ * ROFI Screen Layout Theme - Minimal
+ *******************************************************/
+configuration {
+    font:             "JetBrains Mono Nerd Font 10";
+    show-icons:       false;
+    scroll-method:    0;
+    disable-history:  false;
+    sidebar-mode:     false;
+    hover-select:     true;
+    me-select-entry:  "";
+    me-accept-entry:  "MousePrimary";
+}
+
+@import "~/.config/rofi/config.rasi"
+
+window {
+    background-color: @background;
+    border:           0;
+    padding:          5;
+    transparency:     "real";
+
+    width:            env(ROFI_WIDHT, 200px);
+
+    location:         northeast;   /* Top Right */
+    y-offset:         38;
+    x-offset:         -14;
+
+    children:         [ listview ];
+}
+
+listview {
+    lines:            env(ROFI_LINES, 10);
+    columns:          1;
+    scrollbar:        false;      /* Hidden Scrollbar */
+    spacing:          0;
+    padding:          5px 0;
+}
+
+/* HIDES THE SEARCH BAR AND CURSOR */
+inputbar {
+    enabled:          false;
+}
+
+element {
+    border:  0;
+    padding: 5px 10px;
+}
+
+element-text {
+    background-color: inherit;
+    text-color:       inherit;
+    horizontal-align: 0.0;        /* Left align text */
+    vertical-align:   0.5;        /* Center vertically */
+}
+
+/* Colors from your main config */
+element.normal.normal { background-color: @normal-background; text-color: @normal-foreground; }
+element.selected.normal { background-color: @selected-normal-background; text-color: @selected-normal-foreground; }
+element.alternate.normal { background-color: @alternate-normal-background; text-color: @alternate-normal-foreground; }

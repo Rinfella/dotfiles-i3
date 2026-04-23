@@ -1,0 +1,149 @@
+"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+
+[mgr]
+
+keymap = [
+	# Basics
+	{ on = [ "<Esc>", "<C-[>" ], run = "escape", desc = "Exit visual mode, clear selected, or cancel search" },
+	{ on = [ "q" ],     run = "quit",               desc = "Exit the process" },
+	{ on = [ "Q" ],     run = "quit --no-cwd-file", desc = "Exit without writing cwd-file" },
+	{ on = [ "<C-q>" ], run = "close",              desc = "Close tab or quit" },
+	{ on = [ "<C-z>" ], run = "suspend",            desc = "Suspend the process" },
+
+	# Navigation - Vim-style (hjkl)
+	{ on = [ "j" ],         run = "arrow 1",    desc = "Move cursor down" },
+	{ on = [ "k" ],         run = "arrow -1",   desc = "Move cursor up" },
+	{ on = [ "h" ],         run = "leave",      desc = "Go to parent directory" },
+	{ on = [ "l" ],         run = "enter",      desc = "Enter selected directory" },
+	
+	# Secondary navigation (arrows - for non-vim users)
+	{ on = [ "<Down>" ],    run = "arrow 1",    desc = "Move cursor down" },
+	{ on = [ "<Up>" ],      run = "arrow -1",   desc = "Move cursor up" },
+	{ on = [ "<Left>" ],    run = "leave",      desc = "Go to parent directory" },
+	{ on = [ "<Right>" ],   run = "enter",      desc = "Enter selected directory" },
+
+	# Enhanced navigation
+	{ on = [ "J" ],         run = "arrow 5",    desc = "Move cursor down 5 items" },
+	{ on = [ "K" ],         run = "arrow -5",   desc = "Move cursor up 5 items" },
+	{ on = [ "H" ],         run = "back",       desc = "Go to previous directory" },
+	{ on = [ "L" ],         run = "forward",    desc = "Go to next directory" },
+
+	# Page navigation
+	{ on = [ "<C-u>" ],     run = "arrow -50%", desc = "Move cursor up half page" },
+	{ on = [ "<C-d>" ],     run = "arrow 50%",  desc = "Move cursor down half page" },
+	{ on = [ "<C-b>", "<PageUp>" ],     run = "arrow -100%", desc = "Page up" },
+	{ on = [ "<C-f>", "<PageDown>" ],   run = "arrow 100%",  desc = "Page down" },
+	{ on = [ "g", "g" ],    run = "arrow -99999999", desc = "Go to top" },
+	{ on = [ "G" ],         run = "arrow 99999999",  desc = "Go to bottom" },
+
+	# Preview navigation
+	{ on = [ "<A-j>" ],     run = "seek 5",     desc = "Seek preview down" },
+	{ on = [ "<A-k>" ],     run = "seek -5",    desc = "Seek preview up" },
+	{ on = [ "<A-PageDown>" ], run = "seek 5",  desc = "Seek preview down" },
+	{ on = [ "<A-PageUp>" ],   run = "seek -5", desc = "Seek preview up" },
+
+	# Selection
+	{ on = [ "<Space>" ],   run = [ "select --state=none", "arrow 1" ], desc = "Toggle selection and move down" },
+	{ on = [ "v" ],         run = "visual_mode", desc = "Enter visual selection mode" },
+	{ on = [ "V" ],         run = "visual_mode --unset", desc = "Enter unset visual mode" },
+	{ on = [ "<C-a>" ],     run = "toggle_all --state=true", desc = "Select all" },
+	{ on = [ "<C-r>" ],     run = "toggle_all --state=none", desc = "Invert selection" },
+
+	# File operations
+	{ on = [ "<Enter>" ],   run = "open --with", desc = "Open selected files" },
+	{ on = [ "o" ],   run = "open --with", desc = "Open selected files" },
+	{ on = [ "<C-Enter>" ], run = "open --interactive", desc = "Open interactively" },
+	{ on = [ "O" ], run = "open --interactive", desc = "Open interactively" },
+
+	{ on = [ "y" ],         run = "yank",      desc = "Copy selected files" },
+	{ on = [ "x" ],         run = "yank --cut", desc = "Cut selected files" },
+	{ on = [ "p" ],         run = "paste",     desc = "Paste files" },
+	{ on = [ "P" ],         run = "paste --force", desc = "Paste and overwrite" },
+	{ on = [ "Y", "X" ],    run = "unyank",    desc = "Clear clipboard" },
+	{ on = [ "-" ],         run = "link",      desc = "Create symlink (absolute)" },
+	{ on = [ "_" ],         run = "link --relative", desc = "Create symlink (relative)" },
+	{ on = [ "d" ],         run = "remove",    desc = "Move to trash" },
+	{ on = [ "D" ],         run = "remove --permanently", desc = "Delete permanently" },
+	{ on = [ "a" ],         run = "create",    desc = "Create file/directory" },
+	{ on = [ "r" ],         run = "rename --cursor=before_ext", desc = "Rename file" },
+
+	# Shell commands
+	{ on = [ ";" ],         run = "shell",     desc = "Run shell command" },
+	{ on = [ ":" ],         run = "shell --block", desc = "Run shell command (block UI)" },
+
+	# Filter and search
+	{ on = [ "." ],         run = "hidden toggle", desc = "Toggle hidden files" },
+	{ on = [ "f" ],         run = "filter --smart", desc = "Filter files" },
+	{ on = [ "/" ],         run = "find --smart", desc = "Search forward" },
+	{ on = [ "?" ],         run = "find --previous --smart", desc = "Search backward" },
+	{ on = [ "n" ],         run = "find_arrow", desc = "Go to next match" },
+	{ on = [ "N" ],         run = "find_arrow --previous", desc = "Go to previous match" },
+	{ on = [ "s" ],         run = "search fd", desc = "Search by filename" },
+	{ on = [ "S" ],         run = "search rg", desc = "Search by content" },
+	{ on = [ "<C-s>" ],     run = "search none", desc = "Cancel search" },
+
+	# Plugins
+	{ on = [ "z" ],         run = "plugin zoxide", desc = "Navigate with zoxide" },
+	{ on = [ "Z" ],         run = "plugin fzf",    desc = "Jump/reveal with fzf" },
+
+	# Copy paths
+	{ on = [ "c", "c" ],    run = "copy path", desc = "Copy absolute path" },
+	{ on = [ "c", "d" ],    run = "copy dirname", desc = "Copy directory name" },
+	{ on = [ "c", "f" ],    run = "copy filename", desc = "Copy filename" },
+	{ on = [ "c", "n" ],    run = "copy name_without_ext", desc = "Copy name without extension" },
+
+	# Sorting
+	{ on = [ ",", "a" ],    run = "sort alphabetical --dir-first", desc = "Sort A-Z" },
+	{ on = [ ",", "A" ],    run = "sort alphabetical --reverse --dir-first", desc = "Sort Z-A" },
+	{ on = [ ",", "c" ],    run = "sort created --dir-first", desc = "Sort by creation time" },
+	{ on = [ ",", "C" ],    run = "sort created --reverse --dir-first", desc = "Sort by creation time (rev)" },
+	{ on = [ ",", "e" ],    run = "sort extension --dir-first", desc = "Sort by extension" },
+	{ on = [ ",", "E" ],    run = "sort extension --reverse --dir-first", desc = "Sort by extension (rev)" },
+	{ on = [ ",", "m" ],    run = "sort modified --dir-first", desc = "Sort by modification time" },
+	{ on = [ ",", "M" ],    run = "sort modified --reverse --dir-first", desc = "Sort by modification time (rev)" },
+	{ on = [ ",", "n" ],    run = "sort natural --dir-first", desc = "Sort natural" },
+	{ on = [ ",", "N" ],    run = "sort natural --reverse --dir-first", desc = "Sort natural (rev)" },
+	{ on = [ ",", "s" ],    run = "sort size --dir-first", desc = "Sort by size" },
+	{ on = [ ",", "S" ],    run = "sort size --reverse --dir-first", desc = "Sort by size (rev)" },
+
+	# Tabs
+	{ on = [ "t" ],         run = "tab_create --current", desc = "New tab" },
+	{ on = [ "[" ],         run = "tab_switch -1 --relative", desc = "Previous tab" },
+	{ on = [ "]" ],         run = "tab_switch 1 --relative", desc = "Next tab" },
+	{ on = [ "{" ],         run = "tab_swap -1", desc = "Swap with previous tab" },
+	{ on = [ "}" ],         run = "tab_swap 1", desc = "Swap with next tab" },
+
+	# Tab selection
+	{ on = [ "1" ],         run = "tab_switch 0", desc = "Go to tab 1" },
+	{ on = [ "2" ],         run = "tab_switch 1", desc = "Go to tab 2" },
+	{ on = [ "3" ],         run = "tab_switch 2", desc = "Go to tab 3" },
+	{ on = [ "4" ],         run = "tab_switch 3", desc = "Go to tab 4" },
+	{ on = [ "5" ],         run = "tab_switch 4", desc = "Go to tab 5" },
+	{ on = [ "6" ],         run = "tab_switch 5", desc = "Go to tab 6" },
+	{ on = [ "7" ],         run = "tab_switch 6", desc = "Go to tab 7" },
+	{ on = [ "8" ],         run = "tab_switch 7", desc = "Go to tab 8" },
+	{ on = [ "9" ],         run = "tab_switch 8", desc = "Go to tab 9" },
+
+	# Quick navigation
+	{ on = [ "g", "h" ],    run = "cd ~", desc = "Go to home directory" },
+	{ on = [ "g", "c" ],    run = "cd ~/.config", desc = "Go to config directory" },
+	{ on = [ "g", "d" ],    run = "cd ~/Downloads", desc = "Go to downloads directory" },
+	{ on = [ "g", "t" ],    run = "cd /tmp", desc = "Go to temporary directory" },
+	{ on = [ "g", "<Space>" ], run = "cd --interactive", desc = "Go to directory (interactive)" },
+
+	# Tasks and help
+	{ on = [ "w" ],         run = "tasks_show", desc = "Show task manager" },
+	{ on = [ "~" ],         run = "help", desc = "Show help" },
+]
+
+[tasks]
+
+keymap = [
+	{ on = [ "<Esc>", "<C-[>", "<C-q>", "w" ], run = "close", desc = "Close task manager" },
+	# Vim-style navigation for tasks
+	{ on = [ "j" ],         run = "arrow 1",    desc = "Move down" },
+	{ on = [ "k" ],         run = "arrow -1",   desc = "Move up" },
+	# Arrow keys for non-vim users
+	{ on = [ "<Down>" ],    run = "arrow 1",    desc = "Move down" },
+	{ on = [ "<Up>" ],      run = "arrow -1",   desc = "Move up" },
+]

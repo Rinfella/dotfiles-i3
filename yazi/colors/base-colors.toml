@@ -1,0 +1,28 @@
+# Base colors that can be referenced by all themes
+# Define general colors that themes can override
+
+[colors]
+black = "#000000"
+white = "#ffffff"
+gray = "#7f849c"
+darkgray = "#45475a"
+
+# Primary colors - should be overridden by specific themes
+blue = "#89b4fa"
+green = "#a6e3a1" 
+red = "#f38ba8"
+yellow = "#f9e2af"
+magenta = "#f5c2e7"
+cyan = "#94e2d5"
+
+# Light variants - should be overridden by specific themes
+lightblue = "#89b4fa"
+lightgreen = "#a6e3a1"
+lightred = "#f38ba8"
+lightyellow = "#f9e2af"
+lightmagenta = "#f5c2e7"
+lightcyan = "#94e2d5"
+
+# Background and foreground
+bg = "#1e1e2e"
+fg = "#cdd6f4"

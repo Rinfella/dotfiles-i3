@@ -1,0 +1,53 @@
+# Nord color scheme
+# https://www.nordtheme.com/docs/colors-and-palettes
+
+[colors]
+# Polar Night (dark)
+nord0 = "#2e3440"  # Background
+nord1 = "#3b4252"  # Lighter background
+nord2 = "#434c5e"  # Selection background
+nord3 = "#4c566a"  # Comments, invisibles
+
+# Snow Storm (light)
+nord4 = "#d8dee9"  # Content foreground
+nord5 = "#e5e9f0"  # Subtle foreground
+nord6 = "#eceff4"  # Bright foreground
+
+# Frost (blue tones)
+nord7 = "#8fbcbb"  # Declarations
+nord8 = "#88c0d0"  # Methods, functions
+nord9 = "#81a1c1"  # Classes, types
+nord10 = "#5e81ac" # Statements, keywords
+
+# Aurora (colorful)
+nord11 = "#bf616a" # Errors, warnings
+nord12 = "#d08770" # Annotations
+nord13 = "#ebcb8b" # Warnings, escape characters
+nord14 = "#a3be8c" # Strings, numbers
+nord15 = "#b48ead" # Operators, constants
+
+# Mappings to standard color names for easier reference
+bg = "#2e3440"        # Background (nord0)
+fg = "#d8dee9"        # Foreground (nord4)
+black = "#3b4252"     # nord1
+blue = "#5e81ac"      # nord10
+cyan = "#8fbcbb"      # nord7
+green = "#a3be8c"     # nord14
+red = "#bf616a"       # nord11
+yellow = "#ebcb8b"    # nord13
+magenta = "#b48ead"   # nord15
+gray = "#4c566a"      # nord3
+darkgray = "#3b4252"  # nord1
+
+# Light variants
+lightblue = "#81a1c1"   # nord9
+lightgreen = "#a3be8c"  # nord14
+lightred = "#bf616a"    # nord11
+lightyellow = "#ebcb8b" # nord13
+lightmagenta = "#b48ead" # nord15
+lightcyan = "#88c0d0"   # nord8
+
+# Extra mappings for the theme
+surface0 = "#3b4252"    # nord1
+surface2 = "#4c566a"    # nord3
+overlay2 = "#d8dee9"    # nord4

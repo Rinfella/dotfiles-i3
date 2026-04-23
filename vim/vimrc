@@ -1,0 +1,83 @@
+" =============================================================================
+" GENERAL SETTINGS
+" =============================================================================
+set nocompatible            " Disable Vi-compatibility (Required for modern features)
+filetype plugin indent on   " Enable filetype detection and indentation
+
+" =============================================================================
+" LINE NUMBERS 
+" =============================================================================
+set number                  " Show absolute line number on the current line
+set relativenumber          " Show relative line numbers on other lines
+
+" =============================================================================
+" TABS & INDENTATION 
+" =============================================================================
+set tabstop=4               " Width of a tab character
+set shiftwidth=4            " Size of an indent (>> or <<)
+set expandtab               " Convert tabs to spaces
+set smartindent             " Auto-indent new lines
+
+" =============================================================================
+" UI & VISUALS 
+" =============================================================================
+syntax on                   " Enable syntax highlighting
+set signcolumn=yes          " Always show sign column (Stops text shifting)
+set scrolloff=8             " Keep 8 lines visible above/below cursor
+set sidescrolloff=8         " Keep 8 columns visible left/right
+
+" Wrapping behavior (Clean reading for logs/configs)
+set wrap                    " Enable line wrapping
+set breakindent             " Wrapped lines keep visual indentation
+
+" Show hidden characters (Crucial for debugging YAML/Makefiles)
+set list
+set listchars=tab:»\ ,trail:·,nbsp:␣
+
+" =============================================================================
+" SEARCHING
+" =============================================================================
+set ignorecase              " Ignore case when searching
+set smartcase               " ...unless you type a capital letter
+set incsearch               " Show search matches as you type
+set hlsearch                " Highlight all search matches
+
+" Clear search highlights with ESC
+nnoremap <silent> <Esc> :nohlsearch<CR>
+
+" =============================================================================
+" SYSTEM INTEGRATION
+" =============================================================================
+" Use system clipboard (requires vim-gtk3 or vim-x11 on Linux)
+set clipboard=unnamedplus
+
+" Persistent Undo (Save undo history to file)
+if has('persistent_undo')
+    set undofile
+    set undodir=~/.config/vim/undo
+    " Create the directory if it doesn't exist
+    if !isdirectory(expand('$HOME/.config/vim/undo'))
+        call mkdir(expand('$HOME/.config/vim/undo'), 'p')
+    endif
+endif
+
+" =============================================================================
+" SPLIT BEHAVIOR (Like i3wm)
+" =============================================================================
+set splitright              " Vertical splits open to the right
+set splitbelow              " Horizontal splits open below
+
+" =============================================================================
+" KEY MAPPINGS
+" =============================================================================
+let mapleader = " "         " Set space as leader key
+
+" Fast saving and quitting
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+
+" Easier split navigation (Ctrl+h/j/k/l)
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l

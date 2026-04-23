@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+# ------- Battery Health -------
+# Reading directly from sysfs for instant speed
+# BAT0 is the first battery, default on most laptops.
+if [ -d "/sys/class/power_supply/BAT0" ]; then
+    energy_full=$(cat /sys/class/power_supply/BAT0/energy_full)
+    energy_design=$(cat /sys/class/power_supply/BAT0/energy_full_design)
+
+    # Calculate health % (current max capacity / Design capacity * 100)
+    health_pct=$(awk "BEGIN { printf \"%.1f\", ($energy_full / $energy_design) * 100 }")
+
+else
+    health_pct="?"
+fi
+
+# Health icon
+health_icon=""
+
+# ------- TLP Mode -------
+# tlp-stat shows "Power profile = performance/AC". We strip this to just "AC" or "BAT".
+tlp_info=$(tlp-stat -s)
+mode_raw=$(echo "$tlp_info" | grep -i "Power Profile" | awk -F'= ' '{print $2}')
+
+if [[ "$mode_raw" == *"AC"* ]]; then
+    mode="AC"
+elif [[ "$mode_raw" == *"BAT"* ]]; then
+    mode="BAT"
+else
+    mode="?"
+fi
+
+echo "$health_icon -$health_pct% | $mode"
+
+echo "$health_pct%|$mode"
+

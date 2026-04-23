@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Get the current volume percentage of the default sink
+
+VOLUME=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po '[0-9]{1,3}(?=%)' | head -1)
+MUTE=$(pactl get-sink-mute @DEFAULT_SINK@ | grep -Po '(?<=Mute: )(yes|no)')
+
+if [ "$MUTE" == "yes" ]; then
+    echo "MUTE"
+else
+    echo "$VOLUME%"
+fi

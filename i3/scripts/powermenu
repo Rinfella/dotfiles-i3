@@ -1,0 +1,134 @@
+#!/usr/bin/env bash
+
+# Refactored power menu script for i3blocks or standalone use
+# Original author: Benjamin Chrétien, updated and modified by joekamprad and ChatGPT
+
+#######################################################################
+#                            BEGIN CONFIG                             #
+#######################################################################
+
+# Colors for rofi theme
+FG_COLOR="#bbbbbb"
+BG_COLOR="#111111"
+HLFG_COLOR="#111111"
+HLBG_COLOR="#bbbbbb"
+BORDER_COLOR="#222222"
+
+ROFI_THEME=~/.config/rofi/powermenu.rasi
+ROFI_OPTIONS=(-theme "$ROFI_THEME")
+
+ZENITY_TITLE="Power Menu"
+ZENITY_TEXT="Action:"
+ZENITY_OPTIONS=(--column= --hide-header)
+
+#######################################################################
+#                             END CONFIG                              #
+#######################################################################
+
+enable_confirmation=false
+preferred_launcher="rofi"
+launcher_list=(rofi zenity)
+
+usage="$(basename "$0") [-h] [-c] [-p name] -- display a power menu with shutdown, reboot, etc.
+
+Options:
+  -h   Show this help text
+  -c   Ask for user confirmation
+  -p   Preferred launcher (rofi or zenity)"
+
+function check_launcher() {
+  local launcher="$1"
+  for valid in "${launcher_list[@]}"; do
+    [[ "$launcher" == "$valid" ]] && return
+  done
+  echo "Supported launchers: ${launcher_list[*]}" >&2
+  exit 1
+}
+
+function command_exists() {
+  command -v "$1" &> /dev/null
+}
+
+function reorder_launchers() {
+  local preferred="$1"
+  mapfile -t launcher_list < <(
+    printf "%s\n" "$preferred" "${launcher_list[@]}" |
+      awk '!seen[$0]++'
+  )
+}
+
+while getopts "hcp:" opt; do
+  case "$opt" in
+    h) echo "$usage"; exit 0 ;;
+    c) enable_confirmation=true ;;
+    p) preferred_launcher="$OPTARG"; check_launcher "$preferred_launcher"; reorder_launchers "$preferred_launcher" ;;
+    *) exit 1 ;;
+  esac
+done
+
+if ! command_exists systemctl; then
+  echo "systemctl is required" >&2
+  exit 1
+fi
+
+declare -A menu=(
+  [ Shutdown]="systemctl poweroff"
+  [ Reboot]="systemctl reboot"
+  [ Suspend]="systemctl suspend"
+  [ Hibernate]="systemctl hibernate"
+  [ Lock]="$HOME/.config/i3/scripts/lock-screen"
+  [ Logout]="i3-msg exit"
+  [ Cancel]=""
+)
+
+menu_confirm="Shutdown Reboot Hibernate Suspend Halt Logout"
+launcher_exe=""
+launcher_options=()
+
+function prepare_launcher() {
+  case "$1" in
+    rofi)
+      launcher_exe="rofi"
+      launcher_options=(-dmenu -i -lines ${#menu[@]} -p "Power" \
+        -bc "$BORDER_COLOR" -bg "$BG_COLOR" -fg "$FG_COLOR" \
+        -hlfg "$HLFG_COLOR" -hlbg "$HLBG_COLOR" "${ROFI_OPTIONS[@]}")
+      ;;
+    zenity)
+      launcher_exe="zenity"
+      launcher_options=(--list --title="$ZENITY_TITLE" --text="$ZENITY_TEXT" "${ZENITY_OPTIONS[@]}")
+      ;;
+  esac
+}
+
+for l in "${launcher_list[@]}"; do
+  if command_exists "$l"; then
+    prepare_launcher "$l"
+    break
+  fi
+done
+
+[[ -z "$launcher_exe" ]] && exit 1
+
+selection=$(printf '%s\n' "${!menu[@]}" | sort | "$launcher_exe" "${launcher_options[@]}")
+
+function ask_confirmation() {
+  if [[ "$launcher_exe" == "rofi" ]]; then
+    confirmed=$(echo -e "Yes\nNo" | rofi -dmenu -i -lines 2 -p "${selection}?" \
+      -bc "$BORDER_COLOR" -bg "$BG_COLOR" -fg "$FG_COLOR" \
+      -hlfg "$HLFG_COLOR" -hlbg "$HLBG_COLOR" "${ROFI_OPTIONS[@]}")
+    [[ "$confirmed" == "Yes" ]] && return 0
+  elif [[ "$launcher_exe" == "zenity" ]]; then
+    zenity --question --text "Are you sure you want to ${selection,,}?"
+    return $?
+  fi
+  return 1
+}
+
+if [[ $? -eq 0 && -n "$selection" ]]; then
+  if $enable_confirmation && [[ "$menu_confirm" =~ (^|[[:space:]])"$selection"($|[[:space:]]) ]]; then
+    ask_confirmation && i3-msg -q "exec --no-startup-id ${menu[$selection]}"
+  else
+    i3-msg -q "exec --no-startup-id ${menu[$selection]}"
+  fi
+fi
+

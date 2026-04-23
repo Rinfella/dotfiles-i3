@@ -1,0 +1,21 @@
+[Presets]
+lastLoadedOutputPreset=Crinacle32B
+
+[StreamInputs]
+inputDevice=alsa_input.pci-0000_07_00.6.HiFi__Mic1__source
+
+[StreamOutputs]
+mostUsedPresets=Crinacle32B,Flat Default,Zero2-10B
+outputDevice=alsa_output.pci-0000_07_00.6.HiFi__Headphones__sink
+plugins=equalizer#0
+usedPresets=Crinacle32B:322,Zero2-10B:6,Flat Default:10
+visiblePage=pluginsPage
+visiblePlugin=equalizer#0
+
+[Window]
+autostartOnLogin=true
+height=507
+noWindowAfterStarting=true
+outputAutoloadingFallbackPreset=Crinacle32B
+outputAutoloadingUsesFallback=true
+width=939

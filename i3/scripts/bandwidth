@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+#
+# i3blocks blocklet script to monitor total bandwidth usage
+
+# Default values
+iface="${IFACE:-$(ip route | awk '/^default via/ {print $5; exit}')}"
+dt="${DT:-3}"
+LABEL="${LABEL:-ᯤ}"
+
+# Check if /proc/net/dev exists
+if [ ! -f "/proc/net/dev" ]; then
+    echo "/proc/net/dev not found"
+    exit 1
+fi
+
+# Check if interface exists
+if ! grep -q "^[ ]*$iface:" /proc/net/dev; then
+    echo "Interface not found: $iface"
+    exit 1
+fi
+
+# Get initial values
+init_line=$(grep "^[ ]*$iface:" /proc/net/dev)
+old_received=$(echo "$init_line" | awk '{print $2}')
+old_sent=$(echo "$init_line" | awk '{print $10}')
+
+# Monitor bandwidth
+(while true; do
+    cat /proc/net/dev
+    sleep "$dt"
+done) |
+    stdbuf -oL grep "^[ ]*$iface:" |
+    awk -v dt="$dt" -v label="$LABEL" '
+    BEGIN {
+        old_received='"$old_received"';
+        old_sent='"$old_sent"';
+    }
+    {
+        received=$2
+        sent=$10
+        total_bytes=(received - old_received) + (sent - old_sent)
+        old_received=received
+        old_sent=sent
+
+        if (total_bytes < 0) next
+
+        rate = total_bytes / dt  # bytes per second
+
+        if (rate >= 1024*1024*1024) {
+            speed = rate / (1024*1024*1024)
+            unit = "GB/s"
+            printf "%s %.1f %s\n", label, speed, unit
+        } else if (rate >= 1024*1024) {
+            speed = rate / (1024*1024)
+            unit = "MB/s"
+            printf "%s %.1f %s\n", label, speed, unit
+        } else if (rate >= 1024) {
+            speed = rate / 1024
+            unit = "KB/s"
+            printf "%s %.0f %s\n", label, speed, unit
+        } else {
+            speed = rate
+            unit = "B/s"
+            printf "%s %.0f %s\n", label, speed, unit
+        }
+        fflush(stdout)
+    }'
+

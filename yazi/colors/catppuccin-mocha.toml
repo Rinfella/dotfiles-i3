@@ -1,0 +1,59 @@
+# Catppuccin Mocha color scheme
+# https://github.com/catppuccin/catppuccin
+
+[colors]
+# Base
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"
+
+# Text
+text = "#cdd6f4"
+subtext0 = "#a6adc8"
+subtext1 = "#bac2de"
+
+# Overlay
+overlay0 = "#6c7086"
+overlay1 = "#7f849c"
+overlay2 = "#9399b2"
+
+# Surface
+surface0 = "#313244"
+surface1 = "#45475a"
+surface2 = "#585b70"
+
+# Blue
+blue = "#89b4fa"
+sapphire = "#74c7ec"
+
+# Lavender
+lavender = "#b4befe"
+
+# Other colors
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+
+# Mappings to standard color names for easier reference
+fg = "#cdd6f4"
+bg = "#1e1e2e"
+gray = "#7f849c"
+darkgray = "#45475a"
+cyan = "#94e2d5"
+magenta = "#f5c2e7"
+
+# Light variants (same as base in Mocha)
+lightblue = "#89b4fa"
+lightgreen = "#a6e3a1"
+lightred = "#f38ba8"
+lightyellow = "#f9e2af"
+lightmagenta = "#f5c2e7"
+lightcyan = "#94e2d5"

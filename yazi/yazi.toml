@@ -1,0 +1,62 @@
+[mgr]
+ratio = [1, 4, 3]
+sort_by = "alphabetical"
+sort_dir_first = true
+scrolloff = 5
+
+[preview]
+tab_size = 2
+max_width = 600
+max_height = 900
+image_filter = "triangle"
+image_quality = 85
+sixel_fraction = 20
+
+[opener]
+edit = [
+  { run = '${EDITOR:=nvim} "$@"', desc = "$EDITOR", block = true, for = "unix" }
+]
+open = [
+  { run = 'google-chrome-stable "$@"', desc = "Chrome", mime = "application/pdf", for = "linux" },
+  { run = 'feh --auto-zoom "$@"', desc = "feh", mime = "image/*", for = "linux" },
+  { run = 'xdg-open "$@"', desc = "Open", for = "linux" }
+]
+play = [
+  { run = 'mpv "$@"', orphan = true, for = "unix" }
+]
+
+[open]
+rules = [
+  { name = "*.md", use = ["edit"] },
+  { name = "*/", use = ["edit", "open"] },
+  { mime = "application/pdf", use = ["open"] },
+  { mime = "text/*", use = ["edit"] },
+  { mime = "image/*", use = ["open"] },
+  { mime = "{audio,video}/*", use = ["play"] },
+  { mime = "*", use = ["open"] }
+]
+
+[tasks]
+micro_workers = 10
+macro_workers = 25
+suppress_preload = true
+image_alloc = 870912
+
+[plugin]
+preloaders = [
+  # Only run mime on text/image/video — not every file on the planet
+  { mime = "text/*", run = "mime", multi = true, prio = "high" },
+  { mime = "image/*", run = "image" },
+  { mime = "video/*", run = "video" },
+  { mime = "application/pdf", run = "pdf" },
+]
+
+previewers = [
+  { name = "*/", run = "folder", sync = true },
+  { mime = "text/*", run = "code" },
+  { mime = "application/json", run = "json" },
+  { mime = "image/*", run = "image" },
+  { mime = "video/*", run = "video" },
+  { mime = "application/pdf", run = "pdf" },
+  { mime = "*", run = "file" }
+]

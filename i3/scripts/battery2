@@ -1,0 +1,100 @@
+#!/usr/bin/env python3
+# Battery indicator blocklet for i3blocks
+
+import os
+import re
+import subprocess
+import sys
+
+
+def get_color(percent, config):
+    thresholds = [
+        (10, config.get("color_10", "#FFFFFF")),
+        (20, config.get("color_20", "#FF3300")),
+        (30, config.get("color_30", "#FF6600")),
+        (40, config.get("color_40", "#FF9900")),
+        (50, config.get("color_50", "#FFCC00")),
+        (60, config.get("color_60", "#FFFF00")),
+        (70, config.get("color_70", "#FFFF33")),
+        (80, config.get("color_80", "#FFFF66")),
+    ]
+    for limit, color in thresholds:
+        if percent < limit:
+            return color
+    return config.get("color_full", "#FFFFFF")
+
+
+def parse_acpi_output(output):
+    status_lines = output.strip().splitlines()
+    states = []
+    percents = []
+    time = ""
+
+    for line in status_lines:
+        try:
+            _, info = line.split(": ", 1)
+            fields = [x.strip() for x in info.split(",")]
+            state = fields[0]
+            percent = int(fields[1].rstrip("%"))
+
+            states.append(state)
+            if percent > 0:
+                percents.append(percent)
+
+            if not time and len(fields) > 2:
+                m = re.match(r"(\d+):(\d+)", fields[2])
+                if m:
+                    time = ":".join(m.groups())
+        except (IndexError, ValueError):
+            continue
+
+    return states[0] if states else "Unknown", percents, time
+
+
+def icon_markup(fontawesome, color=None):
+    icon = f"<span font='FontAwesome'>{fontawesome}</span>"
+    return f"<span color='{color}'>{icon}</span>" if color else icon
+
+
+def main():
+    config = dict(os.environ)
+
+    try:
+        acpi_output = subprocess.check_output(
+            ['acpi'], universal_newlines=True)
+    except subprocess.CalledProcessError:
+        acpi_output = ""
+
+    if not acpi_output.strip():
+        # No battery
+        dead_icon = icon_markup('\uf00d \uf240', config.get("color_10", "red"))
+        print(dead_icon)
+        print(dead_icon)
+        return
+
+    state, percents, time = parse_acpi_output(acpi_output)
+    percent = int(sum(percents) / len(percents)) if percents else 0
+    color = get_color(percent, config)
+
+    if state == "Discharging":
+        icon = icon_markup("\uf240")
+    elif state == "Full":
+        icon = icon_markup("\uf1e6")  # Plug
+    elif state == "Unknown":
+        icon = icon_markup("\uf128") + " " + \
+            icon_markup("\uf240")  # Question + Battery
+    else:
+        icon = icon_markup("\uf0e7", config.get(
+            "color_charging", "yellow")) + " " + icon_markup("\uf1e6")
+
+    fulltext = f"{icon} <span color='{color}'>{percent}%</span>"
+
+    print(fulltext)
+    print(fulltext)
+
+    if percent < 10:
+        sys.exit(33)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+BAT="/sys/class/power_supply/BAT0"
+
+# Some batteries measure in 'energy', others in 'charge'
+if [ -f "$BAT/energy_full" ]; then
+    FULL=$(cat "$BAT/energy_full")
+    DESIGN=$(cat "$BAT/energy_full_design")
+elif [ -f "$BAT/charge_full" ]; then
+    FULL=$(cat "$BAT/charge_full")
+    DESIGN=$(cat "$BAT/charge_full_design")
+else
+    echo " N/A"
+    exit 0
+fi
+
+# Calculate health percentage
+HEALTH=$(( 100 * FULL / DESIGN ))
+
+echo " ${HEALTH}%"

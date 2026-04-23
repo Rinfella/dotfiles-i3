@@ -1,0 +1,18 @@
+#!/bin/bash
+# FortiClient VPN status indicator optimized for Polybar
+
+# Icons
+ICON_VPN="󰌆"
+
+# Colors (Mapped to your Catppuccin palette)
+COLOR_CONNECTED="#a6d189"     # Success Green
+COLOR_DISCONNECTED="#737994"  # Disabled Grey
+
+# Check if FortiClient VPN is connected
+if ip addr show | grep -i "fctvpn" > /dev/null; then
+    # Output only the connected key in green
+    echo "%{F$COLOR_CONNECTED}$ICON_VPN%{F-}"
+else
+    # Output only the muted disconnected key
+    echo "%{F$COLOR_DISCONNECTED}$ICON_VPN%{F-}"
+fi

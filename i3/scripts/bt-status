@@ -1,0 +1,18 @@
+#!/bin/bash
+
+ICON_ON="" 
+ICON_OFF="" 
+
+if rfkill list bluetooth | grep -q "locked: yes"; then
+        echo "$ICON_OFF Off"
+else
+
+    # Get the alias of the first connected device
+    # We cut out the MAC address in the 'devices Connected' list
+    DEVICE_NAME=$(pactl list sinks | grep -A 2 "bluez_output" | grep "Description" | cut -d: -f2 | xargs)
+    if [ -n "$DEVICE_NAME" ]; then
+        echo "$ICON_ON $DEVICE_NAME"
+    else
+        echo "$ICON_ON On"
+    fi
+fi

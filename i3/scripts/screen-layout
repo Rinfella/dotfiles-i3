@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+
+# CONFIGURATION
+LAYOUT_DIR="$HOME/.screenlayout"
+ROFI_THEME="$HOME/.config/rofi/screen-layout.rasi"
+WALLPAPER_CMD="feh --randomize --bg-fill $HOME/Pictures/wallpapers/*.png"
+
+# Arrays
+declare -a file_list
+declare -a display_list
+max_str_len=0
+
+# Check directory
+if [ ! -d "$LAYOUT_DIR" ]; then
+    notify-send -u critical "Error" "Layout directory $LAYOUT_DIR not found!" 
+    exit 1
+fi
+
+# SCAN LOOP
+while IFS= read -r file; do
+    [ -e "$file" ] || continue
+    filename=$(basename "$file" .sh)
+    
+    # Icon Logic (converted filename to lowercase for easier matching)
+    case "${filename,,}" in
+        *"up"*)                 icon="⬆" ;;
+        *"down"*)               icon="⬇" ;;
+        *"left"*)               icon="⬅" ;;
+        *"right"*)              icon="➡" ;;
+        *"mirror"*)             icon="" ;;
+        *"laptop"*|*"internal"*)icon="" ;; # Laptop icon
+        *"hdmi"*|*"external"*)  icon="󰍹" ;; # External Monitor icon
+        *"single"*)             icon="" ;;
+        *)                      icon="" ;;
+    esac
+
+    # Name Formatting (Title Case, no hyphens)
+    clean_name="${filename//[-_]/ }"
+    clean_name=${clean_name^}
+
+    # Display String (Icon + Name Only)
+    display_str="$icon  $clean_name"
+
+    # Track maximum string length for Rofi width formatting
+    if (( ${#display_str} > max_str_len )); then
+        max_str_len=${#display_str}
+    fi
+
+    file_list+=("$file")
+    display_list+=("$display_str")
+
+done < <(find "$LAYOUT_DIR" -maxdepth 1 -name "*.sh" | sort)
+
+# Cancel Button
+display_list+=("  Cancel")
+line_count=${#display_list[@]}
+
+# Calculate width based on longest display String (added +4ch for padding)
+calculated_width="$(( max_str_len + 4 ))ch"
+
+# ROFI EXECUTION
+selected_index=$(printf "%s\n" "${display_list[@]}" | ROFI_WIDTH="$calculated_width" ROFI_LINES="$line_count" rofi -dmenu -i -theme "$ROFI_THEME" -lines "$line_count" -p "Layout" -format i)
+
+# Exit if nothing selected or if "Cancel" is chosen
+if [ -z "$selected_index" ] || [ "$selected_index" -eq $((line_count - 1)) ]; then
+    exit 0
+fi
+
+# APPLY SELECTION
+target_script="${file_list[$selected_index]}"
+    
+if [ -x "$target_script" ]; then
+    "$target_script"
+    eval "$WALLPAPER_CMD"
+    i3-msg restart
+    notify-send "Display Layout" "Applied: $(basename "$target_script" .sh)" -i video-display
+fi

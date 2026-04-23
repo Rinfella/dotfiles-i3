@@ -1,0 +1,88 @@
+[global]
+    monitor = 0
+    follow = none
+
+    # --- Geometry & Positioning ---
+    # Width maxes out at 350 for a nice, uniform Material card look
+    width = 350
+    height = 300
+    origin = top-right
+    # Dropped the top offset to 55 to comfortably clear your new floating Polybar
+    offset = (12, 55) 
+    
+    # Match the rounded corners of your Polybar exactly
+    corner_radius = 10
+
+    # --- Borders & Padding (The Material Feel) ---
+    frame_width = 2
+    # Generous padding gives the text room to breathe, a staple of Material design
+    padding = 16
+    horizontal_padding = 16
+    text_icon_padding = 16
+
+    # --- Typography ---
+    # Matched to your Polybar font. Increased line height slightly for readability
+    font = JetBrainsMono Nerd Font 10
+    line_height = 4
+    markup = full
+    alignment = left
+    word_wrap = yes
+    # Removed the %p (progress) to keep the text block cleaner, just Summary and Body
+    format = "<b>%s</b>\n%b"
+
+    # --- Behavior ---
+    indicate_hidden = yes
+    show_indicators = yes
+    separator_height = 2
+    separator_color = frame
+    sort = yes
+    idle_threshold = 0
+    override_dbus_timeout = 3
+    show_age_threshold = 10
+    ignore_newline = no
+    stack_duplicates = yes
+    hide_duplicate_count = no
+
+    # --- Icons ---
+    enable_recursive_icon_lookup = true
+    icon_theme = Papirus # Or your preferred modern theme (Adwaita can look a bit dated)
+    # Removed the hardcoded Adwaita paths so Dunst can dynamically fetch larger icons
+    icon_position = left
+    # Bumped icon size from 16 to 48 so they look like proper Material avatars/thumbnails
+    max_icon_size = 48
+
+    # --- Interaction ---
+    sticky_history = no
+    history_length = 10
+    dmenu = /usr/bin/dmenu -p dunst
+    browser = /usr/bin/google-chrome-stable
+    mouse_left_click = close_current
+    mouse_middle_click = do_action, close_current
+    mouse_right_click = close_all
+
+# --- The Deep Contrast Theme (Catppuccin Mocha) ---
+
+[urgency_low]
+    background = "#1e1e2e"
+    # Dimmer text for low urgency
+    foreground = "#a5adce" 
+    # Subtle frame color
+    frame_color = "#313244"
+    timeout = 3
+
+[urgency_normal]
+    background = "#1e1e2e"
+    # Pure white text for high contrast readability
+    foreground = "#ffffff"
+    # Primary Blue accent from your Polybar for the border
+    frame_color = "#8caaee"
+    timeout = 5
+
+[urgency_critical]
+    # We keep the dark background to stay consistent...
+    background = "#1e1e2e"
+    foreground = "#ffffff"
+    # ...but use a bold Red frame to grab your attention
+    frame_color = "#e78284"
+    # Critical notifications usually shouldn't auto-dismiss
+    timeout = 0
