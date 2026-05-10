@@ -8,7 +8,7 @@ inputDevice=alsa_input.pci-0000_06_00.6.HiFi__Mic1__source
 mostUsedPresets=Crinacle32B,Flat Default,Zero2-10B
 outputDevice=alsa_output.pci-0000_06_00.6.HiFi__Headphones__sink
 plugins=equalizer#0
-usedPresets=Crinacle32B:2380,Zero2-10B:7,Flat Default:10
+usedPresets=Crinacle32B:3054,Zero2-10B:7,Flat Default:10
 visiblePage=pluginsPage
 visiblePlugin=equalizer#0
 

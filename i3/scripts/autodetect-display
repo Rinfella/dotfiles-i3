@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+# Auto-detect and apply display layout based on machine type and monitor connection
+
+LAYOUT_DIR="$HOME/.screenlayout"
+
+# Detect if this is a ThinkPad T14 Gen 1 (laptop)
+PRODUCT_NAME=$(cat /sys/class/dmi/id/product_name 2>/dev/null || echo "")
+IS_THINKPAD=false
+if [[ "$PRODUCT_NAME" == "20UECTO1WW" ]]; then
+    IS_THINKPAD=true
+fi
+
+# Check HDMI connection status
+HDMI_CONNECTED=false
+if xrandr | grep -q "HDMI-A-0 connected"; then
+    HDMI_CONNECTED=true
+fi
+
+# For ThinkPad laptop: check lid state
+LID_OPEN=true
+if [[ "$IS_THINKPAD" == "true" ]]; then
+    LID_STATE=$(cat /proc/acpi/button/lid/LID0/state 2>/dev/null | grep -c "open" || echo "1")
+    if [[ "$LID_STATE" -eq "0" ]]; then
+        LID_OPEN=false
+    fi
+fi
+
+# Determine which layout to apply
+if [[ "$IS_THINKPAD" == "false" ]]; then
+    # Desktop or non-ThinkPad: use HDMI only
+    LAYOUT="hdmi-only"
+    echo "Desktop detected, applying HDMI-only layout..."
+elif [[ "$HDMI_CONNECTED" == "false" ]]; then
+    # Laptop with no HDMI: use built-in display only
+    LAYOUT="single"
+    echo "Laptop: HDMI disconnected, applying single (built-in) layout..."
+elif [[ "$LID_OPEN" == "false" ]]; then
+    # Laptop with HDMI + lid closed: use HDMI only
+    LAYOUT="hdmi-only"
+    echo "Laptop: HDMI connected + lid closed, applying HDMI-only layout..."
+else
+    # Laptop with HDMI + lid open: extended up
+    LAYOUT="extended-up"
+    echo "Laptop: HDMI connected + lid open, applying extended-up layout..."
+fi
+
+# Apply the layout
+SCRIPT="${LAYOUT_DIR}/${LAYOUT}.sh"
+if [[ -x "$SCRIPT" ]]; then
+    "$SCRIPT"
+    echo "Applied layout: $LAYOUT"
+else
+    echo "Error: Layout script not found or not executable: $SCRIPT"
+    exit 1
+fi

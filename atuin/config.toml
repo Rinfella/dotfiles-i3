@@ -1,0 +1,24 @@
+# ~/.config/atuin/config.toml
+
+# Let pacman handle updates, disable Atuin's internal checks
+update_check = false
+
+# Set search mode to fuzzy to perfectly mimic your old fzf setup
+search_mode = "fuzzy"
+
+# Keep the UI inline rather than taking over the whole terminal
+inline_height = 15
+
+# "compact" style removes some of the bulky UI elements
+style = "compact"
+
+# Show search results matching the current directory first, 
+# then expand to global history
+filter_mode_shell_up_key_binding = "directory"
+
+# Opt out of cloud sync by default (keeps everything local-only)
+# You can remove this later if you want to sync between your on-prem/cloud boxes
+auto_sync = false
+
+# Pressing ctrl-c will exit the UI and clear the prompt
+ctrl_n_shortcuts = true

@@ -1,0 +1,117 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "model": "gemini/gemini-2.5-pro",
+    "instructions": [
+        "~/.config/opencode/kb/global/rules/00-global-directives.md",
+        "~/.config/opencode/kb/global/rules/01-tall-stack.md",
+        "~/.config/opencode/kb/global/rules/02-infrastructure.md",
+        "~/.config/opencode/kb/global/rules/03-cicd.md"
+    ],
+    "autoupdate": true,
+    "compaction": {
+        "auto": true,
+        "prune": true,
+        "reserved": 10000
+    },
+    "mcp": {
+        "sequential-thinking": {
+            "type": "local",
+            "command": ["npx", "-y", "@modelcontextprotocol/server-sequential-thinking"]
+        },
+        "puppeteer": {
+            "type": "local",
+            "command": ["npx", "-y", "@modelcontextprotocol/server-puppeteer"]
+        },
+        "fetch": {
+            "type": "local",
+            "command": ["uvx", "mcp-server-fetch"]
+        },
+        "memory": {
+            "type": "local",
+            "command": ["npx", "-y", "@modelcontextprotocol/server-memory"]
+        }
+    },
+    "command": {
+        "filament": {
+            "template": "Create a new Filament feature: Model, Migration, Resource, Tests. Follow rules in ~/.config/opencode/kb/global/rules/01-tall-stack.md",
+            "description": "Scaffold Filament resource",
+            "agent": "build"
+        },
+        "seed": {
+            "template": "Generate Laravel Factories with realistic relational data using Faker",
+            "description": "Generate seed data",
+            "agent": "build"
+        },
+        "debug": {
+            "template": "Debug application errors. Read storage/logs/laravel.log, analyze stack trace, propose fix following rules in ~/.config/opencode/kb/global/rules/01-tall-stack.md",
+            "description": "Debug Laravel errors",
+            "agent": "build"
+        },
+        "audit-db": {
+            "template": "Audit database schema for missing indexes, N+1 queries, normalization issues. Do NOT modify existing migrations.",
+            "description": "Audit database schema",
+            "agent": "build"
+        },
+        "test": {
+            "template": "Run the full test suite with coverage. Show failures and suggest fixes.",
+            "description": "Run tests with coverage",
+            "agent": "build"
+        },
+        "make-migration": {
+            "template": "Create a new Laravel migration following database rules in ~/.config/opencode/kb/global/rules/01-tall-stack.md",
+            "description": "Create migration",
+            "agent": "build"
+        },
+        "make-service": {
+            "template": "Create a new Laravel Service class with proper structure",
+            "description": "Create service class",
+            "agent": "build"
+        },
+        "make-observer": {
+            "template": "Create a new Eloquent Observer following Laravel conventions",
+            "description": "Create observer",
+            "agent": "build"
+        },
+        "make-policy": {
+            "template": "Create a Laravel Policy for authorization",
+            "description": "Create policy",
+            "agent": "build"
+        },
+        "make-job": {
+            "template": "Create a Laravel Job class (queued or synchronous)",
+            "description": "Create job",
+            "agent": "build"
+        },
+        "sys-update": {
+            "template": "Update Arch Linux system packages using pacman/yay. Check news first with pacman -Pn.",
+            "description": "Update Arch packages",
+            "agent": "build"
+        },
+        "sys-service": {
+            "template": "Manage systemd services. Use systemctl for start/stop/enable/disable/status.",
+            "description": "Manage services",
+            "agent": "build"
+        },
+        "sys-packages": {
+            "template": "Install or remove packages with pacman or yay (AUR). Search first.",
+            "description": "Package management",
+            "agent": "build"
+        },
+        "sys-logs": {
+            "template": "Read system logs with journalctl. Show errors or specific service logs.",
+            "description": "Read system logs",
+            "agent": "build"
+        },
+        "sys-stats": {
+            "template": "Check system resource usage: CPU, memory, disk, processes. Use htop for interactive.",
+            "description": "System stats",
+            "agent": "build"
+        }
+    },
+    "formatter": {
+        "php-cs-fixer": {
+            "command": ["vendor/bin/php-cs-fixer", "fix", "$FILE"],
+            "extensions": [".php"]
+        }
+    }
+}

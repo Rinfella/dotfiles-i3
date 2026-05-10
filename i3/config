@@ -59,6 +59,7 @@ bindsym $mod+Escape exec --no-startup-id sleep 0.5 && ~/.config/i3/scripts/lock-
 bindsym $mod+F1 exec --no-startup-id ~/.config/i3/scripts/keyhint-2
 
 # Custom monitor configuration
+bindsym $mod+Shift+a exec --no-startup-id ~/.config/i3/scripts/autodetect-display
 bindsym $mod+Shift+s exec --no-startup-id ~/.screenlayout/single.sh
 bindsym $mod+Shift+m exec --no-startup-id ~/.screenlayout/extended-right.sh
 bindsym $mod+m exec --no-startup-id ~/.screenlayout/mirror.sh
