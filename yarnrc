@@ -1,0 +1,3 @@
+# ~/.config/doti3/yarnrc
+# Yarn configuration - cache folder set to XDG_CACHE_HOME
+cache-folder ${XDG_CACHE_HOME:-~/.cache}/yarn

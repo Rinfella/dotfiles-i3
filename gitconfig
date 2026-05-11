@@ -1,0 +1,8 @@
+[user]
+	name = Rinfella
+	email = rinfellapachuau93@gmail.com
+[init]
+	defaultBranch = master
+[http]
+	version = HTTP/1.1
+	postBuffer = 524288000

@@ -1,0 +1,24 @@
+# ~/.config/doti3/inputrc
+# Readline configuration for better CLI experience
+
+set editing-mode vi
+set input-meta on
+set output-meta on
+set show-all-if-ambiguous on
+set completion-ignore-case on
+set colored-stats on
+set colored-completion-prefix on
+set bell-style visible
+set enable-bracketed-paste on
+
+"\C-n": menu-complete
+"\C-p": menu-complete-backward
+"\C-a": beginning-of-line
+"\C-e": end-of-line
+"\C-k": kill-line
+"\C-u": backward-kill-line
+"\C-w": backward-kill-word
+"\e\e[C": forward-word
+"\e\e[D": backward-word
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word

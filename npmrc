@@ -1,0 +1,4 @@
+# ~/.config/doti3/npmrc
+# npm configuration - cache already set in .zshenv via NPM_CONFIG_CACHE
+cache=${XDG_CACHE_HOME:-~/.cache}/npm
+prefix=${XDG_CONFIG_HOME:-~/.config}/npm

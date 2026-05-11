@@ -57,3 +57,21 @@ export BUN_INSTALL="$XDG_DATA_HOME/bun"
 export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 export ANDROID_USER_HOME="$XDG_DATA_HOME/android"
 export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
+
+# SQL History Files
+export PSQL_HISTFILE="$XDG_DATA_HOME/psql_history"
+export MYSQL_HISTFILE="$XDG_DATA_HOME/mysql_history"
+
+# Parallel
+export PARALLEL_TMPDIR="$XDG_CACHE_HOME/parallel"
+
+# Ddev
+export DDEV_CONFIG_DIR="$XDG_CONFIG_HOME/ddev"
+
+# Yarn
+export YARN_CACHE_FOLDER="$XDG_CACHE_HOME/yarn"
+
+# Xsession errors redirect to /tmp (only in interactive shell)
+if [[ -t 0 ]]; then
+    exec 2> /tmp/xsession-$USER.$DISPLAY.log
+fi

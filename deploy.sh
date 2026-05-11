@@ -32,6 +32,13 @@ DOTFILE_FILES=(
     "$DOTI3_DIR/starship.toml:$HOME/.config/starship.toml"
     "$DOTI3_DIR/screenlayout:$HOME/.screenlayout"
     "$DOTI3_DIR/easyeffectsrc:$HOME/.config/easyeffectsrc"
+    # XDG_CONFIG_HOME files
+    "$DOTI3_DIR/curlrc:$HOME/.config/curlrc"
+    "$DOTI3_DIR/wgetrc:$HOME/.config/wgetrc"
+    "$DOTI3_DIR/inputrc:$HOME/.config/inputrc"
+    "$DOTI3_DIR/npmrc:$HOME/.config/npmrc"
+    "$DOTI3_DIR/yarnrc:$HOME/.config/yarnrc"
+    "$DOTI3_DIR/gitconfig:$HOME/.config/gitconfig"
 )
 
 # List of config directories to manage (in ~/.config/)
