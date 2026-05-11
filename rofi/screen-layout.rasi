@@ -20,7 +20,7 @@ window {
     padding:          5;
     transparency:     "real";
 
-    width:            env(ROFI_WIDHT, 200px);
+    width:            env(ROFI_WIDTH, 200px);
 
     location:         northeast;   /* Top Right */
     y-offset:         38;

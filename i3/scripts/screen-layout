@@ -17,8 +17,8 @@ if [ ! -d "$LAYOUT_DIR" ]; then
 fi
 
 # SCAN LOOP
-while IFS= read -r file; do
-    [ -e "$file" ] || continue
+for file in "$LAYOUT_DIR"/*.sh; do
+    [ -f "$file" ] || continue
     filename=$(basename "$file" .sh)
     
     # Icon Logic (converted filename to lowercase for easier matching)
@@ -49,7 +49,7 @@ while IFS= read -r file; do
     file_list+=("$file")
     display_list+=("$display_str")
 
-done < <(find "$LAYOUT_DIR" -maxdepth 1 -name "*.sh" | sort)
+done
 
 # Cancel Button
 display_list+=("  Cancel")
