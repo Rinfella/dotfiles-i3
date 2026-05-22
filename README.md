@@ -95,11 +95,19 @@ Automatic display detection for laptops via HDMI + lid state:
 ### Screenshots
 | Keybind | Action |
 |---------|--------|
-| `Print` | Full screen save |
-| `Mod+Print` | Active window save |
-| `Shift+Print` | Selection save |
-| `Ctrl+Print` | Full screen to clipboard |
-| `Ctrl+Shift+Print` | Selection to clipboard |
+| `Mod+x` | Full screen save |
+| `Mod+Shift+x` | Active window save |
+| `Mod+Ctrl+x` | Selection save |
+| `Mod+c` | Full screen to clipboard |
+| `Mod+Ctrl+c` | Selection to clipboard |
+
+### Notifications
+| Keybind | Action |
+|---------|--------|
+| `Mod+d` | Notification context |
+| `Mod+Shift+d` | Close notification |
+| `Mod+Ctrl+d` | Close all notifications |
+| `Mod+Shift+z` | History pop |
 
 Hot-plug detection is automatic via udev rule.
 

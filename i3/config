@@ -73,6 +73,9 @@ bindsym $mod+b exec --no-startup-id kitty -e bluetui
 
 # Dunst notification keybinds 
 bindsym $mod+Shift+z exec --no-startup-id dunstctl history-pop
+bindsym $mod+Shift+d exec --no-startup-id dunstctl close
+bindsym $mod+Ctrl+d exec --no-startup-id dunstctl close-all
+bindsym $mod+d exec --no-startup-id dunstctl context
 
 ###################
 # Scratchpad
@@ -202,19 +205,19 @@ bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/scripts/volume_b
 ####################
 
 # Full screen screenshot
-bindsym Print exec --no-startup-id maim ~/Pictures/screenshots/$(date +"%Y-%m-%d-%H-%M-%S")-screenshot.png && notify-send "Full screenshot saved"
+bindsym $mod+x exec --no-startup-id maim ~/Pictures/screenshots/$(date +"%Y-%m-%d-%H-%M-%S")-screenshot.png && notify-send "Full screenshot saved"
 
 # Active window screenshot
-bindsym $mod+Print exec --no-startup-id maim -i $(xdotool getactivewindow) ~/Pictures/screenshots/$(date +"%Y-%m-%d-%H-%M-%S")-screenshot.png && notify-send "Window screenshot saved"
+bindsym $mod+Shift+x exec --no-startup-id maim -i $(xdotool getactivewindow) ~/Pictures/screenshots/$(date +"%Y-%m-%d-%H-%M-%S")-screenshot.png && notify-send "Window screenshot saved"
 
 # Selection screenshot
-bindsym Shift+Print exec --no-startup-id maim -s ~/Pictures/screenshots/$(date +"%Y-%m-%d-%H-%M-%S")-screenshot.png && notify-send "Selection screenshot saved"
+bindsym $mod+Ctrl+x exec --no-startup-id maim -s ~/Pictures/screenshots/$(date +"%Y-%m-%d-%H-%M-%S")-screenshot.png && notify-send "Selection screenshot saved"
 
 # Screenshot to clipboard (full)
-bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png && notify-send "Full screenshot copied to clipboard"
+bindsym $mod+c exec --no-startup-id maim | xclip -selection clipboard -t image/png && notify-send "Full screenshot copied to clipboard"
 
 # Screenshot to clipboard (selection)
-bindsym Ctrl+Shift+Print exec --no-startup-id maim -s | xclip -selection clipboard -t image/png && notify-send "Selection copied to clipboard"
+bindsym $mod+Ctrl+c exec --no-startup-id maim -s | xclip -selection clipboard -t image/png && notify-send "Selection copied to clipboard"
 
 ########################################
 # Application Workspace Assignments
