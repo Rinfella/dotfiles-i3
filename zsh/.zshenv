@@ -71,7 +71,5 @@ export DDEV_CONFIG_DIR="$XDG_CONFIG_HOME/ddev"
 # Yarn
 export YARN_CACHE_FOLDER="$XDG_CACHE_HOME/yarn"
 
-# Xsession errors redirect to /tmp (only in interactive shell)
-if [[ -t 0 ]]; then
-    exec 2> /tmp/xsession-$USER.$DISPLAY.log
-fi
+# Xsession errors are handled by the display manager (~/.xsession-errors)
+# Do NOT redirect stderr here - it will break verbose output in terminal
