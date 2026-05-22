@@ -280,7 +280,7 @@ exec_always --no-startup-id sleep 1 && feh --randomize --bg-fill ~/Pictures/wall
 exec --no-startup-id sleep 4 && easyeffects --gapplication-service
 exec --no-startup-id sleep 4 && google-chrome-stable > /dev/null 2>&1
 exec --no-startup-id sleep 4 && kdeconnectd
-exec --no-startup-id sleep 2 && clipmenud
+exec_always --no-startup-id pgrep -x clipmenud >/dev/null || clipmenud
 
 ###################
 # Color Settings  #
