@@ -61,7 +61,10 @@ cd ~/.config/doti3
 # 4. Deploy with package installation (requires sudo)
 ./deploy.sh --install-deps
 
-# 5. Restart i3
+# 5. Start clipboard daemon (systemd user service)
+systemctl --user enable --now clipmenud
+
+# 6. Restart i3
 i3-msg restart
 ```
 
@@ -100,7 +103,16 @@ Automatic display detection for laptops via HDMI + lid state:
 | `Mod+Ctrl+x` | Selection save |
 | `Mod+Ctrl+c` | Full screen to clipboard |
 | `Mod+Ctrl+Shift+c` | Selection to clipboard |
-| `Mod+c` | Clipboard history (clipmenu + rofi) |
+
+### Clipboard Manager
+| Keybind | Action |
+|---------|--------|
+| `Mod+c` | Clipboard history (clipmenu + rofi themed) |
+
+`clipmenud` runs as a systemd user service:
+```bash
+systemctl --user enable --now clipmenud
+```
 
 ### Notifications
 | Keybind | Action |
@@ -144,6 +156,11 @@ doti3/
 ├── picom/
 ├── polybar/
 ├── rofi/
+│   ├── config.rasi         # Theme import (deep-purple)
+│   ├── rofidmenu.rasi      # App launcher / window switcher
+│   ├── clipmenu.rasi       # Clipboard history (clipmenu)
+│   ├── powermenu.rasi
+│   └── screen-layout.rasi
 ├── screenlayout/
 ├── rofi-themes/
 ├── tmux/
