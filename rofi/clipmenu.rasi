@@ -9,47 +9,51 @@ configuration {
 @import "~/.config/rofi/config.rasi"
 
 window {
-    background-color: rgba ( 26, 24, 44, 94 % );
-    border:           2;
-    border-color:     rgba ( 124, 131, 137, 25 % );
-    padding:          6;
-    width:            640;
+    background-color: rgba ( 26, 24, 44, 96 % );
+    border:           3px 0px 0px 0px;
+    border-color:     rgba ( 255, 127, 127, 80 % );
+    padding:          0;
+    width:            660;
 }
 
 mainbox {
     border:  0;
-    padding: 0;
-    spacing: 4;
+    padding: 8px 10px 6px;
+    spacing: 6;
 }
 
 inputbar {
-    spacing:    6;
-    padding:    8px 12px;
-    background-color: rgba ( 45, 48, 59, 40 % );
+    spacing:    8;
+    padding:    10px 14px;
+    background-color: rgba ( 30, 28, 48, 60 % );
+    border:       0px 0px 0px 3px;
+    border-color: rgba ( 255, 127, 127, 40 % );
 }
 
 prompt {
     spacing:    0;
     text-color: rgba ( 255, 127, 127, 100 % );
-    font:       "Noto Sans Bold 11";
+    font:       "Noto Sans Bold 12";
 }
 
 textbox-prompt-colon {
     expand:     false;
-    str:        " ";
+    str:        "";
     margin:     0;
-    text-color: @foreground;
 }
 
 entry {
     spacing:    0;
-    text-color: @foreground;
+    text-color: rgba ( 220, 225, 232, 100 % );
     cursor:     text;
+    font:       "Noto Sans Regular 11";
+    placeholder: "Search clipboard history";
+    placeholder-color: rgba ( 124, 131, 137, 50 % );
 }
 
 case-indicator {
     spacing:    0;
-    text-color: rgba ( 124, 131, 137, 50 % );
+    text-color: rgba ( 124, 131, 137, 45 % );
     font:       "Noto Sans Regular 9";
 }
 
@@ -59,13 +63,13 @@ listview {
     columns:      1;
     spacing:      2;
     scrollbar:    false;
-    padding:      4px 0px;
+    padding:      6px 0px 2px;
     border:       0;
 }
 
 element {
     border:       0;
-    padding:      8px 12px;
+    padding:      9px 14px;
 }
 
 element-text {
@@ -80,37 +84,39 @@ element-icon {
 
 element.normal.normal {
     background-color: transparent;
-    text-color:       rgba ( 196, 203, 212, 80 % );
+    text-color:       rgba ( 196, 203, 212, 75 % );
 }
 
 element.normal.urgent {
-    background-color: @urgent-background;
+    background-color: rgba ( 220, 50, 47, 10 % );
     text-color:       @urgent-foreground;
 }
 
 element.normal.active {
-    background-color: @active-background;
+    background-color: rgba ( 38, 139, 210, 10 % );
     text-color:       @active-foreground;
 }
 
 element.selected.normal {
-    background-color: rgba ( 255, 127, 127, 12 % );
+    background-color: rgba ( 255, 127, 127, 10 % );
     text-color:       rgba ( 255, 255, 255, 100 % );
+    border:       0px 0px 0px 3px;
+    border-color: rgba ( 255, 127, 127, 50 % );
 }
 
 element.selected.urgent {
-    background-color: @selected-urgent-background;
+    background-color: rgba ( 165, 66, 66, 60 % );
     text-color:       @selected-urgent-foreground;
 }
 
 element.selected.active {
-    background-color: @selected-active-background;
+    background-color: rgba ( 26, 28, 35, 80 % );
     text-color:       @selected-active-foreground;
 }
 
 element.alternate.normal {
-    background-color: transparent;
-    text-color:       rgba ( 196, 203, 212, 80 % );
+    background-color: rgba ( 255, 255, 255, 2 % );
+    text-color:       rgba ( 196, 203, 212, 75 % );
 }
 
 element.alternate.urgent {
@@ -126,7 +132,7 @@ element.alternate.active {
 scrollbar {
     width:        4px;
     border:       0;
-    handle-color: rgba ( 124, 131, 137, 35 % );
+    handle-color: rgba ( 124, 131, 137, 30 % );
     handle-width: 8px;
     padding:      0;
 }
