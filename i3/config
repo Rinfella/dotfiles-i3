@@ -214,13 +214,16 @@ bindsym $mod+Shift+x exec --no-startup-id maim -i $(xdotool getactivewindow) ~/P
 bindsym $mod+Ctrl+x exec --no-startup-id maim -s ~/Pictures/screenshots/$(date +"%Y-%m-%d-%H-%M-%S")-screenshot.png && notify-send "Selection screenshot saved"
 
 # Screenshot to clipboard (full)
-bindsym $mod+c exec --no-startup-id maim | xclip -selection clipboard -t image/png && notify-send "Full screenshot copied to clipboard"
+bindsym $mod+Ctrl+c exec --no-startup-id maim | xclip -selection clipboard -t image/png && notify-send "Full screenshot copied to clipboard"
 
 # Screenshot to clipboard (selection)
-bindsym $mod+Ctrl+c exec --no-startup-id maim -s | xclip -selection clipboard -t image/png && notify-send "Selection copied to clipboard"
+bindsym $mod+Ctrl+Shift+c exec --no-startup-id maim -s | xclip -selection clipboard -t image/png && notify-send "Selection copied to clipboard"
+
+# Clipboard manager (clipmenu with rofi)
+bindsym $mod+c exec --no-startup-id CM_LAUNCHER=rofi clipmenu
 
 # Clipboard manager (clipmenu)
-bindsym $mod+Shift+v exec --no-startup-id clipmenu
+bindsym $mod+Shift+v exec --no-startup-id CM_LAUNCHER=rofi clipmenu
 
 ########################################
 # Application Workspace Assignments
