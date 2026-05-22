@@ -61,7 +61,8 @@ bindsym $mod+F1 exec --no-startup-id ~/.config/i3/scripts/keyhint-2
 # Custom monitor configuration
 bindsym $mod+Shift+a exec --no-startup-id ~/.config/i3/scripts/autodetect-display
 bindsym $mod+Shift+s exec --no-startup-id ~/.screenlayout/single.sh
-bindsym $mod+Shift+m exec --no-startup-id ~/.screenlayout/extended-right.sh
+bindsym $mod+Shift+m exec --no-startup-id ~/.screenlayout/extended-left.sh
+bindsym $mod+Shift+u exec --no-startup-id ~/.screenlayout/extended-up.sh
 bindsym $mod+m exec --no-startup-id ~/.screenlayout/mirror.sh
 bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/screen-layout
 
@@ -71,9 +72,6 @@ bindsym $mod+Shift+b exec --no-startup-id sudo rfkill toggle bluetooth && pkill 
 bindsym $mod+b exec --no-startup-id kitty -e bluetui
 
 # Dunst notification keybinds 
-bindsym $mod+x exec --no-startup-id dunstctl close
-bindsym $mod+c exec --no-startup-id dunstctl context
-bindsym $mod+Shift+x exec --no-startup-id dunstctl close-all
 bindsym $mod+Shift+z exec --no-startup-id dunstctl history-pop
 
 ###################
@@ -204,18 +202,18 @@ bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/scripts/volume_b
 ####################
 
 # Full screen screenshot
-bindsym Print exec --no-startup-id maim ~/Pictures/screenshots/$(date +"%Y-%m-%d-%H-%M-%S")-screenshot.png && notify-send "Screenshot saved"
+bindsym Print exec --no-startup-id maim ~/Pictures/screenshots/$(date +"%Y-%m-%d-%H-%M-%S")-screenshot.png && notify-send "Full screenshot saved"
 
 # Active window screenshot
 bindsym $mod+Print exec --no-startup-id maim -i $(xdotool getactivewindow) ~/Pictures/screenshots/$(date +"%Y-%m-%d-%H-%M-%S")-screenshot.png && notify-send "Window screenshot saved"
 
 # Selection screenshot
-bindsym $mod+Shift+Print exec --no-startup-id maim -s ~/Pictures/screenshots/$(date +"%Y-%m-%d-%H-%M-%S")-screenshot.png && notify-send "Selection screenshot saved"
+bindsym Shift+Print exec --no-startup-id maim -s ~/Pictures/screenshots/$(date +"%Y-%m-%d-%H-%M-%S")-screenshot.png && notify-send "Selection screenshot saved"
 
-# Screenshot to clipboard
-bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png && notify-send "Screenshot copied to clipboard"
+# Screenshot to clipboard (full)
+bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png && notify-send "Full screenshot copied to clipboard"
 
-# Selection screenshot to clipboard
+# Screenshot to clipboard (selection)
 bindsym Ctrl+Shift+Print exec --no-startup-id maim -s | xclip -selection clipboard -t image/png && notify-send "Selection copied to clipboard"
 
 ########################################

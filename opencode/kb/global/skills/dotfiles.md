@@ -1,43 +1,37 @@
 ---
-description: Backs up and restores dotfiles/configs
+description: Manages the doti3 dotfile configuration repo
 ---
 
-Back up and restore dotfiles and configuration files.
+This repo manages dotfiles via symlinks from `~/.config/doti3/`.
 
-## Steps:
-1. Ask for action (backup/restore/list).
-2. Execute appropriate command.
-
-## Common Commands
+## Deploy
 
 ```bash
-# List dotfiles
-ls -la ~
-ls -la ~/.config/
-
-# Backup to git repo
-cd ~
-git init --bare $HOME/.dotfiles
-git add .bashrc .zshrc .gitconfig .vim/
-git commit -m "Add dotfiles"
-
-# Using Stow (already in your setup)
-cd ~/.config/opencode/blueprint
-stow -t ~ .bashrc .zshrc
-
-# Restore from backup
-cp ~/.dotfiles/backup/.bashrc ~
-source ~/.bashrc
-
-# Config directories
-~/.config/      # User configs
-~/.local/bin/   # User binaries
-~/.local/share/ # User data
+cd ~/.config/doti3
+./deploy.sh --dry-run    # Preview
+./deploy.sh              # Deploy
 ```
 
-## Important Dotfiles
-- `.bashrc`, `.zshrc` - Shell
-- `.gitconfig` - Git
-- `.vim/` - Vim
-- `.config/opencode/` - OpenCode config
-- `.ssh/` - SSH keys (sensitive!)
+## Config Structure
+
+| Path | Target | Description |
+|------|--------|-------------|
+| `zsh/` | `~/.config/zsh/` | Zsh modular config |
+| `i3/` | `~/.config/i3/` | i3wm + scripts |
+| `nvim/` | `~/.config/nvim/` | Neovim config |
+| `opencode/` | `~/.config/opencode/` | Opencode AI config |
+| `kitty/`, `alacritty/` | `~/.config/` | Terminal emulators |
+| `polybar/`, `picom/`, `rofi/`, `dunst/` | `~/.config/` | Desktop env |
+| `tmux/` | `~/.config/tmux/` | Terminal multiplexer |
+| `yazi/` | `~/.config/yazi/` | File manager |
+| `screenlayout/` | `~/.screenlayout` | Display layouts |
+| `starship.toml` | `~/.config/starship.toml` | Prompt |
+| `zsh/.zshenv` | `~/.zshenv` | Env vars (XDG config) |
+| `curlrc`, `wgetrc`, `inputrc`, `gitconfig`, `npmrc`, `yarnrc` | `~/.config/` | Tool configs |
+
+## Key Features
+- XDG-compliant directory structure (CONFIG_HOME, CACHE_HOME, DATA_HOME, STATE_HOME)
+- Automatic display detection via HDMI + lid state
+- Modular zsh config via conf.d/
+- Desktop env: i3 + polybar + picom + rofi + dunst
+- Backup on deploy (timestamped backups)

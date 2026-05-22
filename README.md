@@ -32,7 +32,6 @@ This repository manages configuration files for various tools via symlinks from 
 |------|-----------------|-------------|
 | nvim | `nvim/` | Neovim (LazyVim-style config) |
 | vim | `vim/` | Vim config |
-| zed | `zed/` | Code editor |
 | opencode | `opencode/` | AI coding assistant |
 
 ### System Utilities
@@ -79,21 +78,28 @@ Options:
 
 ## Display Auto-Detection
 
-The i3 config includes automatic display detection:
+Automatic display detection for laptops via HDMI + lid state:
 
-- **ThinkPad T14 Gen 1** (product: `20UECTO1WW`):
-  - No HDMI → Built-in display only (`single.sh`)
-  - HDMI connected + lid open → Extended up (`extended-up.sh`)
-  - HDMI connected + lid closed → HDMI only (`hdmi-only.sh`)
-- **Desktop/Other machines** → HDMI only (`hdmi-only.sh`)
+- **No HDMI** → Built-in display only (`single.sh`)
+- **HDMI + lid open** → Extended left (`extended-left.sh`)
+- **HDMI + lid closed** → HDMI only (`hdmi-only.sh`)
 
 ### Keybinds
 | Keybind | Action |
 |---------|--------|
 | `Mod+Shift+a` | Auto-detect display |
 | `Mod+Shift+s` | Single display |
-| `Mod+Shift+m` | Extended right |
+| `Mod+Shift+p` | Choose layout via menu |
 | `Mod+m` | Mirror display |
+
+### Screenshots
+| Keybind | Action |
+|---------|--------|
+| `Print` | Full screen save |
+| `Mod+Print` | Active window save |
+| `Shift+Print` | Selection save |
+| `Ctrl+Print` | Full screen to clipboard |
+| `Ctrl+Shift+Print` | Selection to clipboard |
 
 Hot-plug detection is automatic via udev rule.
 
@@ -105,6 +111,12 @@ doti3/
 ├── starship.toml          # Starship prompt
 ├── easyeffectsrc          # EasyEffects UI config
 ├── easyeffects-data/      # EasyEffects presets
+├── curlrc                 # curl config
+├── wgetrc                 # wget config
+├── gitconfig              # git config
+├── inputrc                # readline config
+├── npmrc                  # npm config
+├── yarnrc                 # yarn config
 ├── alacritty/
 ├── atuin/
 ├── autostart/
@@ -114,7 +126,9 @@ doti3/
 ├── i3/
 │   ├── config
 │   └── scripts/
-│       └── autodetect-display
+│       ├── autodetect-display
+│       ├── screen-layout
+│       └── ...
 ├── kitty/
 ├── nvim/
 ├── opencode/
@@ -122,10 +136,10 @@ doti3/
 ├── polybar/
 ├── rofi/
 ├── screenlayout/
+├── rofi-themes/
 ├── tmux/
 ├── vim/
 ├── yazi/
-├── zed/
 └── zsh/
     ├── .zshenv
     └── conf.d/
