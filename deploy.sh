@@ -96,6 +96,7 @@ PACKAGES=(
     i3blocks
     polkit-gnome
     network-manager-applet
+    clipmenu
 )
 
 # Parse arguments

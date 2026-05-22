@@ -219,6 +219,9 @@ bindsym $mod+c exec --no-startup-id maim | xclip -selection clipboard -t image/p
 # Screenshot to clipboard (selection)
 bindsym $mod+Ctrl+c exec --no-startup-id maim -s | xclip -selection clipboard -t image/png && notify-send "Selection copied to clipboard"
 
+# Clipboard manager (clipmenu)
+bindsym $mod+Shift+v exec --no-startup-id clipmenu
+
 ########################################
 # Application Workspace Assignments
 ########################################
@@ -277,6 +280,7 @@ exec_always --no-startup-id sleep 1 && feh --randomize --bg-fill ~/Pictures/wall
 exec --no-startup-id sleep 4 && easyeffects --gapplication-service
 exec --no-startup-id sleep 4 && google-chrome-stable > /dev/null 2>&1
 exec --no-startup-id sleep 4 && kdeconnectd
+exec --no-startup-id sleep 2 && clipmenud
 
 ###################
 # Color Settings  #

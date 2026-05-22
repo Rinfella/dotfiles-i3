@@ -100,6 +100,7 @@ Automatic display detection for laptops via HDMI + lid state:
 | `Mod+Ctrl+x` | Selection save |
 | `Mod+c` | Full screen to clipboard |
 | `Mod+Ctrl+c` | Selection to clipboard |
+| `Mod+Shift+v` | Clipboard manager (clipmenu) |
 
 ### Notifications
 | Keybind | Action |
