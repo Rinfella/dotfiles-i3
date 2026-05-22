@@ -220,7 +220,7 @@ bindsym $mod+Ctrl+c exec --no-startup-id maim | xclip -selection clipboard -t im
 bindsym $mod+Ctrl+Shift+c exec --no-startup-id maim -s | xclip -selection clipboard -t image/png && notify-send "Selection copied to clipboard"
 
 # Clipboard manager (clipmenu with rofi)
-bindsym $mod+c exec --no-startup-id sh -c 'CM_LAUNCHER=rofi CM_LAUNCHER_ARGS="-dmenu" clipmenu'
+bindsym $mod+c exec --no-startup-id sh -c 'CM_LAUNCHER=rofi CM_LAUNCHER_ARGS="-dmenu -theme $HOME/.config/rofi/rofidmenu.rasi" clipmenu'
 
 ########################################
 # Application Workspace Assignments
@@ -280,7 +280,6 @@ exec_always --no-startup-id sleep 1 && feh --randomize --bg-fill ~/Pictures/wall
 exec --no-startup-id sleep 4 && easyeffects --gapplication-service
 exec --no-startup-id sleep 4 && google-chrome-stable > /dev/null 2>&1
 exec --no-startup-id sleep 4 && kdeconnectd
-exec_always --no-startup-id pgrep -x clipmenud >/dev/null || clipmenud
 
 ###################
 # Color Settings  #
