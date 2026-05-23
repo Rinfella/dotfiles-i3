@@ -1,0 +1,10 @@
+# Catppuccin Mocha theme — matches everything else
+--theme="Catppuccin Mocha"
+# Show git modifications
+--diff
+# Line numbers
+--number
+# Disable pager (cat behavior)
+--paging=never
+# Wrap long lines
+--wrap=character

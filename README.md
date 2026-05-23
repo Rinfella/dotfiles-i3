@@ -17,6 +17,7 @@ This repository manages configuration files for various tools via symlinks from 
 | alacritty | `alacritty/` | GPU-accelerated terminal |
 | kitty | `kitty/` | Terminal emulator |
 | tmux | `tmux/` | Terminal multiplexer |
+| bat | `bat/config` | Better cat with syntax highlighting |
 
 ### Window Manager & Desktop
 | Tool | Config Location | Description |
@@ -41,8 +42,10 @@ This repository manages configuration files for various tools via symlinks from 
 | fastfetch | `fastfetch/` | System info fetch |
 | screenlayout | `screenlayout/` | Display layouts |
 | autostart | `autostart/` | Autostart desktop files |
-| easyeffects | `easyeffects/` | Audio equalizer |
-| easyeffects-data | `easyeffects-data/` | EQ presets |
+| easyeffects | `easyeffects/` | Audio equalizer (presets + config) |
+| fontconfig | `fontconfig/` | Font rendering configuration |
+| X11 | `X11/` | X11 resources (cursor theme) |
+| systemd | `systemd/user/` | User systemd services |
 
 ## Quick Start
 
@@ -114,6 +117,10 @@ Automatic display detection for laptops via HDMI + lid state:
 systemctl --user enable --now clipmenud
 ```
 
+Polybar shows a  clipboard icon (clickable):
+- **Left-click** → open clipmenu (clipboard history)
+- **Right-click** → show clipctl status
+
 ### Notifications
 | Keybind | Action |
 |---------|--------|
@@ -129,9 +136,9 @@ Hot-plug detection is automatic via udev rule.
 ```
 doti3/
 ├── deploy.sh              # Deployment script
+├── mise.toml              # Runtime version management (mise)
 ├── starship.toml          # Starship prompt
-├── easyeffectsrc          # EasyEffects UI config
-├── easyeffects-data/      # EasyEffects presets
+├── easyeffects/           # EasyEffects audio presets + config
 ├── curlrc                 # curl config
 ├── wgetrc                 # wget config
 ├── gitconfig              # git config
@@ -141,9 +148,10 @@ doti3/
 ├── alacritty/
 ├── atuin/
 ├── autostart/
+├── bat/
 ├── dunst/
-├── easyeffects/
 ├── fastfetch/
+├── fontconfig/
 ├── i3/
 │   ├── config
 │   └── scripts/
@@ -163,26 +171,50 @@ doti3/
 │   └── screen-layout.rasi
 ├── screenlayout/
 ├── rofi-themes/
+├── systemd/user/          # User systemd services (tmux)
 ├── tmux/
 ├── vim/
+├── X11/
 ├── yazi/
 └── zsh/
     ├── .zshenv
     └── conf.d/
 ```
 
-## Recommended Additional Tools
+## Runtime Management
 
-These tools are not included in the repo but are recommended for better workflow:
+This repo uses **mise** to manage tool versions:
+
+| Tool | Config | Managed Runtimes | Backend |
+|------|--------|------------------|---------|
+| mise | `mise.toml` → `~/.config/mise/config.toml` | Node.js (core, prebuilt), PHP (github, precompiled static) |
+
+mise replaces the previous setup of nvm (Node) and phpv (PHP) with a single, unified tool.
+
+| Runtime | Version | Backend |
+|---------|---------|---------|
+| Node.js | 24 (LTS) | `core` — prebuilt binaries |
+| PHP | 8.5 | `github:adwinying/php` — precompiled static binaries |
+
+To change versions:
 
 ```bash
-# Install via pacman
-sudo pacman -S zoxide eza bottom
-
-# zoxide - smarter cd (integrates with nvim, zsh)
-# eza - modern ls replacement with icons
-# bottom - cross-platform system monitor
+mise use -g node@<version>
+mise use -g github:adwinying/php@<version>
 ```
+
+## QoL Tools
+
+Configured in `zsh/conf.d/`:
+
+| Tool | Function |
+|------|----------|
+| **bat** | `cat` alternative with syntax highlighting, Catppuccin Mocha theme |
+| **eza** | Modern `ls` with icons, tree view, git integration |
+| **zoxide** | Smarter `cd` that learns your habits |
+| **fd** | Fast `find` replacement |
+| **ripgrep** | Fast `grep` replacement |
+| **jq** | JSON processor |
 
 ## How It Works
 

@@ -1,19 +1,32 @@
 # ==========================================
 # General Navigation & Core
 # ==========================================
-alias ll='ls -lha --color=auto'
-alias la='ls -A --color=auto'
-alias l='ls -lah --color=auto'
-alias ls='ls --color=auto'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias c='clear'
 alias y="yazi"
 alias lg="lazygit"
-alias pv="phpvm"
 alias path='echo -e ${PATH//:/\\n}'
 alias vim='VIMINIT="source $XDG_CONFIG_HOME/vim/vimrc" vim'
+
+# bat — better cat
+if command -v bat >/dev/null 2>&1; then
+  alias cat='bat'
+  alias catp='bat --plain'
+fi
+
+# eza — modern ls with icons
+if command -v eza >/dev/null 2>&1; then
+  alias ls='eza --icons --group-directories-first'
+  alias ll='eza -l --icons --group-directories-first'
+  alias la='eza -la --icons --group-directories-first'
+  alias l='eza -la --icons --group-directories-first'
+  alias tree='eza --tree --icons'
+fi
+
+# jq — pretty JSON
+alias json='jq .'
 
 # ==========================================
 # Tmux

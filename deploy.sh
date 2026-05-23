@@ -31,7 +31,7 @@ DOTFILE_FILES=(
     "$DOTI3_DIR/zsh/.zshenv:$HOME/.zshenv"
     "$DOTI3_DIR/starship.toml:$HOME/.config/starship.toml"
     "$DOTI3_DIR/screenlayout:$HOME/.screenlayout"
-    "$DOTI3_DIR/easyeffectsrc:$HOME/.config/easyeffectsrc"
+    "$DOTI3_DIR/mise.toml:$HOME/.config/mise/config.toml"
     # XDG_CONFIG_HOME files
     "$DOTI3_DIR/curlrc:$HOME/.config/curlrc"
     "$DOTI3_DIR/wgetrc:$HOME/.config/wgetrc"
@@ -46,9 +46,11 @@ APPS=(
     alacritty
     atuin
     autotiling
+    bat
     dunst
     easyeffects
     fastfetch
+    fontconfig
     i3
     kitty
     nvim
@@ -56,10 +58,11 @@ APPS=(
     picom
     polybar
     rofi
+    systemd
     tmux
     vim
+    X11
     yazi
-    zed
     zsh
 )
 
@@ -97,6 +100,15 @@ PACKAGES=(
     polkit-gnome
     network-manager-applet
     clipmenu
+    # QoL tools
+    bat
+    eza
+    fd
+    jq
+    ripgrep
+    zoxide
+    # Runtime version management
+    mise
 )
 
 # Parse arguments

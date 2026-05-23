@@ -13,3 +13,15 @@ __pycache__/
 # OS
 .DS_Store
 Thumbs.db
+
+# Zsh
+.zcompdump*
+zsh/.zcompdump*
+zsh/.zsh_history
+
+# Editor swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]

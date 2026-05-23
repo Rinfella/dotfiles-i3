@@ -1,0 +1,16 @@
+# ~/.config/doti3/mise.toml
+# mise global runtime version configuration
+# See: https://mise.jdx.dev
+#
+# Synced to ~/.config/mise/config.toml via deploy.sh
+#
+# Node: core backend (prebuilt binaries)
+# PHP:  github backend (precompiled static-php-cli binaries, no build deps)
+
+[tools]
+"github:adwinying/php" = "8.5"
+node = "24"
+
+[settings]
+experimental = true
+jobs = 4

@@ -18,3 +18,8 @@ fi
 if command -v navi >/dev/null 2>&1; then
   eval "$(navi widget zsh)"
 fi
+
+# zoxide — smarter cd
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+fi
