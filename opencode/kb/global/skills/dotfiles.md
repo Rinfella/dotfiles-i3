@@ -31,6 +31,7 @@ cd ~/.config/doti3
 | `fontconfig/` | System | Font rendering (JetBrainsMono Nerd Font) |
 | `i3/` | WM | i3wm config + scripts (polybar, powermenu, etc.) |
 | `kitty/` | Terminal | Terminal emulator (JetBrainsMono, Catppuccin) |
+| `mise/` | Runtime | Runtime version manager (config.toml) |
 | `nvim/` | Editor | Neovim (LazyVim-style) |
 | `opencode/` | AI | Opencode AI coding assistant |
 | `picom/` | Desktop | Compositor (shadows, blur, transparency) |
@@ -47,11 +48,10 @@ cd ~/.config/doti3
 
 | doti3 | Target | Description |
 |-------|--------|-------------|
-| `mise.toml` | `~/.config/mise/config.toml` | Runtime version manager |
 | `starship.toml` | `~/.config/starship.toml` | Prompt |
 | `zsh/.zshenv` | `~/.zshenv` | XDG env vars |
 | `screenlayout/` | `~/.screenlayout` | Display layouts |
-| `curlrc` | `~/.config/curlrc` | curl config |
+| `curlrc` | `~/.config/.curlrc` | curl config |
 | `wgetrc` | `~/.config/wgetrc` | wget config |
 | `inputrc` | `~/.config/inputrc` | Readline (Vi mode) |
 | `npmrc` | `~/.config/npmrc` | npm config |
@@ -65,13 +65,13 @@ mise replaces nvm + phpv:
 | Runtime | Version | Backend | Method |
 |---------|---------|---------|--------|
 | Node.js | 24 LTS | `core` | Prebuilt binaries |
-| PHP | 8.5 | `github:adwinying/php` | Precompiled static (no build deps) |
+| PHP | 8.5 | `php` | Precompiled community binaries (vfox-php) |
 
-Config: `doti3/mise.toml` → symlinked to `~/.config/mise/config.toml`
+Config: `doti3/mise/config.toml` → symlinked to `~/.config/mise/config.toml`
 
 ```bash
 mise use -g node@<version>
-mise use -g github:adwinying/php@<version>
+mise use -g php@<version>
 ```
 
 ## Zsh Config Modules (`zsh/conf.d/`)

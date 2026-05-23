@@ -27,8 +27,8 @@ play = [
 
 [open]
 rules = [
-  { name = "*.md", use = ["edit"] },
-  { name = "*/", use = ["edit", "open"] },
+  { name = "*.md", mime = "*", use = ["edit"] },
+  { name = "*/", mime = "*", use = ["edit", "open"] },
   { mime = "application/pdf", use = ["open"] },
   { mime = "text/*", use = ["edit"] },
   { mime = "image/*", use = ["open"] },
@@ -52,7 +52,7 @@ preloaders = [
 ]
 
 previewers = [
-  { name = "*/", run = "folder", sync = true },
+  { mime = "inode/directory", run = "folder", sync = true },
   { mime = "text/*", run = "code" },
   { mime = "application/json", run = "json" },
   { mime = "image/*", run = "image" },

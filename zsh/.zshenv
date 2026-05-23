@@ -44,6 +44,7 @@ export LOCALSTACK_VOLUME_DIR="$XDG_DATA_HOME/localstack"
 
 # Rust & Go 
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export GOPATH="$XDG_DATA_HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 
@@ -61,6 +62,7 @@ export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
 # SQL History Files
 export PSQL_HISTFILE="$XDG_DATA_HOME/psql_history"
 export MYSQL_HISTFILE="$XDG_DATA_HOME/mysql_history"
+export MARIADB_HISTFILE="$XDG_DATA_HOME/mariadb_history"
 
 # Parallel
 export PARALLEL_TMPDIR="$XDG_CACHE_HOME/parallel"
@@ -70,6 +72,19 @@ export DDEV_CONFIG_DIR="$XDG_CONFIG_HOME/ddev"
 
 # Yarn
 export YARN_CACHE_FOLDER="$XDG_CACHE_HOME/yarn"
+
+# Wget & Curl Configs
+export WGETRC="$XDG_CONFIG_HOME/wgetrc"
+export CURL_HOME="$XDG_CONFIG_HOME"
+
+# Readline Config
+export INPUTRC="$XDG_CONFIG_HOME/inputrc"
+
+# Cleaner Home Directory (Evictions)
+export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"
+export LESSHISTFILE="$XDG_STATE_HOME/less/history"
+export PYTHON_HISTORY="$XDG_STATE_HOME/python_history"
+export PULSE_COOKIE="$XDG_CONFIG_HOME/pulse/cookie"
 
 # Xsession errors are handled by the display manager (~/.xsession-errors)
 # Do NOT redirect stderr here - it will break verbose output in terminal

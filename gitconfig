@@ -6,3 +6,17 @@
 [http]
 	version = HTTP/1.1
 	postBuffer = 524288000
+[color]
+	ui = auto
+[push]
+	autoSetupRemote = true
+[pull]
+	rebase = true
+[core]
+	editor = nvim
+[alias]
+	st = status -sb
+	co = checkout
+	br = branch
+	ci = commit
+	lol = log --oneline --graph --decorate

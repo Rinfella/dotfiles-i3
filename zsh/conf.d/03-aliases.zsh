@@ -84,3 +84,26 @@ alias gproj="gcloud config set project"         # Quick project switch
 gcssh() {
   TERM=xterm-256color gcloud compute ssh "$@"
 }
+
+# ==========================================
+# Git (QOL & Interactive)
+# ==========================================
+alias g="git"
+alias gs="git status -sb"
+alias gd="git diff"
+alias gdc="git diff --cached"
+alias gl="git log --oneline --graph --decorate -n 10"
+alias gco="git checkout"
+alias gcb="git checkout -b"
+alias gp="git push"
+alias gpl="git pull"
+
+# Interactive fuzzy branch switcher (requires fzf)
+if command -v fzf >/dev/null 2>&1; then
+  gfb() {
+    local branches branch
+    branches=$(git branch --all | grep -v 'HEAD ->') &&
+    branch=$(echo "$branches" | fzf --height=15 --layout=reverse +m --prompt="Switch Branch > ") &&
+    git checkout "$(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")"
+  }
+fi

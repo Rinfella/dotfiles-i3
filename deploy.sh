@@ -31,9 +31,8 @@ DOTFILE_FILES=(
     "$DOTI3_DIR/zsh/.zshenv:$HOME/.zshenv"
     "$DOTI3_DIR/starship.toml:$HOME/.config/starship.toml"
     "$DOTI3_DIR/screenlayout:$HOME/.screenlayout"
-    "$DOTI3_DIR/mise.toml:$HOME/.config/mise/config.toml"
     # XDG_CONFIG_HOME files
-    "$DOTI3_DIR/curlrc:$HOME/.config/curlrc"
+    "$DOTI3_DIR/curlrc:$HOME/.config/.curlrc"
     "$DOTI3_DIR/wgetrc:$HOME/.config/wgetrc"
     "$DOTI3_DIR/inputrc:$HOME/.config/inputrc"
     "$DOTI3_DIR/npmrc:$HOME/.config/npmrc"
@@ -53,6 +52,7 @@ APPS=(
     fontconfig
     i3
     kitty
+    mise
     nvim
     opencode
     picom
@@ -109,6 +109,7 @@ PACKAGES=(
     zoxide
     # Runtime version management
     mise
+    re2c
 )
 
 # Parse arguments

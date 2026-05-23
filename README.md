@@ -136,7 +136,7 @@ Hot-plug detection is automatic via udev rule.
 ```
 doti3/
 ├── deploy.sh              # Deployment script
-├── mise.toml              # Runtime version management (mise)
+├── mise/                  # Runtime version management (config.toml)
 ├── starship.toml          # Starship prompt
 ├── easyeffects/           # EasyEffects audio presets + config
 ├── curlrc                 # curl config
@@ -187,20 +187,20 @@ This repo uses **mise** to manage tool versions:
 
 | Tool | Config | Managed Runtimes | Backend |
 |------|--------|------------------|---------|
-| mise | `mise.toml` → `~/.config/mise/config.toml` | Node.js (core, prebuilt), PHP (github, precompiled static) |
+| mise | `mise/config.toml` → `~/.config/mise/config.toml` | Node.js (core, prebuilt), PHP (registry, community vfox) |
 
 mise replaces the previous setup of nvm (Node) and phpv (PHP) with a single, unified tool.
 
 | Runtime | Version | Backend |
 |---------|---------|---------|
 | Node.js | 24 (LTS) | `core` — prebuilt binaries |
-| PHP | 8.5 | `github:adwinying/php` — precompiled static binaries |
+| PHP | 8.5 | `php` (vfox-php) — precompiled community binaries |
 
 To change versions:
 
 ```bash
 mise use -g node@<version>
-mise use -g github:adwinying/php@<version>
+mise use -g php@<version>
 ```
 
 ## QoL Tools
