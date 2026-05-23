@@ -118,8 +118,8 @@ systemctl --user enable --now clipmenud
 ```
 
 Polybar shows a  clipboard icon (clickable):
-- **Left-click** → open clipmenu (clipboard history)
-- **Right-click** → show clipctl status
+- **Left-click** → themed rofi clipboard history (same as `Mod+c`)
+- **Right-click** → pause clipboard tracking for 5s (clipctl toggle) — useful for copying sensitive data
 
 ### Notifications
 | Keybind | Action |

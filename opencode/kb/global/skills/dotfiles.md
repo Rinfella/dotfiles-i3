@@ -137,6 +137,14 @@ mise use -g github:adwinying/php@<version>
 | `Mod+Shift+p` | Choose layout |
 | `Mod+m` | Mirror display |
 
+## Polybar Clipboard Module
+
+`polybar/config.ini` includes a clipboard module:
+- **Left-click** → opens themed rofi clipboard history (`clipmenu` + rofi + `clipmenu.rasi`)
+- **Right-click** → toggles clipmenud tracking off/on (5s pause for sensitive data)
+
+Uses: `i3/scripts/clipboard-status`
+
 ## Systemd User Services
 
 | Service | Purpose | Status |
