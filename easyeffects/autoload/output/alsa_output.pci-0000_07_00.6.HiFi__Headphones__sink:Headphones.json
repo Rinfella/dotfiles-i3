@@ -1,6 +1,0 @@
-{
-    "device": "alsa_output.pci-0000_07_00.6.HiFi__Headphones__sink",
-    "device-description": "Family 17h/19h/1ah HD Audio Controller Headphones",
-    "device-profile": "Headphones",
-    "preset-name": "Crinacle32B"
-}

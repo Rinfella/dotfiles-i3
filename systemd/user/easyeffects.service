@@ -1,0 +1,15 @@
+[Unit]
+Description=Easy Effects Daemon
+After=pipewire.service
+Requires=pipewire.service
+Conflicts=pulseaudio.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/easyeffects --gapplication-service
+ExecStop=/usr/bin/easyeffects --quit
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

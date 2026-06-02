@@ -205,13 +205,13 @@ bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/scripts/volume_b
 ####################
 
 # Full screen screenshot
-bindsym $mod+x exec --no-startup-id maim ~/Pictures/screenshots/$(date +"%Y-%m-%d-%H-%M-%S")-screenshot.png && notify-send "Full screenshot saved"
+bindsym $mod+x exec --no-startup-id mkdir -p ~/Pictures/screenshots && maim ~/Pictures/screenshots/$(date +"%Y-%m-%d-%H-%M-%S")-screenshot.png && notify-send "Full screenshot saved"
 
 # Active window screenshot
-bindsym $mod+Shift+x exec --no-startup-id maim -i $(xdotool getactivewindow) ~/Pictures/screenshots/$(date +"%Y-%m-%d-%H-%M-%S")-screenshot.png && notify-send "Window screenshot saved"
+bindsym $mod+Shift+x exec --no-startup-id mkdir -p ~/Pictures/screenshots && maim -i $(xdotool getactivewindow) ~/Pictures/screenshots/$(date +"%Y-%m-%d-%H-%M-%S")-screenshot.png && notify-send "Window screenshot saved"
 
 # Selection screenshot
-bindsym $mod+Ctrl+x exec --no-startup-id maim -s ~/Pictures/screenshots/$(date +"%Y-%m-%d-%H-%M-%S")-screenshot.png && notify-send "Selection screenshot saved"
+bindsym $mod+Ctrl+x exec --no-startup-id mkdir -p ~/Pictures/screenshots && maim -s ~/Pictures/screenshots/$(date +"%Y-%m-%d-%H-%M-%S")-screenshot.png && notify-send "Selection screenshot saved"
 
 # Screenshot to clipboard (full)
 bindsym $mod+Ctrl+c exec --no-startup-id maim | xclip -selection clipboard -t image/png && notify-send "Full screenshot copied to clipboard"
@@ -264,6 +264,9 @@ for_window [class=".*"] move position center
 # Startup Applications
 ############################
 
+# Import display/session environment variables into systemd user session
+exec --no-startup-id dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XAUTHORITY
+
 exec --no-startup-id xrdb -merge ~/.config/X11/Xresources
 exec picom --config ~/.config/picom/picom.conf
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -276,8 +279,8 @@ exec_always --no-startup-id sleep 1 && ~/.config/polybar/launch.sh
 exec_always --no-startup-id killall dunst; dunst -config ~/.config/dunst/dunstrc
 exec_always --no-startup-id sleep 1 && feh --randomize --bg-fill ~/Pictures/wallpapers/*
 
-# Optimized application startup with staggered delays
-exec --no-startup-id sleep 4 && easyeffects --gapplication-service
+# Optimized application startup with staggered delays (EasyEffects now managed via systemd user service)
+# exec --no-startup-id sleep 4 && easyeffects --gapplication-service
 exec --no-startup-id sleep 4 && google-chrome-stable > /dev/null 2>&1
 exec --no-startup-id sleep 4 && kdeconnectd
 

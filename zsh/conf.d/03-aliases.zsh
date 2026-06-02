@@ -5,7 +5,19 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias c='clear'
-alias y="yazi"
+# yazi — terminal file manager with cwd-on-quit wrapper
+if command -v yazi >/dev/null 2>&1; then
+  function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+      builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+  }
+else
+  alias y="yazi"
+fi
 alias lg="lazygit"
 alias path='echo -e ${PATH//:/\\n}'
 alias vim='VIMINIT="source $XDG_CONFIG_HOME/vim/vimrc" vim'
@@ -107,3 +119,12 @@ if command -v fzf >/dev/null 2>&1; then
     git checkout "$(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")"
   }
 fi
+
+# ==========================================
+# Audio & EasyEffects (Systemd Daemon Control)
+# ==========================================
+alias ees='systemctl --user status easyeffects'      # Check status
+alias eer='systemctl --user restart easyeffects'     # Restart / reload profiles
+alias eequit='systemctl --user stop easyeffects'     # Quit / Stop daemon
+alias eelogs='journalctl --user -u easyeffects -f'   # View live daemon logs
+

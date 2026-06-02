@@ -171,7 +171,7 @@ doti3/
 │   └── screen-layout.rasi
 ├── screenlayout/
 ├── rofi-themes/
-├── systemd/user/          # User systemd services (tmux)
+├── systemd/user/          # User systemd services (tmux, clipmenud, easyeffects)
 ├── tmux/
 ├── vim/
 ├── X11/

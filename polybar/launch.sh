@@ -11,6 +11,12 @@ if type "xrandr" >/dev/null; then
   # Use an associative array to track which screen offsets (X/Y coordinates) already have a bar
   declare -A used_offsets
 
+  # Detect primary monitor, default to first connected monitor if not set
+  primary_monitor=$(xrandr --query | grep " primary" | cut -d" " -f1)
+  if [[ -z "$primary_monitor" ]]; then
+    primary_monitor=$(xrandr --query | grep " connected" | cut -d" " -f1 | head -n 1)
+  fi
+
   for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
     # Get the geometry (e.g., 1920x1080+0+0) for this specific monitor
     geometry=$(xrandr --query | grep "^$m" | grep -o -E "[0-9]+x[0-9]+\+[0-9]+\+[0-9]+")
@@ -28,8 +34,12 @@ if type "xrandr" >/dev/null; then
       used_offsets[$offset]=$m
     fi
 
-    # Launch Polybar
-    MONITOR=$m polybar main -c ~/.config/polybar/config.ini &
+    # Launch Polybar (main with tray on primary, secondary without tray on others)
+    if [[ "$m" == "$primary_monitor" ]]; then
+      MONITOR=$m polybar main -c ~/.config/polybar/config.ini &
+    else
+      MONITOR=$m polybar secondary -c ~/.config/polybar/config.ini &
+    fi
   done
 else
   polybar main -c ~/.config/polybar/config.ini &

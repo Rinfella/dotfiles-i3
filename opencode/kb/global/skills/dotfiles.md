@@ -26,7 +26,7 @@ cd ~/.config/doti3
 | `autostart/` | Desktop | Autostart .desktop files |
 | `bat/` | Shell | Better cat (Catppuccin Mocha theme) |
 | `dunst/` | Desktop | Notification daemon |
-| `easyeffects/` | Audio | EQ presets + live config (db/, output/, autoload/) |
+| `easyeffects/` | Audio | EQ presets + config (mapped to XDG data home) |
 | `fastfetch/` | System | System info fetch |
 | `fontconfig/` | System | Font rendering (JetBrainsMono Nerd Font) |
 | `i3/` | WM | i3wm config + scripts (polybar, powermenu, etc.) |
@@ -37,7 +37,7 @@ cd ~/.config/doti3
 | `picom/` | Desktop | Compositor (shadows, blur, transparency) |
 | `polybar/` | Desktop | Status bar |
 | `rofi/` | Desktop | App launcher + window switcher + clipboard + powermenu |
-| `systemd/` | System | User systemd services (tmux) |
+| `systemd/` | System | User systemd services (tmux, clipmenud, easyeffects) |
 | `tmux/` | Terminal | Terminal multiplexer (TPM + Catppuccin + resurrect) |
 | `vim/` | Editor | Vim config (Vi mode, undodir) |
 | `X11/` | System | Xresources (Qogir-dark cursor) |
@@ -151,6 +151,7 @@ Uses: `i3/scripts/clipboard-status`
 |---------|---------|--------|
 | `tmux.service` | Auto-start tmux on login | enabled |
 | `clipmenud.service` | Clipboard manager daemon | enabled |
+| `easyeffects.service` | EasyEffects background daemon | enabled |
 
 Config: `doti3/systemd/user/` → `~/.config/systemd/user/`
 

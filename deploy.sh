@@ -38,6 +38,8 @@ DOTFILE_FILES=(
     "$DOTI3_DIR/npmrc:$HOME/.config/npmrc"
     "$DOTI3_DIR/yarnrc:$HOME/.config/yarnrc"
     "$DOTI3_DIR/gitconfig:$HOME/.config/gitconfig"
+    # XDG_DATA_HOME directories
+    "$DOTI3_DIR/easyeffects:$HOME/.local/share/easyeffects"
 )
 
 # List of config directories to manage (in ~/.config/)
@@ -47,7 +49,6 @@ APPS=(
     autotiling
     bat
     dunst
-    easyeffects
     fastfetch
     fontconfig
     i3
@@ -287,6 +288,25 @@ else
         sudo udevadm control --reload-rules
         log_success "udev rule created and reloaded!"
     fi
+fi
+
+# ============================================
+# Reload and enable systemd user services
+# ============================================
+log_info "Setting up systemd user services..."
+
+if [[ "$DRY_RUN" == "true" ]]; then
+    echo -e "${YELLOW}[DRY-RUN]${NC} Would reload systemd user daemon and enable service units"
+else
+    systemctl --user daemon-reload
+    for svc in "$CONFIG_DIR"/systemd/user/*.service; do
+        if [[ -f "$svc" ]]; then
+            svc_name=$(basename "$svc")
+            log_info "Enabling systemd user service: $svc_name"
+            systemctl --user enable "$svc_name" >/dev/null 2>&1 || log_warn "Failed to enable $svc_name"
+        fi
+    done
+    log_success "systemd user services reloaded and enabled!"
 fi
 
 # ============================================
