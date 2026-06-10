@@ -13,6 +13,26 @@ export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 export TERMINAL="xterm-kitty"
 
+# bat / delta — theme shared across all tools that respect BAT_THEME
+export BAT_THEME="Catppuccin Mocha"
+
+# ripgrep — point to XDG config file
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/ripgrep"
+
+# fzf — use fd as backend (respects .gitignore, shows hidden, fast)
+# Colors: Catppuccin Mocha palette
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS="\
+  --height=40% --layout=reverse --border=rounded \
+  --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+  --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+  --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+  --color=selected-bg:#45475a \
+  --preview 'if [ -d {} ]; then eza --tree --color=always --icons --level=2 {} 2>/dev/null | head -200; else bat --style=numbers,changes --color=always --line-range :100 {} 2>/dev/null; fi' \
+  --preview-window=right:50%:hidden --bind=ctrl-/:toggle-preview"
+
 # Android SDK
 export ANDROID_HOME=/opt/android-sdk
 

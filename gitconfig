@@ -1,22 +1,65 @@
 [user]
-	name = Rinfella
-	email = rinfellapachuau93@gmail.com
+        name = Rinfella
+        email = rinfellapachuau93@gmail.com
+
 [init]
-	defaultBranch = master
+        defaultBranch = master
+
 [http]
-	version = HTTP/1.1
-	postBuffer = 524288000
+        version = HTTP/1.1
+        postBuffer = 524288000
+
 [color]
-	ui = auto
+        ui = auto
+
 [push]
-	autoSetupRemote = true
+        autoSetupRemote = true
+
 [pull]
-	rebase = true
+        rebase = true
+
+[fetch]
+        prune = true          # auto-remove remote-tracking branches that no longer exist
+
 [core]
-	editor = nvim
+        editor = nvim
+        excludesFile = ~/.config/git/gitignore_global
+        pager = delta
+
+[interactive]
+        diffFilter = delta --color-only
+
+[delta]
+        navigate = true       # n/N to jump between diff sections
+        side-by-side = true
+        line-numbers = true
+        syntax-theme = Catppuccin Mocha
+
+[diff]
+        colorMoved = default  # highlight moved blocks differently from changed lines
+        tool = nvimdiff
+
+[merge]
+        conflictstyle = zdiff3   # shows base + both sides in conflict markers
+
+[rerere]
+        enabled = true        # remember conflict resolutions, replay on re-merge
+
+[branch]
+        sort = -committerdate # git branch lists most recently used first
+
+[rebase]
+        autoSquash = true     # --fixup! commits automatically squash on rebase
+
 [alias]
-	st = status -sb
-	co = checkout
-	br = branch
-	ci = commit
-	lol = log --oneline --graph --decorate
+        st = status -sb
+        co = checkout
+        br = branch
+        ci = commit
+        lol = log --oneline --graph --decorate
+        lola = log --oneline --graph --decorate --all
+        ls = log --oneline -15
+        who = shortlog -sn --no-merges
+        undo = reset HEAD~1 --mixed
+        wip = !git add -A && git commit -m 'WIP'
+        aliases = config --get-regexp alias

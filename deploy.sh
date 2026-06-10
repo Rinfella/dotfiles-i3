@@ -38,6 +38,8 @@ DOTFILE_FILES=(
     "$DOTI3_DIR/npmrc:$HOME/.config/npmrc"
     "$DOTI3_DIR/yarnrc:$HOME/.config/yarnrc"
     "$DOTI3_DIR/gitconfig:$HOME/.config/gitconfig"
+    # git XDG files
+    "$DOTI3_DIR/git/gitignore_global:$HOME/.config/git/gitignore_global"
     # XDG_DATA_HOME directories
     "$DOTI3_DIR/easyeffects:$HOME/.local/share/easyeffects"
 )
@@ -51,6 +53,7 @@ APPS=(
     dunst
     fastfetch
     fontconfig
+    git
     i3
     kitty
     mise
@@ -58,6 +61,7 @@ APPS=(
     opencode
     picom
     polybar
+    ripgrep
     rofi
     systemd
     tmux
@@ -108,6 +112,14 @@ PACKAGES=(
     jq
     ripgrep
     zoxide
+    fzf
+    atuin
+    git-delta
+    direnv
+    glow
+    lazydocker
+    duf
+    zsh-history-substring-search
     # Runtime version management
     mise
     re2c

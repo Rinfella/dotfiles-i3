@@ -25,3 +25,6 @@ zsh/.zsh_history
 [._]s[a-rt-v][a-z]
 [._]ss[a-gi-z]
 [._]sw[a-p]
+
+# Antigravity CLI
+.antigravitycli/

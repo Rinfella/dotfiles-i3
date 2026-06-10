@@ -1,10 +1,13 @@
 # Catppuccin Mocha theme — matches everything else
+# (also exported as BAT_THEME in zshenv so delta/other tools inherit it)
 --theme="Catppuccin Mocha"
-# Show git modifications
---diff
-# Line numbers
---number
-# Disable pager (cat behavior)
+
+# Style: show line numbers + git change markers in gutter + filename header
+# NOTE: do NOT use --diff here — it suppresses output on untracked/clean files
+--style=numbers,changes,header-filename
+
+# Disable pager (cat-like behavior)
 --paging=never
+
 # Wrap long lines
 --wrap=character

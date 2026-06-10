@@ -22,10 +22,22 @@ alias lg="lazygit"
 alias path='echo -e ${PATH//:/\\n}'
 alias vim='VIMINIT="source $XDG_CONFIG_HOME/vim/vimrc" vim'
 
+# zoxide — smarter cd (learns frequently visited dirs)
+# z <dir>  — jump to frecent match
+# zi       — interactive fzf picker
+if command -v zoxide >/dev/null 2>&1; then
+  alias cd='z'
+  alias cdi='zi'
+fi
+
 # bat — better cat
 if command -v bat >/dev/null 2>&1; then
   alias cat='bat'
-  alias catp='bat --plain'
+  alias catp='bat --plain'           # no decorations, raw content
+  alias bh='bat --paging=always'     # bat with pager for big files
+  alias batd='bat --diff'            # explicit git-diff view (only changed lines)
+  alias batl='bat --list-languages'  # list all supported syntax languages
+  alias catn='/usr/bin/cat'          # escape hatch: real cat, bypass bat entirely
 fi
 
 # eza — modern ls with icons
@@ -35,6 +47,17 @@ if command -v eza >/dev/null 2>&1; then
   alias la='eza -la --icons --group-directories-first'
   alias l='eza -la --icons --group-directories-first'
   alias tree='eza --tree --icons'
+fi
+
+# fd — modern find
+if command -v fd >/dev/null 2>&1; then
+  alias find='fd'
+fi
+
+# ripgrep — modern grep
+if command -v rg >/dev/null 2>&1; then
+  alias grep='rg'
+  alias rg='rg --color=always --smart-case'
 fi
 
 # jq — pretty JSON
@@ -79,6 +102,16 @@ alias dps="docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'" # Cle
 alias dex="docker exec -it"                     # Usage: dex <container_name> bash
 alias dlogs="docker logs -f"
 
+# lazydocker — Docker TUI (like lazygit for containers)
+if command -v lazydocker >/dev/null 2>&1; then
+  alias ldc='lazydocker'
+fi
+
+# duf — better df (disk usage overview with pretty output)
+if command -v duf >/dev/null 2>&1; then
+  alias df='duf'
+fi
+
 # ==========================================
 # AWS CLI
 # ==========================================
@@ -110,6 +143,11 @@ alias gcb="git checkout -b"
 alias gp="git push"
 alias gpl="git pull"
 
+# delta — beautiful diff pager (install: sudo pacman -S git-delta)
+if command -v delta >/dev/null 2>&1; then
+  alias diff='delta'
+fi
+
 # Interactive fuzzy branch switcher (requires fzf)
 if command -v fzf >/dev/null 2>&1; then
   gfb() {
@@ -127,4 +165,18 @@ alias ees='systemctl --user status easyeffects'      # Check status
 alias eer='systemctl --user restart easyeffects'     # Restart / reload profiles
 alias eequit='systemctl --user stop easyeffects'     # Quit / Stop daemon
 alias eelogs='journalctl --user -u easyeffects -f'   # View live daemon logs
+
+# ==========================================
+# QOL Readers
+# ==========================================
+# glow — render markdown beautifully in terminal
+if command -v glow >/dev/null 2>&1; then
+  alias md='glow'
+fi
+
+# tldr — practical command cheatsheets (faster than man)
+# Usage: tldr <command>   e.g. tldr tar, tldr git push
+if command -v tldr >/dev/null 2>&1; then
+  alias help='tldr'
+fi
 

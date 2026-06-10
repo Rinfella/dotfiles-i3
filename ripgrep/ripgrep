@@ -1,0 +1,33 @@
+# ripgrep config — ~/.config/ripgrep/ripgrep
+# Pointed to by RIPGREP_CONFIG_PATH in zshenv
+
+# Search hidden files/dirs by default (.dotfiles, .config, etc.)
+--hidden
+
+# Follow symlinks
+--follow
+
+# Smart case: case-insensitive unless pattern has uppercase
+--smart-case
+
+# Always show line numbers
+--line-number
+
+# Exclude common noise from all searches
+--glob=!.git/
+--glob=!node_modules/
+--glob=!.cache/
+--glob=!vendor/
+--glob=!target/
+--glob=!dist/
+--glob=!build/
+--glob=!*.lock
+--glob=!.direnv/
+
+# Colors
+--colors=line:fg:yellow
+--colors=line:style:bold
+--colors=path:fg:green
+--colors=path:style:bold
+--colors=match:fg:red
+--colors=match:style:bold

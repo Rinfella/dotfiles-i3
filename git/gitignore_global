@@ -1,0 +1,73 @@
+# Global gitignore — applies to every repo without polluting per-repo .gitignore
+# Managed in doti3 → symlinked to ~/.config/git/gitignore_global
+
+# ── OS & editors ──────────────────────────────────────────
+.DS_Store
+.DS_Store?
+Thumbs.db
+desktop.ini
+
+# ── Editor / IDE ──────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.vim/
+Session.vim
+
+# ── Secrets & env files ───────────────────────────────────
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.key
+*.p12
+*.pfx
+secrets.json
+secrets.yaml
+secrets.yml
+
+# ── Logs & temp ───────────────────────────────────────────
+*.log
+*.tmp
+*.cache
+.cache/
+
+# ── Build artifacts ───────────────────────────────────────
+dist/
+build/
+out/
+target/
+*.o
+*.a
+*.so
+
+# ── Language-specific ─────────────────────────────────────
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+venv/
+.venv/
+
+# Node
+node_modules/
+.npm/
+.pnpm-store/
+
+# PHP / Composer
+vendor/
+composer.lock.bak
+
+# Rust
+target/
+
+# ── Misc tools ────────────────────────────────────────────
+.direnv/
+.mise/
+.tool-versions.local

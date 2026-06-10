@@ -4,6 +4,18 @@ bindkey -v
 # Remove the ESC delay in Vi mode
 export KEYTIMEOUT=1
 
+# Vi mode cursor shape: beam in insert, block in normal/visual
+function zle-keymap-select zle-line-init {
+  case $KEYMAP in
+    vicmd)      print -n '\e[2 q' ;;  # block cursor — normal/visual mode
+    viins|main) print -n '\e[6 q' ;;  # beam cursor  — insert mode
+  esac
+}
+zle -N zle-keymap-select
+zle -N zle-line-init
+# Reset to beam on exit
+print -n '\e[6 q'
+
 # ==========================================
 # Emacs lifesavers in Vi Insert mode
 # ==========================================
