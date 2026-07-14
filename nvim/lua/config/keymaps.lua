@@ -73,3 +73,13 @@ map("n", "<leader>nc", "<cmd>Telescope neoclip initial_mode=normal<cr>", { desc 
 -- === Terminal ===
 map("n", "<leader>th", "<cmd>ToggleTerm direction=horizontal<cr>", { desc = "Term Horizontal" })
 map("n", "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", { desc = "Term Float" })
+
+-- === Smart gf for Obsidian ===
+map("n", "gf", function()
+    if require("obsidian").util.cursor_on_markdown_link() then
+        return "<cmd>ObsidianFollowLink<cr>"
+    else
+        return "gf"
+    end
+end, { noremap = false, expr = true, desc = "Follow Obsidian Link" })
+
