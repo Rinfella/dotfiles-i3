@@ -192,7 +192,7 @@ if [[ "$INSTALL_DEPS" == "true" ]]; then
     if [[ ${#MISSING[@]} -gt 0 ]]; then
         log_warn "Missing packages: ${MISSING[*]}"
         log_info "Installing missing packages with sudo..."
-        run_cmd sudo pacman -Sy --noconfirm "${MISSING[@]}"
+        run_cmd sudo pacman -S --noconfirm "${MISSING[@]}"
     else
         log_success "All required packages are installed"
     fi
@@ -278,6 +278,13 @@ for entry in "${DOTFILE_FILES[@]}"; do
         fi
     fi
     
+    # Ensure target parent directory exists
+    TARGET_PARENT="$(dirname "$TARGET")"
+    if [[ ! -d "$TARGET_PARENT" ]]; then
+        log_info "Creating target parent directory: $TARGET_PARENT"
+        run_cmd mkdir -p "$TARGET_PARENT"
+    fi
+
     log_info "Symlinking $TARGET..."
     run_cmd ln -s "$SOURCE" "$TARGET"
     log_success "$TARGET linked!"
