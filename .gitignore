@@ -28,3 +28,16 @@ zsh/.zsh_history
 
 # Antigravity CLI
 .antigravitycli/
+
+# AI & Agent configurations / state
+ai/
+opencode/.caveman-active
+opencode/kb
+opencode/memory
+opencode/plugins/
+opencode/skills
+opencode/superpowers
+opencode/*.json
+
+# Zsh completions
+zsh/completions/

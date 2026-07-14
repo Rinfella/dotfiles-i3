@@ -54,12 +54,6 @@ if command -v fd >/dev/null 2>&1; then
   alias find='fd'
 fi
 
-# ripgrep — modern grep
-if command -v rg >/dev/null 2>&1; then
-  alias grep='rg'
-  alias rg='rg --color=always --smart-case'
-fi
-
 # jq — pretty JSON
 alias json='jq .'
 

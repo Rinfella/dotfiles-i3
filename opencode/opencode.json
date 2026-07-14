@@ -1,13 +1,19 @@
 {
     "$schema": "https://opencode.ai/config.json",
-    "model": "gemini/gemini-2.5-pro",
+    "model": "openrouter/meta-llama/llama-3.3-70b-instruct:free",
+    "plugin": [
+        "@mumme-it/opencode-caveman",
+        "/home/rf/.config/ai/ponytail.mjs",
+        "@azumag/opencode-rate-limit-fallback"
+    ],
     "instructions": [
         "~/.config/opencode/kb/global/rules/00-global-directives.md",
         "~/.config/opencode/kb/global/rules/01-tall-stack.md",
         "~/.config/opencode/kb/global/rules/02-infrastructure.md",
         "~/.config/opencode/kb/global/rules/03-cicd.md"
     ],
-    "autoupdate": true,
+    "autoupdate": "notify",
+    "small_model": "openrouter/qwen/qwen3-coder:free",
     "compaction": {
         "auto": true,
         "prune": true,
@@ -16,96 +22,203 @@
     "mcp": {
         "sequential-thinking": {
             "type": "local",
-            "command": ["npx", "-y", "@modelcontextprotocol/server-sequential-thinking"]
+            "command": ["npx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
+            "enabled": true
         },
-        "puppeteer": {
+        "playwright": {
             "type": "local",
-            "command": ["npx", "-y", "@modelcontextprotocol/server-puppeteer"]
+            "command": ["npx", "-y", "@playwright/mcp@latest"],
+            "enabled": false
         },
         "fetch": {
             "type": "local",
-            "command": ["uvx", "mcp-server-fetch"]
+            "command": ["uvx", "mcp-server-fetch"],
+            "enabled": false
         },
         "memory": {
             "type": "local",
-            "command": ["npx", "-y", "@modelcontextprotocol/server-memory"]
+            "command": ["npx", "-y", "@modelcontextprotocol/server-memory"],
+            "enabled": false
+        },
+        "firecrawl": {
+            "type": "local",
+            "command": ["npx", "-y", "firecrawl-mcp"],
+            "environment": {"FIRECRAWL_API_KEY": "{env:FIRECRAWL_API_KEY}"},
+            "enabled": false
+        },
+        "github": {
+            "type": "local",
+            "command": ["npx", "-y", "@modelcontextprotocol/server-github"],
+            "enabled": false,
+            "environment": {"GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_TOKEN}"}
+        },
+        "puppeteer": {
+            "type": "local",
+            "command": ["npx", "-y", "@puppeteer/mcp"],
+            "enabled": false
+        },
+        "filesystem": {
+            "type": "local",
+            "command": ["npx", "-y", "@modelcontextprotocol/server-filesystem"],
+            "enabled": true
+        },
+        "brave-search": {
+            "type": "local",
+            "command": ["npx", "-y", "@anthropic/mcp-brave-search"],
+            "enabled": false
+        },
+        "context7": {
+            "type": "remote",
+            "url": "https://mcp.context7.com/mcp",
+            "enabled": false,
+            "headers": {
+                "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
+            }
         }
     },
     "command": {
         "filament": {
-            "template": "Create a new Filament feature: Model, Migration, Resource, Tests. Follow rules in ~/.config/opencode/kb/global/rules/01-tall-stack.md",
+            "template": "Create a new Filament feature: Model, Migration, Resource, Tests. Reference ~/.config/opencode/kb/global/skills/make-filament-feature.md for detailed procedures. Follow rules in ~/.config/opencode/kb/global/rules/01-tall-stack.md",
             "description": "Scaffold Filament resource",
             "agent": "build"
         },
         "seed": {
-            "template": "Generate Laravel Factories with realistic relational data using Faker",
+            "template": "Generate Laravel Factories with realistic relational data using Faker. Reference ~/.config/opencode/kb/global/skills/generate-seeders.md for patterns.",
             "description": "Generate seed data",
             "agent": "build"
         },
         "debug": {
-            "template": "Debug application errors. Read storage/logs/laravel.log, analyze stack trace, propose fix following rules in ~/.config/opencode/kb/global/rules/01-tall-stack.md",
+            "template": "Debug application errors. Read storage/logs/laravel.log, analyze stack trace, propose fix. Reference ~/.config/opencode/kb/global/skills/debug-laravel.md for debugging workflow. Follow rules in ~/.config/opencode/kb/global/rules/01-tall-stack.md",
             "description": "Debug Laravel errors",
             "agent": "build"
         },
         "audit-db": {
-            "template": "Audit database schema for missing indexes, N+1 queries, normalization issues. Do NOT modify existing migrations.",
+            "template": "Audit database schema for missing indexes, N+1 queries, normalization issues. Reference ~/.config/opencode/kb/global/skills/audit-db.md for audit checklist. Do NOT modify existing migrations.",
             "description": "Audit database schema",
             "agent": "build"
         },
         "test": {
-            "template": "Run the full test suite with coverage. Show failures and suggest fixes.",
+            "template": "Run the full test suite with coverage. Reference ~/.config/opencode/kb/global/skills/run-tests.md for test procedures and ~/.config/opencode/kb/global/skills/write-tests.md for writing new tests. Show failures and suggest fixes.",
             "description": "Run tests with coverage",
             "agent": "build"
         },
         "make-migration": {
-            "template": "Create a new Laravel migration following database rules in ~/.config/opencode/kb/global/rules/01-tall-stack.md",
+            "template": "Create a new Laravel migration. Reference ~/.config/opencode/kb/global/skills/make-migration.md for schema patterns. Follow database rules in ~/.config/opencode/kb/global/rules/01-tall-stack.md",
             "description": "Create migration",
             "agent": "build"
         },
         "make-service": {
-            "template": "Create a new Laravel Service class with proper structure",
+            "template": "Create a new Laravel Service class. Reference ~/.config/opencode/kb/global/skills/make-service.md for structure patterns.",
             "description": "Create service class",
             "agent": "build"
         },
         "make-observer": {
-            "template": "Create a new Eloquent Observer following Laravel conventions",
+            "template": "Create a new Eloquent Observer. Reference ~/.config/opencode/kb/global/skills/make-observer.md for conventions.",
             "description": "Create observer",
             "agent": "build"
         },
         "make-policy": {
-            "template": "Create a Laravel Policy for authorization",
+            "template": "Create a Laravel Policy for authorization. Reference ~/.config/opencode/kb/global/skills/make-policy.md for policy patterns.",
             "description": "Create policy",
             "agent": "build"
         },
         "make-job": {
-            "template": "Create a Laravel Job class (queued or synchronous)",
+            "template": "Create a Laravel Job class (queued or synchronous). Reference ~/.config/opencode/kb/global/skills/make-job.md for job structure.",
             "description": "Create job",
             "agent": "build"
         },
         "sys-update": {
-            "template": "Update Arch Linux system packages using pacman/yay. Check news first with pacman -Pn.",
+            "template": "Update Arch Linux system packages using pacman/yay. Reference ~/.config/opencode/kb/global/skills/update-arch.md for update workflow. Check news first with pacman -Pn.",
             "description": "Update Arch packages",
             "agent": "build"
         },
         "sys-service": {
-            "template": "Manage systemd services. Use systemctl for start/stop/enable/disable/status.",
+            "template": "Manage systemd services. Reference ~/.config/opencode/kb/global/skills/systemd.md for service management patterns. Use systemctl for start/stop/enable/disable/status.",
             "description": "Manage services",
             "agent": "build"
         },
         "sys-packages": {
-            "template": "Install or remove packages with pacman or yay (AUR). Search first.",
+            "template": "Install or remove packages with pacman or yay (AUR). Reference ~/.config/opencode/kb/global/skills/pacman.md for package management patterns. Search first.",
             "description": "Package management",
             "agent": "build"
         },
         "sys-logs": {
-            "template": "Read system logs with journalctl. Show errors or specific service logs.",
+            "template": "Read system logs with journalctl. Reference ~/.config/opencode/kb/global/skills/journalctl.md for log analysis patterns. Show errors or specific service logs.",
             "description": "Read system logs",
             "agent": "build"
         },
         "sys-stats": {
-            "template": "Check system resource usage: CPU, memory, disk, processes. Use htop for interactive.",
+            "template": "Check system resource usage: CPU, memory, disk, processes. Reference ~/.config/opencode/kb/global/skills/system-stats.md for diagnostics patterns. Use htop for interactive.",
             "description": "System stats",
             "agent": "build"
+        },
+        "init-workspace": {
+            "template": "Initialize AI workspace in current project: copy KB, create agent configs, set up stow symlinks, create .gitignore entries following ~/.config/opencode/commands/init-workspace.md",
+            "description": "Initialize AI workspace",
+            "agent": "build"
+        }
+    },
+    "agent": {
+        "debug": {
+            "description": "Debug application errors. Reads logs, analyzes stack traces, finds root cause.",
+            "mode": "subagent",
+            "model": "openrouter/qwen/qwen3-coder:free",
+            "permission": {
+                "edit": "allow",
+                "bash": "allow"
+            }
+        },
+        "test": {
+            "description": "Write and run tests. Creates test cases, runs suite, reports failures.",
+            "mode": "subagent",
+            "model": "openrouter/qwen/qwen3-coder:free",
+            "permission": {
+                "edit": "allow",
+                "bash": "allow"
+            }
+        },
+        "code-reviewer": {
+            "description": "Reviews code for best practices, security, and potential issues",
+            "mode": "subagent",
+            "model": "openrouter/meta-llama/llama-3.3-70b-instruct:free",
+            "permission": {
+                "edit": "deny",
+                "bash": "deny"
+            }
+        },
+        "plan": {
+            "description": "Architecture and planning. Analyzes requirements, designs solutions, produces spec. No code execution.",
+            "mode": "primary",
+            "model": "openrouter/qwen/qwen3-coder:free",
+            "permission": {
+                "edit": "deny",
+                "bash": "deny"
+            }
+        }
+    },
+    "permission": {
+        "read": {
+            "*": "allow",
+            "*.env": "deny"
+        },
+        "edit": {
+            "*": "allow",
+            "**/.env": "deny",
+            "**/config/*.key": "deny"
+        },
+        "bash": {
+            "*": "allow",
+            "sudo *": "ask",
+            "rm -rf /*": "deny",
+            "rm -rf /": "deny",
+            "sudo rm *": "deny",
+            "git push --force*": "ask",
+            "git reset --hard*": "ask",
+            "php artisan migrate:fresh*": "deny",
+            "php artisan migrate:reset*": "deny"
+        },
+        "task": {
+            "*": "allow"
         }
     },
     "formatter": {

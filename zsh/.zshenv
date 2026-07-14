@@ -106,5 +106,8 @@ export LESSHISTFILE="$XDG_STATE_HOME/less/history"
 export PYTHON_HISTORY="$XDG_STATE_HOME/python_history"
 export PULSE_COOKIE="$XDG_CONFIG_HOME/pulse/cookie"
 
+# Shared AI environment variables — auto-export so MCP servers inherit API keys
+set -a; source "$XDG_CONFIG_HOME/ai/.env"; set +a
+
 # Xsession errors are handled by the display manager (~/.xsession-errors)
 # Do NOT redirect stderr here - it will break verbose output in terminal

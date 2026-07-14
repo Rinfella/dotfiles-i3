@@ -46,6 +46,7 @@ DOTFILE_FILES=(
 
 # List of config directories to manage (in ~/.config/)
 APPS=(
+    ai
     alacritty
     atuin
     autotiling

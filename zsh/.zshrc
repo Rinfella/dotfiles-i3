@@ -1,3 +1,6 @@
+# Prepend custom completions directory to fpath for fast autoloaded completion
+fpath=("$ZDOTDIR/completions" $fpath)
+
 # Preferred editor
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
@@ -12,3 +15,4 @@ done
 
 # Initialize Starship prompt (must be at the end)
 eval "$(starship init zsh)"
+
