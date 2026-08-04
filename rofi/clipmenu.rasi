@@ -1,6 +1,7 @@
 configuration {
     font:                "Noto Sans Regular 11";
-    show-icons:          false;
+    show-icons:          true;
+    display-drun:        "ClipBoarde";
     scroll-method:       0;
     disable-history:     true;
     sidebar-mode:        false;

@@ -42,6 +42,9 @@ export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 # Composer global
 export PATH="$HOME/bin:$HOME/.config/composer/vendor/bin:$PATH"
 
+# late.sh 
+export PATH="/home/rf/.local/bin:$PATH"
+
 # Android SDK tools
 export PATH="$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin"
 
@@ -109,5 +112,5 @@ export PULSE_COOKIE="$XDG_CONFIG_HOME/pulse/cookie"
 # Shared AI environment variables — auto-export so MCP servers inherit API keys
 set -a; source "$XDG_CONFIG_HOME/ai/.env"; set +a
 
-# Xsession errors are handled by the display manager (~/.xsession-errors)
-# Do NOT redirect stderr here - it will break verbose output in terminal
+# Gitlab CLI config
+export GITLAB_GROUP="lailen"
