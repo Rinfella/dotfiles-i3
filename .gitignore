@@ -43,6 +43,9 @@ opencode/*.json
 zsh/completions/
 # Vim state
 vim/.vim/
+# Composer local auth/config (tokens) — only composer.json/lock tracked
+composer/auth.json
+composer/config.json
 # Config backups
 **/backup-*.ini
 **/backup-*.conf

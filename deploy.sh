@@ -72,6 +72,7 @@ APPS=(
     i3
     kitty
     lazygit
+    easyeffects
     mise
     nvim
     nwg-look
@@ -105,7 +106,6 @@ PACKAGES=(
     vim
     fastfetch
     starship
-    atuin
     fzf
     thefuck
     navi
