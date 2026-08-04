@@ -64,6 +64,7 @@ APPS=(
     polybar
     ripgrep
     rofi
+    rbw
     systemd
     tmux
     vim
@@ -106,6 +107,8 @@ PACKAGES=(
     polkit-gnome
     network-manager-applet
     clipmenu
+    rbw
+    rofi-rbw
     # QoL tools
     bat
     eza
