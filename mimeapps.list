@@ -1,0 +1,30 @@
+[Added Associations]
+text/markdown=nvim.desktop;
+application/octet-stream=dev.zed.Zed.desktop;
+video/mp4=vlc.desktop;
+video/x-matroska=vlc.desktop;
+image/jpeg=feh.desktop;
+x-scheme-handler/rdp=org.remmina.Remmina.desktop;
+x-scheme-handler/spice=org.remmina.Remmina.desktop;
+x-scheme-handler/vnc=org.remmina.Remmina.desktop;
+x-scheme-handler/remmina=org.remmina.Remmina.desktop;
+application/x-remmina=org.remmina.Remmina.desktop;
+text/csv=nvim.desktop;wps-office-et.desktop;wps-office-prometheus.desktop;com.google.Chrome.desktop;
+application/sql=nvim.desktop;
+audio/flac=deadbeef.desktop;
+application/yaml=org.x.editor.desktop;dev.zed.Zed.desktop;vim.desktop;nvim.desktop;
+text/plain=nvim.desktop;
+image/png=com.google.Chrome.desktop;gimp.desktop;
+
+[Default Applications]
+x-scheme-handler/discord=vesktop.desktop
+application/octet-stream=dev.zed.Zed.desktop
+x-scheme-handler/rdp=org.remmina.Remmina.desktop
+x-scheme-handler/spice=org.remmina.Remmina.desktop
+x-scheme-handler/vnc=org.remmina.Remmina.desktop
+x-scheme-handler/remmina=org.remmina.Remmina.desktop
+application/x-remmina=org.remmina.Remmina.desktop
+audio/flac=deadbeef.desktop
+x-scheme-handler/mailto=google-chrome.desktop
+x-scheme-handler/antigravity=antigravity.desktop
+x-scheme-handler/tabularis=tabularis-handler.desktop

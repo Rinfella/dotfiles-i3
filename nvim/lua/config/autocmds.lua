@@ -3,34 +3,42 @@ local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 local lsp = require("config.lsp")
 
+-- Blade filetype detection (before FileType autocmd triggers)
+vim.filetype.add({
+    pattern = { [".*%.blade%.php$"] = "blade" },
+})
+
 -- 1. Native LSP Start (Replaces lspconfig)
 autocmd("FileType", {
     pattern = {
-        "python", "php", "lua", "html", "css", "json", "go", "rust",
+        "python", "php", "blade", "lua", "html", "css", "json", "go", "rust",
         "typescript", "javascript", "terraform", "ansible", "sql",
         "dockerfile", "yaml", "toml", "sh", "bash"
     },
     callback = function(args)
         local ft_map = {
-            python = "python",
-            php = "php",
-            lua = "lua",
-            html = "html",
-            json = "json",
-            go = "go",
-            rust = "rust",
-            typescript = "typescript",
-            javascript = "javascript",
-            terraform = "terraform",
-            ansible = "ansible",
-            sql = "sql",
-            dockerfile = "dockerfile",
-            yaml = "yaml",
-            sh = "bash",
-            bash = "bash",
+            python = { "python" },
+            php = { "php", "laravel_lsp" },
+            blade = { "laravel_lsp" },
+            lua = { "lua" },
+            html = { "html" },
+            json = { "json" },
+            go = { "go" },
+            rust = { "rust" },
+            typescript = { "typescript" },
+            javascript = { "javascript" },
+            terraform = { "terraform" },
+            ansible = { "ansible" },
+            sql = { "sql" },
+            dockerfile = { "dockerfile" },
+            yaml = { "yaml" },
+            sh = { "bash" },
+            bash = { "bash" },
         }
-        local server = ft_map[args.match]
-        if server then lsp.start(server) end
+        local servers = ft_map[args.match]
+        if servers then
+            for _, server in ipairs(servers) do lsp.start(server) end
+        end
     end,
 })
 

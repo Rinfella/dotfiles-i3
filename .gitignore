@@ -41,3 +41,9 @@ opencode/*.json
 
 # Zsh completions
 zsh/completions/
+# Vim state
+vim/.vim/
+# Config backups
+**/backup-*.ini
+**/backup-*.conf
+**/*.backup-*

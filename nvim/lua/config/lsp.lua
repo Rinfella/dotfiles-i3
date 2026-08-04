@@ -14,6 +14,13 @@ M.servers = {
         root = { "composer.json", ".git" },
         init_options = { storagePath = vim.fn.stdpath("cache") },
     },
+    laravel_lsp = {
+        binary = "laravel-lsp",
+        root = { "artisan", "composer.json", ".git" },
+        init_options = {
+            phpEnvironment = "auto",
+        },
+    },
     lua = {
         binary = "lua-language-server",
         root = { ".luarc.json", ".git" },
@@ -71,11 +78,14 @@ M.servers = {
     },
 }
 
--- 2. Helper to find binary in Mason or System
+-- 2. Helper to find binary in Mason, Composer global, or System
 local function get_cmd(name)
     local mason_path = vim.fn.stdpath("data") .. "/mason/bin/" .. name
+    local composer_bin = vim.fn.expand("$HOME") .. "/.config/composer/vendor/bin/" .. name
     if vim.loop.fs_stat(mason_path) then
         return { mason_path }
+    elseif vim.loop.fs_stat(composer_bin) then
+        return { composer_bin }
     elseif vim.fn.executable(name) == 1 then
         return { name }
     end
