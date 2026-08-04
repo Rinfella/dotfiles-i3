@@ -45,8 +45,7 @@ DOTFILE_FILES=(
     "$DOTI3_DIR/gitconfig:$HOME/.config/gitconfig"
     "$DOTI3_DIR/mimeapps.list:$HOME/.config/mimeapps.list"
     "$DOTI3_DIR/pavucontrol.ini:$HOME/.config/pavucontrol.ini"
-    # git XDG files
-    "$DOTI3_DIR/git/gitignore_global:$HOME/.config/git/gitignore_global"
+    # git XDG files (git/ dir fully managed via APPS)
     # Composer global manifest (auth.json stays local, never tracked)
     "$DOTI3_DIR/composer/composer.json:$HOME/.config/composer/composer.json"
     "$DOTI3_DIR/composer/composer.lock:$HOME/.config/composer/composer.lock"

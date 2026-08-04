@@ -12,6 +12,8 @@ git clone <repo> ~/.config/doti3
 cd ~/.config/doti3
 ./deploy.sh --dry-run        # preview what will be linked
 ./deploy.sh                  # apply symlinks
+./deploy.sh --verify         # check symlinks + smoke-test i3/rofi/nvim configs
+./deploy.sh --prune          # remove stale doti3 symlinks
 ./deploy.sh --install-deps   # also install packages
 ```
 
@@ -21,6 +23,7 @@ cd ~/.config/doti3
 | Screenshot (full) | `Mod+x` |
 | Screenshot (selection) | `Mod+Ctrl+x` |
 | Clipboard history | `Mod+c` |
+| Bitwarden (rofi-rbw) | `Mod+p` |
 | Fuzzy history search | `Ctrl+R` |
 | File manager (cwd) | `y` |
 | Git TUI | `lg` |
@@ -40,12 +43,18 @@ cd ~/.config/doti3
 ### deploy.sh
 
 ```bash
-./deploy.sh [--dry-run] [--install-deps]
+./deploy.sh [--dry-run] [--install-deps] [--verify] [--prune]
 ```
 
-- **Symlinks directories** to `~/.config/` (e.g. `i3`, `polybar`, `dunst`, `kitty`, etc.)
-- **Symlinks individual files** (`.zshenv`, `starship.toml`, etc.)
+- **Symlinks directories** to `~/.config/` (e.g. `i3`, `polybar`, `dunst`, `kitty`, `rbw`, `lazygit`, `gtk-*`, etc.)
+- **Symlinks individual files** (`.zshenv`, `starship.toml`, `mimeapps.list`, `composer.json`/`composer.lock`, etc.)
 - **Symlinks easyeffects** presets to `~/.local/share/easyeffects`
+- **Symlinks rofi themes** to `~/.local/share/rofi/themes`
+- **Installs cron entries** from `cron/` (e.g. duckdns)
+- **Creates udev rule** for monitor hotplug with expanded `$HOME` path
+- **Backs up existing configs** before linking (keeps last 3 backups)
+- **`--verify`** validates symlink integrity + runs config smoke tests (`i3 -C`, rofi theme dumps, `nvim --headless`)
+- **`--prune`** removes doti3 symlinks no longer in the managed lists
 
 ---
 
@@ -366,6 +375,28 @@ mise use -g php@<version>
 
 - `clipmenud` runs as a **systemd user service**
 - **Polybar icon**: left-click = history, right-click = pause 5s (for sensitive data)
+
+---
+
+## Bitwarden (rbw + rofi-rbw)
+
+| Binding | Action |
+|---|---|
+| `Mod+p` | Summon password entries → copy (rofi) |
+
+- `rbw` config: `rbw/config.json` (symlinked), data/cache stays local
+- `rofi-rbw` theme: `rofi/rbw.rasi` (matches clipmenu styling)
+- Installed via composer: `composer global require laravel/lsp` pattern — see `composer/composer.json`
+
+---
+
+## Laravel LSP (Neovim)
+
+- Server: `laravel-lsp` (composer global, `~/.config/composer/vendor/bin`)
+- PHP buffers: `intelephense` + `laravel_lsp`
+- Blade buffers: `laravel_lsp` (filetype auto-detected via `vim.filetype.add`)
+- Root markers: `artisan` / `composer.json` / `.git`
+- Config: `nvim/lua/config/lsp.lua`, attach map in `nvim/lua/config/autocmds.lua`
 
 ---
 

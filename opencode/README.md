@@ -38,20 +38,33 @@ Thin config. Central hub at `~/.config/ai/`.
 
 All defined in `opencode.json`. Lazy loading via `enabled: false`.
 
-| Server | Load | Command |
-|--------|------|---------|
-| sequential-thinking | always | `npx @modelcontextprotocol/server-sequential-thinking` |
-| firecrawl | always | `npx firecrawl-mcp` |
-| github | always | `npx @modelcontextprotocol/server-github` |
-| context7 | always | remote `https://mcp.context7.com/mcp` |
-| playwright | always | `npx @playwright/mcp@latest` |
-| fetch | always | `uvx mcp-server-fetch` |
-| memory | always | `npx @modelcontextprotocol/server-memory` |
-| brave-search | always | `npx @anthropic/mcp-brave-search` |
-| filesystem | always | `npx @modelcontextprotocol/server-filesystem` |
-| puppeteer | LAZY | `npx @puppeteer/mcp` — disabled by default, duplicates playwright |
+| Server | State | Command |
+|--------|-------|---------|
+| sequential-thinking | enabled | `npx @modelcontextprotocol/server-sequential-thinking` |
+| filesystem | enabled | `npx @modelcontextprotocol/server-filesystem` |
+| firecrawl | disabled | `npx firecrawl-mcp` — needs `FIRECRAWL_API_KEY` |
+| github | disabled | `npx @modelcontextprotocol/server-github` — needs `GITHUB_TOKEN` |
+| context7 | disabled | remote `https://mcp.context7.com/mcp` — needs `CONTEXT7_API_KEY` |
+| playwright | disabled | `npx @playwright/mcp@latest` |
+| fetch | disabled | `uvx mcp-server-fetch` |
+| memory | disabled | `npx @modelcontextprotocol/server-memory` |
+| brave-search | disabled | `npx @anthropic/mcp-brave-search` |
+| puppeteer | disabled | `npx @puppeteer/mcp` — duplicates playwright |
 
 Project MCPs (DB, local services) go in project `opencode.json` — never load globally.
+
+## LSP Servers
+
+| Server | Extensions | Notes |
+|--------|-----------|-------|
+| laravel-lsp | `.php`, `.blade.php` | Absolute path to composer global bin; requires `composer global require laravel/lsp` |
+
+Install:
+```bash
+composer global require laravel/lsp
+```
+
+Restart opencode after changing `opencode.json` — config loads once at startup.
 
 ## Custom Agents
 

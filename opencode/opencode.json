@@ -13,6 +13,12 @@
         "~/.config/opencode/kb/global/rules/03-cicd.md"
     ],
     "autoupdate": "notify",
+    "lsp": {
+        "laravel-lsp": {
+            "command": ["/home/rf/.config/composer/vendor/bin/laravel-lsp"],
+            "extensions": [".php", ".blade.php"]
+        }
+    },
     "small_model": "openrouter/qwen/qwen3-coder:free",
     "compaction": {
         "auto": true,
