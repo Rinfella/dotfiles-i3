@@ -6,7 +6,7 @@ inputDevice=alsa_input.pci-0000_06_00.6.HiFi__Mic1__source
 
 [StreamOutputs]
 mostUsedPresets=Crinacle32B
-outputDevice=alsa_output.pci-0000_06_00.6.HiFi__Headphones__sink
+outputDevice=alsa_output.pci-0000_06_00.6.HiFi__Speaker__sink
 plugins=equalizer#0
 usedPresets=Crinacle32B:1
 
