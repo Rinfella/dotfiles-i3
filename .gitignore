@@ -46,6 +46,8 @@ vim/.vim/
 # Composer local auth/config (tokens) — only composer.json/lock tracked
 composer/auth.json
 composer/config.json
+# systemd enable symlinks (recreated by deploy.sh enable loop)
+systemd/user/default.target.wants/
 # Config backups
 **/backup-*.ini
 **/backup-*.conf
