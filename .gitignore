@@ -52,3 +52,9 @@ systemd/user/default.target.wants/
 **/backup-*.ini
 **/backup-*.conf
 **/*.backup-*
+*.bak
+**/*.bak
+
+# Logs
+*.log
+**/*.log
