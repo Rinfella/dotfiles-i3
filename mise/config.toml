@@ -10,6 +10,7 @@
 [tools]
 php = "8.5"
 node = "24"
+gradle = "9.4.1"
 
 [settings]
 experimental = true
