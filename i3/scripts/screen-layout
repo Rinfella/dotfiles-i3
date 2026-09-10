@@ -16,20 +16,62 @@ if [ ! -d "$LAYOUT_DIR" ]; then
     exit 1
 fi
 
-# SCAN LOOP
+# Preferred layout ordering: "key:icon:Custom Display Title"
+ORDERED_LAYOUTS=(
+    "autodetect:󰑐:Auto Detect"
+    "triple-extended:󰍺:Triple Screen (DP Portrait)"
+    "triple-landscape:󰍺:Triple Screen (DP Landscape)"
+    "dual-external:󰍹:Dual External (DP Portrait)"
+    "dual-landscape:󰍹:Dual External (DP Landscape)"
+    "mirror::Mirror All Displays"
+    "extended-right:➡:Extended Right (HDMI)"
+    "extended-up:⬆:Extended Up (HDMI)"
+    "extended-left:⬅:Extended Left (HDMI)"
+    "single::Single (Laptop Only)"
+    "hdmi-only:󰍹:HDMI Only"
+    "dp-extended-right:󰡁:DP Extended Right"
+    "dp-only:󰡁:DP Only"
+)
+
+declare -A processed
+
+# Add items in preferred order if their script exists
+for item in "${ORDERED_LAYOUTS[@]}"; do
+    IFS=":" read -r key icon title <<< "$item"
+    if [[ "$key" == "autodetect" ]]; then
+        script="$HOME/.config/i3/scripts/autodetect-display"
+    else
+        script="$LAYOUT_DIR/${key}.sh"
+    fi
+
+    if [[ -x "$script" ]]; then
+        display_str="$icon  $title"
+        file_list+=("$script")
+        display_list+=("$display_str")
+        processed["$key"]=1
+        if (( ${#display_str} > max_str_len )); then
+            max_str_len=${#display_str}
+        fi
+    fi
+done
+
+# SCAN LOOP for any additional scripts in LAYOUT_DIR not in preferred list
 for file in "$LAYOUT_DIR"/*.sh; do
     [ -f "$file" ] || continue
     filename=$(basename "$file" .sh)
+    [[ -n "${processed[$filename]}" ]] && continue
     
     # Icon Logic (converted filename to lowercase for easier matching)
     case "${filename,,}" in
+        *"triple"*)             icon="󰍺" ;;
+        *"dual"*)               icon="󰍹" ;;
         *"up"*)                 icon="⬆" ;;
         *"down"*)               icon="⬇" ;;
         *"left"*)               icon="⬅" ;;
         *"right"*)              icon="➡" ;;
         *"mirror"*)             icon="" ;;
         *"laptop"*|*"internal"*)icon="" ;; # Laptop icon
-        *"hdmi"*|*"external"*)  icon="󰍹" ;; # External Monitor icon
+        *"hdmi"*|*"external"*|*"dp"*) icon="󰍹" ;; # External Monitor icon
         *"single"*)             icon="" ;;
         *)                      icon="" ;;
     esac
@@ -41,14 +83,12 @@ for file in "$LAYOUT_DIR"/*.sh; do
     # Display String (Icon + Name Only)
     display_str="$icon  $clean_name"
 
-    # Track maximum string length for Rofi width formatting
     if (( ${#display_str} > max_str_len )); then
         max_str_len=${#display_str}
     fi
 
     file_list+=("$file")
     display_list+=("$display_str")
-
 done
 
 # Cancel Button

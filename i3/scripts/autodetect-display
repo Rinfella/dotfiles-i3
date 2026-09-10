@@ -10,10 +10,15 @@ if [[ "$PRODUCT_NAME" == "20UECTO1WW" ]]; then
     IS_THINKPAD=true
 fi
 
-# Check HDMI connection status
+# Check display connection status (HDMI and Type-C DP)
 HDMI_CONNECTED=false
-if xrandr | grep -q "HDMI-A-0 connected"; then
+if xrandr | grep -q "^HDMI-A-0 connected"; then
     HDMI_CONNECTED=true
+fi
+
+DP_CONNECTED=false
+if xrandr | grep -q "^DisplayPort-1 connected"; then
+    DP_CONNECTED=true
 fi
 
 # For ThinkPad laptop: check lid state
@@ -27,21 +32,46 @@ fi
 
 # Determine which layout to apply
 if [[ "$IS_THINKPAD" == "false" ]]; then
-    # Desktop or non-ThinkPad: use HDMI only
-    LAYOUT="hdmi-only"
-    echo "Desktop detected, applying HDMI-only layout..."
-elif [[ "$HDMI_CONNECTED" == "false" ]]; then
-    # Laptop with no HDMI: use built-in display only
-    LAYOUT="single"
-    echo "Laptop: HDMI disconnected, applying single (built-in) layout..."
-elif [[ "$LID_OPEN" == "false" ]]; then
-    # Laptop with HDMI + lid closed: use HDMI only
-    LAYOUT="hdmi-only"
-    echo "Laptop: HDMI connected + lid closed, applying HDMI-only layout..."
+    # Desktop or non-ThinkPad
+    if [[ "$HDMI_CONNECTED" == "true" && "$DP_CONNECTED" == "true" ]]; then
+        LAYOUT="dual-external"
+    elif [[ "$DP_CONNECTED" == "true" ]]; then
+        LAYOUT="dp-only"
+    else
+        LAYOUT="hdmi-only"
+    fi
+    echo "Desktop detected, applying $LAYOUT layout..."
+elif [[ "$HDMI_CONNECTED" == "true" && "$DP_CONNECTED" == "true" ]]; then
+    # Laptop with both HDMI and DP connected
+    if [[ "$LID_OPEN" == "false" ]]; then
+        LAYOUT="dual-external"
+        echo "Laptop: Dual external connected + lid closed, applying dual-external layout..."
+    else
+        LAYOUT="triple-extended"
+        echo "Laptop: Dual external connected + lid open, applying triple-extended layout..."
+    fi
+elif [[ "$HDMI_CONNECTED" == "true" ]]; then
+    # Laptop with only HDMI connected
+    if [[ "$LID_OPEN" == "false" ]]; then
+        LAYOUT="hdmi-only"
+        echo "Laptop: HDMI connected + lid closed, applying hdmi-only layout..."
+    else
+        LAYOUT="extended-right"
+        echo "Laptop: HDMI connected + lid open, applying extended-right layout..."
+    fi
+elif [[ "$DP_CONNECTED" == "true" ]]; then
+    # Laptop with only DP-1 connected
+    if [[ "$LID_OPEN" == "false" ]]; then
+        LAYOUT="dp-only"
+        echo "Laptop: DP-1 connected + lid closed, applying dp-only layout..."
+    else
+        LAYOUT="dp-extended-right"
+        echo "Laptop: DP-1 connected + lid open, applying dp-extended-right layout..."
+    fi
 else
-    # Laptop with HDMI + lid open: extended up
-    LAYOUT="extended-up"
-    echo "Laptop: HDMI connected + lid open, applying extended-up layout..."
+    # Laptop with no external displays
+    LAYOUT="single"
+    echo "Laptop: External displays disconnected, applying single (built-in) layout..."
 fi
 
 # Apply the layout
@@ -49,6 +79,16 @@ SCRIPT="${LAYOUT_DIR}/${LAYOUT}.sh"
 if [[ -x "$SCRIPT" ]]; then
     "$SCRIPT"
     echo "Applied layout: $LAYOUT"
+
+    # Reload wallpaper and Polybar if running under X
+    if [[ -n "$DISPLAY" ]]; then
+        if command -v feh >/dev/null 2>&1; then
+            feh --randomize --bg-fill "$HOME/Pictures/wallpapers"/* >/dev/null 2>&1 &
+        fi
+        if [[ -x "$HOME/.config/polybar/launch.sh" ]]; then
+            "$HOME/.config/polybar/launch.sh" >/dev/null 2>&1 &
+        fi
+    fi
 else
     echo "Error: Layout script not found or not executable: $SCRIPT"
     exit 1

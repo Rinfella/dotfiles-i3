@@ -21,6 +21,9 @@ if type "xrandr" >/dev/null; then
     # Get the geometry (e.g., 1920x1080+0+0) for this specific monitor
     geometry=$(xrandr --query | grep "^$m" | grep -o -E "[0-9]+x[0-9]+\+[0-9]+\+[0-9]+")
     
+    # Skip connected monitors that are turned off / have no active geometry
+    [[ -z "$geometry" ]] && continue
+
     # Extract just the offset coordinates (e.g., +0+0)
     offset=$(echo "$geometry" | grep -o -E "\+[0-9]+\+[0-9]+")
 
