@@ -285,6 +285,9 @@ exec_always --no-startup-id sleep 1 && feh --randomize --bg-fill ~/Pictures/wall
 exec --no-startup-id sleep 4 && google-chrome-stable > /dev/null 2>&1
 exec --no-startup-id sleep 4 && kdeconnectd
 
+# Ensure ALSA hardware channels are unmuted on startup
+exec --no-startup-id amixer -c Generic_1 sset Master unmute && amixer -c Generic_1 sset Headphone unmute && amixer -c Generic_1 sset Speaker unmute
+
 ###################
 # Color Settings  #
 ###################

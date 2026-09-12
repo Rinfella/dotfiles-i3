@@ -83,6 +83,7 @@ APPS=(
     ripgrep
     rofi
     systemd
+    wireplumber
     tmux
     vim
     xsettingsd

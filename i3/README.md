@@ -33,3 +33,7 @@ Supports ThinkPad internal display + built-in HDMI (`HDMI-A-0`) + Type-C dongle 
   - `$mod+m`: Mirror all displays
   - `$mod+Shift+s`: Built-in laptop screen only
 
+## Audio Defaults
+
+On startup, i3 initializes the ALSA hardware mixer (`Generic_1`) so that `Master`, `Headphone`, and `Speaker` channels are unmuted, with WirePlumber and PipeWire managing active routing and volume levels.
+
