@@ -1,14 +1,20 @@
 {
     "$schema": "https://opencode.ai/config.json",
     "provider": {
-        "amazon-bedrock": {
+        "bedrock-mantle": {
+            "npm": "@ai-sdk/openai-compatible",
             "options": {
-                "region": "ap-south-1",
-                "profile": "piakos"
+                "baseURL": "https://bedrock-mantle.ap-south-1.api.aws/v1",
+                "apiKey": "{env:BEDROCK_API_KEY}"
+            },
+            "models": {
+                "qwen.qwen3-coder-next": {
+                    "name": "Qwen 3 Coder Next"
+                }
             }
         }
     },
-    "model": "openrouter/meta-llama/llama-3.3-70b-instruct:free",
+    "model": "bedrock-mantle/qwen.qwen3-coder-next",
     "plugin": [
         "@mumme-it/opencode-caveman",
         "/home/rf/.config/ai/ponytail.mjs",
@@ -27,7 +33,7 @@
             "extensions": [".php", ".blade.php"]
         }
     },
-    "small_model": "openrouter/qwen/qwen3-coder:free",
+    "small_model": "bedrock-mantle/qwen.qwen3-coder-next",
     "compaction": {
         "auto": true,
         "prune": true,
@@ -39,55 +45,25 @@
             "command": ["npx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
             "enabled": true
         },
-        "playwright": {
-            "type": "local",
-            "command": ["npx", "-y", "@playwright/mcp@latest"],
-            "enabled": false
-        },
-        "fetch": {
-            "type": "local",
-            "command": ["uvx", "mcp-server-fetch"],
-            "enabled": false
-        },
-        "memory": {
-            "type": "local",
-            "command": ["npx", "-y", "@modelcontextprotocol/server-memory"],
-            "enabled": false
-        },
-        "firecrawl": {
-            "type": "local",
-            "command": ["npx", "-y", "firecrawl-mcp"],
-            "environment": {"FIRECRAWL_API_KEY": "{env:FIRECRAWL_API_KEY}"},
-            "enabled": false
-        },
         "github": {
             "type": "local",
             "command": ["npx", "-y", "@modelcontextprotocol/server-github"],
             "enabled": true,
             "environment": {"GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_TOKEN}"}
         },
-        "puppeteer": {
-            "type": "local",
-            "command": ["npx", "-y", "@puppeteer/mcp"],
-            "enabled": false
-        },
-        "filesystem": {
-            "type": "local",
-            "command": ["npx", "-y", "@modelcontextprotocol/server-filesystem"],
-            "enabled": true
-        },
-        "brave-search": {
-            "type": "local",
-            "command": ["npx", "-y", "@anthropic/mcp-brave-search"],
-            "enabled": false
-        },
         "context7": {
             "type": "remote",
             "url": "https://mcp.context7.com/mcp",
-            "enabled": false,
+            "enabled": true,
             "headers": {
                 "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
             }
+        },
+        "firecrawl": {
+            "type": "local",
+            "command": ["npx", "-y", "firecrawl-mcp"],
+            "environment": {"FIRECRAWL_API_KEY": "{env:FIRECRAWL_API_KEY}"},
+            "enabled": false
         }
     },
     "command": {
@@ -176,7 +152,7 @@
         "debug": {
             "description": "Debug application errors. Reads logs, analyzes stack traces, finds root cause.",
             "mode": "subagent",
-            "model": "openrouter/qwen/qwen3-coder:free",
+            "model": "bedrock-mantle/qwen.qwen3-coder-next",
             "permission": {
                 "edit": "allow",
                 "bash": "allow"
@@ -185,7 +161,7 @@
         "test": {
             "description": "Write and run tests. Creates test cases, runs suite, reports failures.",
             "mode": "subagent",
-            "model": "openrouter/qwen/qwen3-coder:free",
+            "model": "bedrock-mantle/qwen.qwen3-coder-next",
             "permission": {
                 "edit": "allow",
                 "bash": "allow"
@@ -194,7 +170,7 @@
         "code-reviewer": {
             "description": "Reviews code for best practices, security, and potential issues",
             "mode": "subagent",
-            "model": "openrouter/meta-llama/llama-3.3-70b-instruct:free",
+            "model": "bedrock-mantle/qwen.qwen3-coder-next",
             "permission": {
                 "edit": "deny",
                 "bash": "deny"
@@ -203,7 +179,7 @@
         "plan": {
             "description": "Architecture and planning. Analyzes requirements, designs solutions, produces spec. No code execution.",
             "mode": "primary",
-            "model": "openrouter/qwen/qwen3-coder:free",
+            "model": "bedrock-mantle/qwen.qwen3-coder-next",
             "permission": {
                 "edit": "deny",
                 "bash": "deny"
