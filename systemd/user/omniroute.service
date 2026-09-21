@@ -1,0 +1,16 @@
+[Unit]
+Description=OmniRoute AI Proxy
+After=network.target
+
+[Service]
+Type=simple
+Environment="PATH=/home/rf/.local/share/mise/shims:/usr/local/bin:/usr/bin:/bin"
+WorkingDirectory=/home/rf/.omniroute
+ExecStart=/home/rf/.local/share/mise/shims/omniroute
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

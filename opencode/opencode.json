@@ -12,9 +12,55 @@
                     "name": "Qwen 3 Coder Next"
                 }
             }
+        },
+        "omniroute": {
+            "npm": "@ai-sdk/openai-compatible",
+            "options": {
+                "baseURL": "http://127.0.0.1:20128/v1",
+                "apiKey": "{env:OMNIROUTE_API_KEY}",
+                "setCacheKey": true
+            },
+            "models": {
+                "rinfela-combo": {
+                    "name": "OmniRoute (Rinfela Combo)",
+                    "limit": { "context": 200000, "output": 8192 }
+                },
+                "static-best-free": {
+                    "name": "OmniRoute (Static Best Free)",
+                    "limit": { "context": 200000, "output": 8192 }
+                },
+                "auto/best-coding": {
+                    "name": "OmniRoute (Auto Best Coding)",
+                    "limit": { "context": 200000, "output": 8192 }
+                },
+                "agy/gemini-3.1-pro-low": {
+                    "name": "Gemini 3.1 Pro (AGY)",
+                    "limit": { "context": 1048576, "output": 65536 },
+                    "reasoning": true
+                },
+                "agy/gemini-3.7-flash-medium": {
+                    "name": "Gemini 3.7 Flash Medium (AGY)",
+                    "limit": { "context": 1048576, "output": 65536 },
+                    "reasoning": true
+                },
+                "kiro/claude-sonnet-4.5": {
+                    "name": "Claude Sonnet 4.5 (Kiro)",
+                    "limit": { "context": 200000, "output": 8192 },
+                    "reasoning": true
+                },
+                "kiro/qwen3-coder-next": {
+                    "name": "Qwen 3 Coder Next (Kiro)",
+                    "limit": { "context": 131072, "output": 8192 },
+                    "reasoning": true
+                },
+                "kiro/claude-haiku-4.5": {
+                    "name": "Claude Haiku 4.5 (Kiro)",
+                    "limit": { "context": 200000, "output": 8192 }
+                }
+            }
         }
     },
-    "model": "bedrock-mantle/qwen.qwen3-coder-next",
+    "model": "omniroute/rinfela-combo",
     "plugin": [
         "@mumme-it/opencode-caveman",
         "/home/rf/.config/ai/ponytail.mjs",
@@ -26,14 +72,24 @@
         "~/.config/opencode/kb/global/rules/02-infrastructure.md",
         "~/.config/opencode/kb/global/rules/03-cicd.md"
     ],
-    "autoupdate": "notify",
+    "autoupdate": false,
     "lsp": {
         "laravel-lsp": {
             "command": ["/home/rf/.config/composer/vendor/bin/laravel-lsp"],
             "extensions": [".php", ".blade.php"]
         }
     },
-    "small_model": "bedrock-mantle/qwen.qwen3-coder-next",
+    "small_model": "omniroute/agy/gemini-3.7-flash-medium",
+    "watcher": {
+        "ignore": [
+            "node_modules/**",
+            ".git/**",
+            "vendor/**",
+            "storage/**",
+            ".next/**",
+            "dist/**"
+        ]
+    },
     "compaction": {
         "auto": true,
         "prune": true,
@@ -42,12 +98,12 @@
     "mcp": {
         "sequential-thinking": {
             "type": "local",
-            "command": ["npx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
+            "command": ["mcp-server-sequential-thinking"],
             "enabled": true
         },
         "github": {
             "type": "local",
-            "command": ["npx", "-y", "@modelcontextprotocol/server-github"],
+            "command": ["mcp-server-github"],
             "enabled": true,
             "environment": {"GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_TOKEN}"}
         },
@@ -146,13 +202,23 @@
             "template": "Initialize AI workspace in current project: copy KB, create agent configs, set up stow symlinks, create .gitignore entries following ~/.config/opencode/commands/init-workspace.md",
             "description": "Initialize AI workspace",
             "agent": "build"
+        },
+        "review": {
+            "template": "Review staged git diff or recent commits for logic bugs, security issues, performance regressions, and adherence to Laravel conventions. Show findings clearly.",
+            "description": "Review staged code changes",
+            "agent": "code-reviewer"
+        },
+        "routes": {
+            "template": "Audit registered Laravel routes (php artisan route:list). Check for missing authorization middleware, duplicate endpoints, and route model binding issues.",
+            "description": "Audit Laravel routes",
+            "agent": "build"
         }
     },
     "agent": {
         "debug": {
             "description": "Debug application errors. Reads logs, analyzes stack traces, finds root cause.",
             "mode": "subagent",
-            "model": "bedrock-mantle/qwen.qwen3-coder-next",
+            "model": "omniroute/rinfela-combo",
             "permission": {
                 "edit": "allow",
                 "bash": "allow"
@@ -161,7 +227,7 @@
         "test": {
             "description": "Write and run tests. Creates test cases, runs suite, reports failures.",
             "mode": "subagent",
-            "model": "bedrock-mantle/qwen.qwen3-coder-next",
+            "model": "omniroute/kiro/qwen3-coder-next",
             "permission": {
                 "edit": "allow",
                 "bash": "allow"
@@ -170,7 +236,7 @@
         "code-reviewer": {
             "description": "Reviews code for best practices, security, and potential issues",
             "mode": "subagent",
-            "model": "bedrock-mantle/qwen.qwen3-coder-next",
+            "model": "omniroute/kiro/claude-sonnet-4.5",
             "permission": {
                 "edit": "deny",
                 "bash": "deny"
@@ -179,7 +245,7 @@
         "plan": {
             "description": "Architecture and planning. Analyzes requirements, designs solutions, produces spec. No code execution.",
             "mode": "primary",
-            "model": "bedrock-mantle/qwen.qwen3-coder-next",
+            "model": "omniroute/kiro/claude-sonnet-4.5",
             "permission": {
                 "edit": "deny",
                 "bash": "deny"
