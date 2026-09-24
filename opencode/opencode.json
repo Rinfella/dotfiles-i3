@@ -56,6 +56,23 @@
                 "kiro/claude-haiku-4.5": {
                     "name": "Claude Haiku 4.5 (Kiro)",
                     "limit": { "context": 200000, "output": 8192 }
+                },
+                "kiro/deepseek-3.2": {
+                    "name": "DeepSeek V3.2 (Kiro)",
+                    "limit": { "context": 131072, "output": 8192 },
+                    "reasoning": true
+                },
+                "kiro/minimax-m2.5": {
+                    "name": "MiniMax M2.5 (Kiro)",
+                    "limit": { "context": 200000, "output": 8192 }
+                },
+                "kiro/minimax-m2.1": {
+                    "name": "MiniMax M2.1 (Kiro)",
+                    "limit": { "context": 200000, "output": 8192 }
+                },
+                "kiro/glm-5": {
+                    "name": "GLM-5 (Kiro)",
+                    "limit": { "context": 131072, "output": 8192 }
                 }
             }
         }

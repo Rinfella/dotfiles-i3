@@ -20,7 +20,12 @@ OpenCode connects to OmniRoute using the `@ai-sdk/openai-compatible` adapter.
 | `omniroute/agy/gemini-3.1-pro-low` | Gemini 3.1 Pro (AGY) | Direct Antigravity CLI Gemini 3.1 Pro |
 | `omniroute/agy/gemini-3.7-flash-medium` | Gemini 3.7 Flash Medium (AGY) | Direct Antigravity CLI Gemini 3.7 Flash |
 | `omniroute/kiro/claude-sonnet-4.5` | Claude Sonnet 4.5 (Kiro) | Direct Kiro Claude Sonnet 4.5 |
+| `omniroute/kiro/claude-haiku-4.5` | Claude Haiku 4.5 (Kiro) | Direct Kiro Claude Haiku 4.5 |
 | `omniroute/kiro/qwen3-coder-next` | Qwen 3 Coder Next (Kiro) | Direct Kiro Qwen 3 Coder Next |
+| `omniroute/kiro/deepseek-3.2` | DeepSeek V3.2 (Kiro) | Direct Kiro DeepSeek V3.2 |
+| `omniroute/kiro/minimax-m2.5` | MiniMax M2.5 (Kiro) | Direct Kiro MiniMax M2.5 |
+| `omniroute/kiro/minimax-m2.1` | MiniMax M2.1 (Kiro) | Direct Kiro MiniMax M2.1 |
+| `omniroute/kiro/glm-5` | GLM-5 (Kiro) | Direct Kiro GLM-5 |
 
 ## Usage Commands
 
