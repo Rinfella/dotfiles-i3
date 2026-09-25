@@ -18,18 +18,24 @@ OmniRoute combines models across **Kiro**, **AGY**, **NVIDIA NIM**, **Mistral**,
 
 | Combo Name | Strategy | Priority / Distribution Sequence | Description |
 | :--- | :--- | :--- | :--- |
-| `combo-code-heavy` | **Priority Failover** | 1. Kiro Claude Sonnet 4.5<br>2. Mistral Codestral<br>3. NVIDIA Devstral 123B<br>4. Kiro Qwen 3 Coder Next<br>5. AGY Gemini 3.7 Flash High<br>6. LiteRouter DeepSeek V4 Flash<br>7. Ollama Cloud Qwen 3.5 397B<br>8. *AWS Bedrock Sonnet 4.5 (Emergency Fallback only)* | Primary coding combo for dev & devops workloads. Prioritizes free high-tier models. |
-| `combo-reason-architect` | **Priority Failover** | 1. AGY Gemini 3.1 Pro Low<br>2. Kiro Claude Sonnet 4.5 High<br>3. LiteRouter DeepSeek R1<br>4. NVIDIA Nemotron 3 Ultra 550B<br>5. Ollama Cloud DeepSeek V4 Pro<br>6. *AWS Bedrock Claude Opus 4.6 (Emergency Fallback only)* | Deep reasoning and planning combo for `/agent plan` and `/review`. |
+| `combo-code-heavy` | **Priority Failover** | 1. Kiro Claude Sonnet 4.5<br>2. **AGY Claude Sonnet 4.6** (5h refresh subscription)<br>3. Mistral Codestral<br>4. NVIDIA Devstral 123B<br>5. Kiro Qwen 3 Coder Next<br>6. AGY Gemini 3.7 Flash High<br>7. LiteRouter DeepSeek V4 Flash<br>8. Ollama Cloud Qwen 3.5 397B<br>9. *AWS Bedrock Sonnet 4.5 (Emergency Fallback only)* | Primary coding combo for dev & devops workloads. Prioritizes free high-tier & 5h refreshing AGY models. |
+| `combo-reason-architect` | **Priority Failover** | 1. AGY Gemini 3.1 Pro Low<br>2. **AGY Claude Sonnet 4.6 High** (5h refresh subscription)<br>3. Kiro Claude Sonnet 4.5 High<br>4. LiteRouter DeepSeek R1<br>5. NVIDIA Nemotron 3 Ultra 550B<br>6. Ollama Cloud DeepSeek V4 Pro<br>7. *AWS Bedrock Claude Opus 4.6 (Emergency Fallback only)* | Deep reasoning and planning combo for `/agent plan` and `/review`. |
 | `combo-fast-chat` | **Round-Robin** | • AGY Gemini 3.7 Flash Low<br>• Kiro Claude Haiku 4.5<br>• Mistral Small Latest<br>• NVIDIA Llama 3.3 Nemotron 49B<br>• LiteRouter DeepSeek V3<br>• Ollama Cloud GPT-OSS 20B | High-speed, low-latency conversational pool. Zero Bedrock. |
 | `combo-free-overflow` | **Round-Robin** | • Kiro Claude Sonnet 4.5<br>• Mistral Devstral<br>• NVIDIA Qwen 3.5 397B<br>• AGY Gemini 3.7 Flash Medium<br>• LiteRouter DeepSeek V4 Flash<br>• Ollama Cloud DeepSeek V4 Flash<br>• OpenRouter Free Auto | Zero-cost multi-provider fallback and overflow pool. Zero Bedrock. |
-| `rinfela-combo` | **Auto** | Multi-provider concoction (Kiro, AGY, OpenRouter) | General auto-balancing combo |
-| `static-best-free` | **Weighted** | Curated free models | Static best free rotation |
 
 ---
 
 ## 3. Direct Individual Model Selection (`/model`)
 
 All individual provider models can still be invoked directly at any time:
+
+### Antigravity (AGY - Paid Subscription, 5h Quota Refresh)
+- `/model omniroute/agy/claude-sonnet-4-6`
+- `/model omniroute/agy/claude-sonnet-4-6-high`
+- `/model omniroute/agy/gemini-3.1-pro-low`
+- `/model omniroute/agy/gemini-3.7-flash-high`
+- `/model omniroute/agy/gemini-3.7-flash-medium`
+- `/model omniroute/agy/gemini-3.7-flash-low`
 
 ### Kiro (Free AWS Builders Tier)
 - `/model omniroute/kiro/claude-sonnet-4.5`
@@ -39,12 +45,6 @@ All individual provider models can still be invoked directly at any time:
 - `/model omniroute/kiro/glm-5`
 - `/model omniroute/kiro/minimax-m2.5`
 - `/model omniroute/kiro/minimax-m2.1`
-
-### Antigravity (AGY / Gemini)
-- `/model omniroute/agy/gemini-3.1-pro-low`
-- `/model omniroute/agy/gemini-3.7-flash-high`
-- `/model omniroute/agy/gemini-3.7-flash-medium`
-- `/model omniroute/agy/gemini-3.7-flash-low`
 
 ### NVIDIA NIM (Free Tier)
 - `/model omniroute/nvidia/mistralai/devstral-2-123b-instruct-2512`

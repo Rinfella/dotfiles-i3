@@ -27,14 +27,6 @@
                     "name": "OmniRoute (Free Overflow Round-Robin)",
                     "limit": { "context": 200000, "output": 8192 }
                 },
-                "rinfela-combo": {
-                    "name": "OmniRoute (Rinfela Combo)",
-                    "limit": { "context": 200000, "output": 8192 }
-                },
-                "static-best-free": {
-                    "name": "OmniRoute (Static Best Free)",
-                    "limit": { "context": 200000, "output": 8192 }
-                },
                 "kiro/claude-sonnet-4.5": {
                     "name": "Claude Sonnet 4.5 (Kiro)",
                     "limit": { "context": 200000, "output": 8192 },
@@ -65,6 +57,16 @@
                 "kiro/minimax-m2.1": {
                     "name": "MiniMax M2.1 (Kiro)",
                     "limit": { "context": 200000, "output": 8192 }
+                },
+                "agy/claude-sonnet-4-6": {
+                    "name": "Claude Sonnet 4.6 (AGY Paid Subscription)",
+                    "limit": { "context": 200000, "output": 8192 },
+                    "reasoning": true
+                },
+                "agy/claude-sonnet-4-6-high": {
+                    "name": "Claude Sonnet 4.6 High (AGY Paid Subscription)",
+                    "limit": { "context": 200000, "output": 8192 },
+                    "reasoning": true
                 },
                 "agy/gemini-3.1-pro-low": {
                     "name": "Gemini 3.1 Pro (AGY)",

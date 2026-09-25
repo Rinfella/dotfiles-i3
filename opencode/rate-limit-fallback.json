@@ -4,8 +4,7 @@
   "fallbackMode": "cycle",
   "fallbackModels": [
     { "providerID": "omniroute", "modelID": "combo-free-overflow" },
-    { "providerID": "omniroute", "modelID": "combo-fast-chat" },
-    { "providerID": "omniroute", "modelID": "static-best-free" }
+    { "providerID": "omniroute", "modelID": "combo-fast-chat" }
   ],
   "retryPolicy": {
     "maxRetries": 3,
