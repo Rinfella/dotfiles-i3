@@ -338,6 +338,11 @@
             "template": "Audit OmniRoute upstream health status: check active connections for Kiro, AGY, NVIDIA, Mistral, and LiteRouter via local gateway.",
             "description": "Check AI provider health and status",
             "agent": "devops"
+        },
+        "audit-codebase": {
+            "template": "Audit the codebase in $ARGUMENTS (or current working directory if empty). Follow procedure in ~/.config/opencode/kb/global/skills/audit-codebase.md strictly. Intelligently detect the tech stack, read READMEs and business logic, map out architecture, and act as a strict critic on security vulnerabilities, flaws, and technical debt. Deliver an executive report with pros, cons, and prioritized fixes.",
+            "description": "Deep codebase & security audit",
+            "agent": "code-reviewer"
         }
     },
     "agent": {
