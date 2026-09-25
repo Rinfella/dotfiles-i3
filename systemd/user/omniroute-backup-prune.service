@@ -1,0 +1,7 @@
+[Unit]
+Description=OmniRoute SQLite Backup Retention Pruning
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/rf/.omniroute/prune-backups.sh
