@@ -171,7 +171,6 @@
     "model": "omniroute/combo-code-heavy",
     "small_model": "omniroute/combo-fast-chat",
     "plugin": [
-        "@mumme-it/opencode-caveman",
         "/home/rf/.config/ai/ponytail.mjs",
         "@azumag/opencode-rate-limit-fallback"
     ],
@@ -199,7 +198,11 @@
             "vendor/**",
             "storage/**",
             ".next/**",
-            "dist/**"
+            "dist/**",
+            "__pycache__/**",
+            ".venv/**",
+            ".pytest_cache/**",
+            ".ruff_cache/**"
         ]
     },
     "compaction": {
@@ -324,6 +327,16 @@
         "devops": {
             "template": "Inspect and diagnose systemd services, container status, journalctl logs, or port bindings following ~/.config/opencode/kb/global/rules/02-infrastructure.md.",
             "description": "DevOps & infrastructure diagnostic",
+            "agent": "devops"
+        },
+        "cleanup": {
+            "template": "Inspect git working tree for untracked scratch files, temporary logs, or unformatted code. Run linters or formatters (`php-cs-fixer`, `ruff`, etc.) and ensure strict adherence to ~/.config/opencode/kb/global/rules/07-git-workflow.md.",
+            "description": "Repository & workspace cleanup",
+            "agent": "build"
+        },
+        "health": {
+            "template": "Audit OmniRoute upstream health status: check active connections for Kiro, AGY, NVIDIA, Mistral, and LiteRouter via local gateway.",
+            "description": "Check AI provider health and status",
             "agent": "devops"
         }
     },

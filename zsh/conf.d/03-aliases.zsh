@@ -174,3 +174,15 @@ if command -v tldr >/dev/null 2>&1; then
   alias help='tldr'
 fi
 
+# ==========================================
+# AI & Agent Workflow (OpenCode & OmniRoute)
+# ==========================================
+alias oc='opencode'                                                # Default OpenCode (Code Heavy)
+alias ocp='opencode -m omniroute/combo-reason-architect'          # Reason & Architecture Planner
+alias ocf='opencode -m omniroute/combo-fast-chat'                  # Fast & Responsive Chat
+alias oco='opencode -m omniroute/combo-free-overflow'              # Free Multi-Provider Overflow
+alias omni-status='systemctl --user status omniroute'              # OmniRoute gateway status
+alias omni-restart='systemctl --user restart omniroute'            # Restart OmniRoute gateway
+alias omni-logs='journalctl --user -u omniroute -n 50 -f'          # Follow OmniRoute logs
+
+
