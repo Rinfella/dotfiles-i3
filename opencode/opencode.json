@@ -1,18 +1,6 @@
 {
     "$schema": "https://opencode.ai/config.json",
     "provider": {
-        "bedrock-mantle": {
-            "npm": "@ai-sdk/openai-compatible",
-            "options": {
-                "baseURL": "https://bedrock-mantle.ap-south-1.api.aws/v1",
-                "apiKey": "{env:BEDROCK_API_KEY}"
-            },
-            "models": {
-                "qwen.qwen3-coder-next": {
-                    "name": "Qwen 3 Coder Next"
-                }
-            }
-        },
         "omniroute": {
             "npm": "@ai-sdk/openai-compatible",
             "options": {
@@ -21,6 +9,24 @@
                 "setCacheKey": true
             },
             "models": {
+                "combo-code-heavy": {
+                    "name": "OmniRoute (Code Heavy Priority)",
+                    "limit": { "context": 200000, "output": 8192 },
+                    "reasoning": true
+                },
+                "combo-reason-architect": {
+                    "name": "OmniRoute (Reason & Architect Priority)",
+                    "limit": { "context": 1048576, "output": 65536 },
+                    "reasoning": true
+                },
+                "combo-fast-chat": {
+                    "name": "OmniRoute (Fast Chat Round-Robin)",
+                    "limit": { "context": 200000, "output": 8192 }
+                },
+                "combo-free-overflow": {
+                    "name": "OmniRoute (Free Overflow Round-Robin)",
+                    "limit": { "context": 200000, "output": 8192 }
+                },
                 "rinfela-combo": {
                     "name": "OmniRoute (Rinfela Combo)",
                     "limit": { "context": 200000, "output": 8192 }
@@ -29,38 +35,28 @@
                     "name": "OmniRoute (Static Best Free)",
                     "limit": { "context": 200000, "output": 8192 }
                 },
-                "auto/best-coding": {
-                    "name": "OmniRoute (Auto Best Coding)",
-                    "limit": { "context": 200000, "output": 8192 }
-                },
-                "agy/gemini-3.1-pro-low": {
-                    "name": "Gemini 3.1 Pro (AGY)",
-                    "limit": { "context": 1048576, "output": 65536 },
-                    "reasoning": true
-                },
-                "agy/gemini-3.7-flash-medium": {
-                    "name": "Gemini 3.7 Flash Medium (AGY)",
-                    "limit": { "context": 1048576, "output": 65536 },
-                    "reasoning": true
-                },
                 "kiro/claude-sonnet-4.5": {
                     "name": "Claude Sonnet 4.5 (Kiro)",
                     "limit": { "context": 200000, "output": 8192 },
-                    "reasoning": true
-                },
-                "kiro/qwen3-coder-next": {
-                    "name": "Qwen 3 Coder Next (Kiro)",
-                    "limit": { "context": 131072, "output": 8192 },
                     "reasoning": true
                 },
                 "kiro/claude-haiku-4.5": {
                     "name": "Claude Haiku 4.5 (Kiro)",
                     "limit": { "context": 200000, "output": 8192 }
                 },
+                "kiro/qwen3-coder-next": {
+                    "name": "Qwen 3 Coder Next (Kiro)",
+                    "limit": { "context": 131072, "output": 8192 },
+                    "reasoning": true
+                },
                 "kiro/deepseek-3.2": {
                     "name": "DeepSeek V3.2 (Kiro)",
                     "limit": { "context": 131072, "output": 8192 },
                     "reasoning": true
+                },
+                "kiro/glm-5": {
+                    "name": "GLM-5 (Kiro)",
+                    "limit": { "context": 131072, "output": 8192 }
                 },
                 "kiro/minimax-m2.5": {
                     "name": "MiniMax M2.5 (Kiro)",
@@ -70,14 +66,108 @@
                     "name": "MiniMax M2.1 (Kiro)",
                     "limit": { "context": 200000, "output": 8192 }
                 },
-                "kiro/glm-5": {
-                    "name": "GLM-5 (Kiro)",
+                "agy/gemini-3.1-pro-low": {
+                    "name": "Gemini 3.1 Pro (AGY)",
+                    "limit": { "context": 1048576, "output": 65536 },
+                    "reasoning": true
+                },
+                "agy/gemini-3.7-flash-high": {
+                    "name": "Gemini 3.7 Flash High (AGY)",
+                    "limit": { "context": 1048576, "output": 65536 },
+                    "reasoning": true
+                },
+                "agy/gemini-3.7-flash-medium": {
+                    "name": "Gemini 3.7 Flash Medium (AGY)",
+                    "limit": { "context": 1048576, "output": 65536 },
+                    "reasoning": true
+                },
+                "agy/gemini-3.7-flash-low": {
+                    "name": "Gemini 3.7 Flash Low (AGY)",
+                    "limit": { "context": 1048576, "output": 65536 }
+                },
+                "mistral/codestral-latest": {
+                    "name": "Codestral Latest (Mistral)",
+                    "limit": { "context": 256000, "output": 8192 },
+                    "reasoning": true
+                },
+                "mistral/devstral-latest": {
+                    "name": "Devstral Latest (Mistral)",
+                    "limit": { "context": 128000, "output": 8192 }
+                },
+                "mistral/mistral-small-latest": {
+                    "name": "Mistral Small Latest",
+                    "limit": { "context": 128000, "output": 8192 }
+                },
+                "mistral/mistral-large-latest": {
+                    "name": "Mistral Large Latest",
+                    "limit": { "context": 128000, "output": 8192 },
+                    "reasoning": true
+                },
+                "nvidia/mistralai/devstral-2-123b-instruct-2512": {
+                    "name": "Devstral 123B (NVIDIA NIM)",
+                    "limit": { "context": 131072, "output": 8192 },
+                    "reasoning": true
+                },
+                "nvidia/nvidia/nemotron-3-ultra-550b-a55b": {
+                    "name": "Nemotron 3 Ultra 550B (NVIDIA NIM)",
+                    "limit": { "context": 131072, "output": 8192 },
+                    "reasoning": true
+                },
+                "nvidia/nvidia/llama-3.3-nemotron-super-49b-v1": {
+                    "name": "Llama 3.3 Nemotron 49B (NVIDIA NIM)",
                     "limit": { "context": 131072, "output": 8192 }
+                },
+                "nvidia/qwen/qwen3.5-397b-a17b": {
+                    "name": "Qwen 3.5 397B (NVIDIA NIM)",
+                    "limit": { "context": 131072, "output": 8192 }
+                },
+                "literouter/deepseek-r1": {
+                    "name": "DeepSeek R1 (LiteRouter)",
+                    "limit": { "context": 131072, "output": 16384 },
+                    "reasoning": true
+                },
+                "literouter/deepseek-v4-flash": {
+                    "name": "DeepSeek V4 Flash (LiteRouter)",
+                    "limit": { "context": 131072, "output": 8192 }
+                },
+                "literouter/deepseek-v3": {
+                    "name": "DeepSeek V3 (LiteRouter)",
+                    "limit": { "context": 131072, "output": 8192 }
+                },
+                "ollama-cloud/qwen3.5:397b": {
+                    "name": "Qwen 3.5 397B (Ollama Cloud)",
+                    "limit": { "context": 131072, "output": 8192 }
+                },
+                "ollama-cloud/deepseek-v4-pro": {
+                    "name": "DeepSeek V4 Pro (Ollama Cloud)",
+                    "limit": { "context": 131072, "output": 8192 },
+                    "reasoning": true
+                },
+                "ollama-cloud/deepseek-v4-flash": {
+                    "name": "DeepSeek V4 Flash (Ollama Cloud)",
+                    "limit": { "context": 131072, "output": 8192 }
+                },
+                "ollama-cloud/gpt-oss:20b": {
+                    "name": "GPT-OSS 20B (Ollama Cloud)",
+                    "limit": { "context": 131072, "output": 8192 }
+                },
+                "openrouter/openrouter/free": {
+                    "name": "OpenRouter Free Auto",
+                    "limit": { "context": 131072, "output": 8192 }
+                },
+                "bedrock/anthropic.claude-sonnet-4-5": {
+                    "name": "Claude Sonnet 4.5 (Bedrock Quarantined)",
+                    "limit": { "context": 200000, "output": 8192 }
+                },
+                "bedrock/anthropic.claude-opus-4-6": {
+                    "name": "Claude Opus 4.6 (Bedrock Quarantined)",
+                    "limit": { "context": 200000, "output": 8192 }
                 }
             }
         }
     },
-    "model": "omniroute/rinfela-combo",
+    "model": "omniroute/combo-code-heavy",
+    "small_model": "omniroute/combo-fast-chat",
     "plugin": [
         "@mumme-it/opencode-caveman",
         "/home/rf/.config/ai/ponytail.mjs",
@@ -87,7 +177,11 @@
         "~/.config/opencode/kb/global/rules/00-global-directives.md",
         "~/.config/opencode/kb/global/rules/01-tall-stack.md",
         "~/.config/opencode/kb/global/rules/02-infrastructure.md",
-        "~/.config/opencode/kb/global/rules/03-cicd.md"
+        "~/.config/opencode/kb/global/rules/03-cicd.md",
+        "~/.config/opencode/kb/global/rules/04-python-fastapi.md",
+        "~/.config/opencode/kb/global/rules/05-modern-frontend.md",
+        "~/.config/opencode/kb/global/rules/06-dos-and-donts.md",
+        "~/.config/opencode/kb/global/rules/07-git-workflow.md"
     ],
     "autoupdate": false,
     "lsp": {
@@ -96,7 +190,6 @@
             "extensions": [".php", ".blade.php"]
         }
     },
-    "small_model": "omniroute/agy/gemini-3.7-flash-medium",
     "watcher": {
         "ignore": [
             "node_modules/**",
@@ -123,20 +216,6 @@
             "command": ["mcp-server-github"],
             "enabled": true,
             "environment": {"GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_TOKEN}"}
-        },
-        "context7": {
-            "type": "remote",
-            "url": "https://mcp.context7.com/mcp",
-            "enabled": true,
-            "headers": {
-                "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
-            }
-        },
-        "firecrawl": {
-            "type": "local",
-            "command": ["npx", "-y", "firecrawl-mcp"],
-            "environment": {"FIRECRAWL_API_KEY": "{env:FIRECRAWL_API_KEY}"},
-            "enabled": false
         }
     },
     "command": {
@@ -153,7 +232,7 @@
         "debug": {
             "template": "Debug application errors. Read storage/logs/laravel.log, analyze stack trace, propose fix. Reference ~/.config/opencode/kb/global/skills/debug-laravel.md for debugging workflow. Follow rules in ~/.config/opencode/kb/global/rules/01-tall-stack.md",
             "description": "Debug Laravel errors",
-            "agent": "build"
+            "agent": "debug"
         },
         "audit-db": {
             "template": "Audit database schema for missing indexes, N+1 queries, normalization issues. Reference ~/.config/opencode/kb/global/skills/audit-db.md for audit checklist. Do NOT modify existing migrations.",
@@ -163,7 +242,7 @@
         "test": {
             "template": "Run the full test suite with coverage. Reference ~/.config/opencode/kb/global/skills/run-tests.md for test procedures and ~/.config/opencode/kb/global/skills/write-tests.md for writing new tests. Show failures and suggest fixes.",
             "description": "Run tests with coverage",
-            "agent": "build"
+            "agent": "test"
         },
         "make-migration": {
             "template": "Create a new Laravel migration. Reference ~/.config/opencode/kb/global/skills/make-migration.md for schema patterns. Follow database rules in ~/.config/opencode/kb/global/rules/01-tall-stack.md",
@@ -193,27 +272,27 @@
         "sys-update": {
             "template": "Update Arch Linux system packages using pacman/yay. Reference ~/.config/opencode/kb/global/skills/update-arch.md for update workflow. Check news first with pacman -Pn.",
             "description": "Update Arch packages",
-            "agent": "build"
+            "agent": "devops"
         },
         "sys-service": {
             "template": "Manage systemd services. Reference ~/.config/opencode/kb/global/skills/systemd.md for service management patterns. Use systemctl for start/stop/enable/disable/status.",
             "description": "Manage services",
-            "agent": "build"
+            "agent": "devops"
         },
         "sys-packages": {
             "template": "Install or remove packages with pacman or yay (AUR). Reference ~/.config/opencode/kb/global/skills/pacman.md for package management patterns. Search first.",
             "description": "Package management",
-            "agent": "build"
+            "agent": "devops"
         },
         "sys-logs": {
             "template": "Read system logs with journalctl. Reference ~/.config/opencode/kb/global/skills/journalctl.md for log analysis patterns. Show errors or specific service logs.",
             "description": "Read system logs",
-            "agent": "build"
+            "agent": "devops"
         },
         "sys-stats": {
             "template": "Check system resource usage: CPU, memory, disk, processes. Reference ~/.config/opencode/kb/global/skills/system-stats.md for diagnostics patterns. Use htop for interactive.",
             "description": "System stats",
-            "agent": "build"
+            "agent": "devops"
         },
         "init-workspace": {
             "template": "Initialize AI workspace in current project: copy KB, create agent configs, set up stow symlinks, create .gitignore entries following ~/.config/opencode/commands/init-workspace.md",
@@ -221,21 +300,36 @@
             "agent": "build"
         },
         "review": {
-            "template": "Review staged git diff or recent commits for logic bugs, security issues, performance regressions, and adherence to Laravel conventions. Show findings clearly.",
+            "template": "Review staged git diff or recent commits for logic bugs, security issues, performance regressions, and adherence to architecture conventions. Follow ~/.config/opencode/kb/global/rules/07-git-workflow.md.",
             "description": "Review staged code changes",
             "agent": "code-reviewer"
         },
         "routes": {
-            "template": "Audit registered Laravel routes (php artisan route:list). Check for missing authorization middleware, duplicate endpoints, and route model binding issues.",
-            "description": "Audit Laravel routes",
+            "template": "Audit registered application routes (Laravel php artisan route:list or FastAPI OpenAPI endpoints). Check for missing authorization middleware, duplicate paths, and validation issues.",
+            "description": "Audit application routes",
             "agent": "build"
+        },
+        "commit": {
+            "template": "Inspect staged changes with `git diff --cached` (or run git status if nothing is staged) and propose an atomic Conventional Commit message following ~/.config/opencode/kb/global/rules/07-git-workflow.md. Never auto-push.",
+            "description": "Generate conventional commit message",
+            "agent": "build"
+        },
+        "fastapi": {
+            "template": "Scaffold or audit FastAPI routes, Pydantic v2 schemas, and dependency injection following ~/.config/opencode/kb/global/rules/04-python-fastapi.md.",
+            "description": "FastAPI router and schema helper",
+            "agent": "fastapi"
+        },
+        "devops": {
+            "template": "Inspect and diagnose systemd services, container status, journalctl logs, or port bindings following ~/.config/opencode/kb/global/rules/02-infrastructure.md.",
+            "description": "DevOps & infrastructure diagnostic",
+            "agent": "devops"
         }
     },
     "agent": {
         "debug": {
             "description": "Debug application errors. Reads logs, analyzes stack traces, finds root cause.",
             "mode": "subagent",
-            "model": "omniroute/rinfela-combo",
+            "model": "omniroute/combo-code-heavy",
             "permission": {
                 "edit": "allow",
                 "bash": "allow"
@@ -251,9 +345,9 @@
             }
         },
         "code-reviewer": {
-            "description": "Reviews code for best practices, security, and potential issues",
+            "description": "Reviews code for best practices, security, and potential issues.",
             "mode": "subagent",
-            "model": "omniroute/kiro/claude-sonnet-4.5",
+            "model": "omniroute/combo-reason-architect",
             "permission": {
                 "edit": "deny",
                 "bash": "deny"
@@ -262,10 +356,37 @@
         "plan": {
             "description": "Architecture and planning. Analyzes requirements, designs solutions, produces spec. No code execution.",
             "mode": "primary",
-            "model": "omniroute/kiro/claude-sonnet-4.5",
+            "model": "omniroute/combo-reason-architect",
             "permission": {
                 "edit": "deny",
                 "bash": "deny"
+            }
+        },
+        "devops": {
+            "description": "DevOps and system administration. Diagnoses systemd, Docker, journalctl, network ports, and package updates.",
+            "mode": "subagent",
+            "model": "omniroute/combo-code-heavy",
+            "permission": {
+                "edit": "allow",
+                "bash": "allow"
+            }
+        },
+        "fastapi": {
+            "description": "Python FastAPI specialist. Designs Pydantic v2 schemas, async APIRouters, dependency injection, and pytest suites.",
+            "mode": "subagent",
+            "model": "omniroute/combo-code-heavy",
+            "permission": {
+                "edit": "allow",
+                "bash": "allow"
+            }
+        },
+        "refactor": {
+            "description": "Code refactoring and simplification adhering to Ponytail guidelines (YAGNI, standard library first, removing bloat).",
+            "mode": "subagent",
+            "model": "omniroute/combo-code-heavy",
+            "permission": {
+                "edit": "allow",
+                "bash": "allow"
             }
         }
     },

@@ -1,0 +1,24 @@
+{
+  "enabled": true,
+  "cooldownMs": 60000,
+  "fallbackMode": "cycle",
+  "fallbackModels": [
+    { "providerID": "omniroute", "modelID": "combo-free-overflow" },
+    { "providerID": "omniroute", "modelID": "combo-fast-chat" },
+    { "providerID": "omniroute", "modelID": "static-best-free" }
+  ],
+  "retryPolicy": {
+    "maxRetries": 3,
+    "strategy": "exponential",
+    "baseDelayMs": 2000,
+    "maxDelayMs": 30000,
+    "jitterEnabled": true
+  },
+  "circuitBreaker": {
+    "enabled": true,
+    "failureThreshold": 5,
+    "recoveryTimeoutMs": 60000,
+    "halfOpenMaxCalls": 1,
+    "successThreshold": 2
+  }
+}

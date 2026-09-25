@@ -30,7 +30,14 @@ zsh/.zsh_history
 .antigravitycli/
 
 # AI & Agent configurations / state
-ai/
+ai/*
+!ai/kb/
+!ai/skills/
+!ai/RULES.md
+!ai/README.md
+!ai/AGENTS.md
+ai/env*
+ai/*.env
 opencode/.caveman-active
 opencode/kb
 opencode/memory
@@ -38,6 +45,7 @@ opencode/plugins/
 opencode/skills
 opencode/superpowers
 opencode/*.json
+!opencode/rate-limit-fallback.json
 
 # Zsh completions
 zsh/completions/
