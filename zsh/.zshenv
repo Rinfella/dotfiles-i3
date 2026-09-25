@@ -110,7 +110,7 @@ export PYTHON_HISTORY="$XDG_STATE_HOME/python_history"
 export PULSE_COOKIE="$XDG_CONFIG_HOME/pulse/cookie"
 
 # Shared AI environment variables — auto-export so MCP servers inherit API keys
-set -a; source "$XDG_CONFIG_HOME/ai/.env"; set +a
+set -a; source "$XDG_CONFIG_HOME/ai/env"; set +a
 
 # Gitlab CLI config
 export GITLAB_GROUP="lailen"
