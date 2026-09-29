@@ -23,3 +23,9 @@ if command -v starship >/dev/null 2>&1; then
   source "$_starship_cache"
 fi
 
+# Fastfetch banner on interactive terminal launch (skipped in non-interactive / subagent commands)
+if [[ -o interactive ]] && [ -z "$FASTFETCH_RUN" ] && command -v fastfetch >/dev/null 2>&1; then
+  export FASTFETCH_RUN=1
+  fastfetch
+fi
+
