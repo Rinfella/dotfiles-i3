@@ -49,4 +49,4 @@ Each configuration directory has its own dedicated `README.md` with cheatsheets,
 
 ## Architecture & Bootstrapping
 
-For full technical specifications on the `mise`-driven bootstrap architecture, see [`ai/superpowers/plans/2026-09-29-bootstrap-mise-dotfiles.md`](./ai/superpowers/plans/2026-09-29-bootstrap-mise-dotfiles.md).
+For full technical specifications on the `mise`-driven bootstrap architecture, see [`ai/kb/project/plans/2026-09-29-bootstrap-mise-dotfiles.md`](./ai/kb/project/plans/2026-09-29-bootstrap-mise-dotfiles.md).
