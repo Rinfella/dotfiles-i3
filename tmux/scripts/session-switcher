@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Interactive fuzzy tmux session & project switcher popup
+
+selected=$( (
+  tmux list-sessions -F '#S' 2>/dev/null
+  fd --min-depth 1 --max-depth 2 --type d . "$HOME/projects" "$HOME/.config" 2>/dev/null
+) | fzf --reverse --prompt='Tmux Project > ' --border=rounded )
+
+[ -z "$selected" ] && exit 0
+
+if tmux has-session -t "$selected" 2>/dev/null; then
+  tmux switch-client -t "$selected"
+else
+  session_name=$(basename "$selected" | tr '.' '_')
+  if ! tmux has-session -t "$session_name" 2>/dev/null; then
+    tmux new-session -d -s "$session_name" -c "$selected" 2>/dev/null
+  fi
+  tmux switch-client -t "$session_name"
+fi
