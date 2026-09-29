@@ -22,7 +22,6 @@ gui:
       - '#cdd6f4' # Text
     searchingActiveBorderColor:
       - '#f9e2af' # Yellow
-
   # UI enhancements
   authorColors:
     'rf': '#cba6f7'
@@ -30,19 +29,15 @@ gui:
   showIcons: true
   nerdFontsVersion: "3"
   showFileTree: true
-
 git:
-  paging:
-    colorArg: always
-    pager: delta --paging=never
+  diffRenderers:
+    - colorArg: always
+      command: delta --paging=never
   autoFetch: true
   autoRefresh: true
   branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --"
-
 update:
   method: never
-
 os:
   editPreset: "nvim"
-
 promptToReturnFromSubprocess: false
