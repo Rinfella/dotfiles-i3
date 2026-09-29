@@ -23,15 +23,11 @@ delta      = "latest"
 direnv     = "latest"
 duf        = "latest"
 eza        = "latest"
-fd         = "latest"
-fzf        = "latest"
 glow       = "latest"
-jq         = "latest"
 lazydocker = "latest"
 lazygit    = "latest"
 navi       = "latest"
 neovim     = "latest"
-ripgrep    = "latest"
 starship   = "latest"
 fastfetch  = "latest"
 yazi       = "latest"
@@ -124,6 +120,7 @@ yay -S --needed --noconfirm \
   blueman brightnessctl playerctl maim xdotool feh thunar \
   easyeffects imagemagick i3blocks polkit-gnome network-manager-applet \
   clipmenu rbw rofi-rbw composer php \
+  fzf ripgrep fd jq \
   thefuck zsh-history-substring-search re2c
 """
 
