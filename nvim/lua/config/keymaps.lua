@@ -65,9 +65,6 @@ map("n", "<leader>nl", "<cmd>Obsidian links<cr>",         { desc = "Obsidian: Ou
 map("n", "<leader>nL", "<cmd>Obsidian link_new<cr>",      { desc = "Obsidian: Link to New Note" })
 map("v", "<leader>nk", "<cmd>Obsidian link<cr>",          { desc = "Obsidian: Link Selection" })
 
--- Checkbox
-map("n", "<leader>nc", "<cmd>ObsidianToggleCheckbox<cr>", { desc = "Obsidian: Toggle Checkbox" })
-
 -- Rename / workspace
 map("n", "<leader>nr", "<cmd>Obsidian rename<cr>",        { desc = "Obsidian: Rename Note" })
 map("n", "<leader>nw", "<cmd>Obsidian workspace<cr>",     { desc = "Obsidian: Switch Workspace" })
