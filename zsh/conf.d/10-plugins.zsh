@@ -8,9 +8,14 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 if command -v atuin >/dev/null 2>&1 && command -v fzf >/dev/null 2>&1; then
   # 1. Stop Atuin from taking over your keybindings
   export ATUIN_NOBIND="true"
-  
-  # 2. Initialize Atuin so it silently records history in the background
-  eval "$(atuin init zsh)"
+
+  # 2. Initialize Atuin silently in background (cached init script)
+  _atuin_cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/atuin.zsh"
+  if [[ ! -s "$_atuin_cache" ]]; then
+    mkdir -p "${_atuin_cache:h}"
+    atuin init zsh > "$_atuin_cache" 2>/dev/null
+  fi
+  source "$_atuin_cache"
 
   # 3. Create a custom widget to use fzf as the frontend
   _fzf_atuin_search() {

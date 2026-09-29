@@ -78,14 +78,24 @@ if command -v navi >/dev/null 2>&1; then
   bindkey '^g' _navi_widget
 fi
 
-# zoxide — smarter cd
+# zoxide — smarter cd (cached init script for instant startup)
 if command -v zoxide >/dev/null 2>&1; then
-  eval "$(zoxide init zsh)"
+  _zoxide_cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zoxide.zsh"
+  if [[ ! -s "$_zoxide_cache" ]]; then
+    mkdir -p "${_zoxide_cache:h}"
+    zoxide init zsh > "$_zoxide_cache" 2>/dev/null
+  fi
+  source "$_zoxide_cache"
 fi
 
-# direnv — per-project .envrc auto-load/unload on cd
+# direnv — per-project .envrc auto-load/unload on cd (cached hook for instant startup)
 if command -v direnv >/dev/null 2>&1; then
-  eval "$(direnv hook zsh)"
+  _direnv_cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/direnv.zsh"
+  if [[ ! -s "$_direnv_cache" ]]; then
+    mkdir -p "${_direnv_cache:h}"
+    direnv hook zsh > "$_direnv_cache" 2>/dev/null
+  fi
+  source "$_direnv_cache"
 fi
 
 # zsh-history-substring-search — Up/Down arrow searches by prefix
