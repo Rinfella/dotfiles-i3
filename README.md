@@ -7,7 +7,7 @@ Dotfiles for **Arch Linux + i3wm**. Managed with [mise](https://mise.jdx.dev).
 ## ⚡ Fresh Machine (One-liner)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/<user>/doti3/main/bootstrap.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Rinfella/dotfiles-i3/master/bootstrap.sh | bash
 ```
 
 Installs `git` → `yay` → `mise` → clones repo → runs full setup automatically.
@@ -19,9 +19,11 @@ mise dot apply               # apply / re-apply all dotfile symlinks
 mise dot status              # check symlink status
 mise dot diff                # preview pending changes
 mise run packages            # install / sync all packages via yay
-mise run verify              # smoke-test i3 + nvim configs
+mise run verify              # smoke-test i3, rofi, nvim configs
 mise run cron                # reinstall crontab entries
-mise run setup               # full re-run: packages + dotfiles + cron + udev + verify
+mise run udev                # install / refresh monitor hotplug udev rule
+mise run systemd             # reload and enable user systemd services
+mise run setup               # full re-run: packages → dotfiles → env → cron → udev → systemd → verify
 ```
 
 > **Legacy:** `deploy.sh` is preserved as a fallback but no longer the primary tool.
@@ -66,12 +68,14 @@ pacman -S git base-devel
 
 | Task | Command | What it does |
 |---|---|---|
-| Full setup | `mise run setup` | packages → dotfiles → cron → udev → verify |
+| Full setup | `mise run setup` | packages → dotfiles → env → cron → udev → systemd → verify |
 | Packages | `mise run packages` | `yay -S` all packages |
 | Dotfiles | `mise run dotfiles` | `mise dot apply` |
-| Cron | `mise run cron` | Install crontab from `cron/` |
-| Udev | `mise run udev` | Install monitor hotplug rule |
-| Verify | `mise run verify` | Smoke-test i3 + nvim |
+| Env | `mise run env` | Init `.env` from template if missing |
+| Cron | `mise run cron` | Sync crontab from `cron/` |
+| Udev | `mise run udev` | Install/update monitor hotplug rule |
+| Systemd | `mise run systemd` | Reload user systemd & enable service units |
+| Verify | `mise run verify` | Smoke-test i3, rofi themes, nvim, dotfiles |
 
 ### deploy.sh (legacy)
 

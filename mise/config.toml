@@ -108,8 +108,8 @@ dotfiles.root = "~/.config/doti3"
 # -----------------------------------------------------------------------------
 
 [tasks.setup]
-description = "Full bootstrap: packages → dotfiles → cron → udev → verify"
-depends = ["packages", "dotfiles", "cron", "udev", "verify"]
+description = "Full bootstrap: packages → dotfiles → env → cron → udev → systemd → verify"
+depends = ["packages", "dotfiles", "env", "cron", "udev", "systemd", "verify"]
 run = "echo 'Setup complete — restart your shell and log out/in to start i3.'"
 
 [tasks.packages]
@@ -128,36 +128,80 @@ yay -S --needed --noconfirm \
 description = "Apply dotfile symlinks via mise dot apply"
 run = "mise bootstrap dotfiles apply --yes"
 
+[tasks.env]
+description = "Initialize .env files from templates if missing"
+run = """
+ENV_EXAMPLE="$HOME/.config/doti3/i3/scripts/.env.example"
+ENV_FILE="$HOME/.config/doti3/i3/scripts/.env"
+if [ -f "$ENV_EXAMPLE" ] && [ ! -f "$ENV_FILE" ]; then
+  cp "$ENV_EXAMPLE" "$ENV_FILE"
+  echo "Created i3/scripts/.env from template."
+fi
+"""
+
 [tasks.cron]
 description = "Install crontab entries from doti3/cron/"
 run = """
 CRON_DIR="$HOME/.config/doti3/cron"
-if [ -d "$CRON_DIR" ] && [ -n "$(ls -A "$CRON_DIR")" ]; then
-  cat "$CRON_DIR"/* | crontab -
-  echo "Crontab installed."
-else
-  echo "No cron entries found, skipping."
+if [ -d "$CRON_DIR" ]; then
+  CURRENT_CRON="$(crontab -l 2>/dev/null || true)"
+  for cronfile in "$CRON_DIR"/*; do
+    [ -f "$cronfile" ] || continue
+    while IFS= read -r line; do
+      [ -z "$line" ] || [[ "$line" == \\#* ]] && continue
+      if ! grep -qF "$line" <<< "$CURRENT_CRON"; then
+        CURRENT_CRON="$(printf '%s\\n%s' "$CURRENT_CRON" "$line")"
+      fi
+    done < "$cronfile"
+  done
+  printf '%s\\n' "$CURRENT_CRON" | crontab -
+  echo "Crontab synced."
 fi
 """
 
 [tasks.udev]
 description = "Install udev monitor hotplug rule"
 run = """
-RULE_SRC="$HOME/.config/doti3/X11/udev/99-monitor-hotplug.rules"
-RULE_DST="/etc/udev/rules.d/99-monitor-hotplug.rules"
-if [ -f "$RULE_SRC" ]; then
-  sudo cp "$RULE_SRC" "$RULE_DST"
+UDEV_RULE="/etc/udev/rules.d/99-monitor-hotplug.rules"
+UDEV_CMD="/usr/bin/su $USER -c $HOME/.config/i3/scripts/autodetect-display"
+
+if [ ! -f "$UDEV_RULE" ] || ! grep -q "$HOME/.config/i3" "$UDEV_RULE" 2>/dev/null; then
+  printf 'ACTION=="change", SUBSYSTEM=="drm", RUN+="%s"\\n' "$UDEV_CMD" | sudo tee "$UDEV_RULE" > /dev/null
   sudo udevadm control --reload-rules
-  echo "udev rule installed."
+  echo "udev monitor hotplug rule created/updated."
 else
-  echo "No udev rule found at $RULE_SRC, skipping."
+  echo "udev rule already present and up to date."
+fi
+"""
+
+[tasks.systemd]
+description = "Reload user systemd daemon and enable user service units"
+run = """
+if [ -n "${XDG_RUNTIME_DIR:-}" ] && [ -d "$XDG_RUNTIME_DIR" ]; then
+  systemctl --user daemon-reload
+  for svc in "$HOME/.config/systemd/user"/*.service; do
+    if [ -f "$svc" ]; then
+      svc_name=$(basename "$svc")
+      systemctl --user enable "$svc_name" >/dev/null 2>&1 || true
+    fi
+  done
+  loginctl enable-linger "$USER" 2>/dev/null || true
+  echo "systemd user services reloaded and enabled."
 fi
 """
 
 [tasks.verify]
-description = "Smoke-test configs: i3, nvim"
+description = "Smoke-test configs: i3, rofi, nvim, dotfiles status"
 run = """
-i3 -C && echo "i3 config OK"
-nvim --headless +q 2>/dev/null && echo "nvim OK"
+if command -v i3 >/dev/null 2>&1; then
+  i3 -C "$HOME/.config/doti3/i3/config" && echo "i3 config OK"
+fi
+if command -v nvim >/dev/null 2>&1; then
+  nvim --headless +qa 2>/dev/null && echo "nvim OK"
+fi
+for theme in "$HOME/.config/doti3"/rofi/*.rasi; do
+  [ -f "$theme" ] || continue
+  rofi -theme "$theme" -dump-theme >/dev/null 2>&1 && echo "rofi theme OK: $(basename "$theme")"
+done
 mise dot status
 """

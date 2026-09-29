@@ -4,7 +4,7 @@
 # One-liner fresh machine setup for Arch-based Linux (Arch, EndeavourOS, Manjaro, etc.)
 #
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/<user>/doti3/main/bootstrap.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/Rinfella/dotfiles-i3/master/bootstrap.sh | bash
 #
 # What it does:
 #   1. Installs git + base-devel via pacman (only hard prereqs)
@@ -13,14 +13,14 @@
 #   4. Clones doti3 repo to ~/.config/doti3 if not already there
 #   5. Snapshots existing ~/.config as a backup
 #   6. Delegates full setup to: mise run setup
-#      (packages → dotfiles → cron → udev → verify)
+#      (packages → dotfiles → env → cron → udev → systemd → verify)
 #
 # Idempotent: safe to re-run on an already configured machine.
 #
 
 set -euo pipefail
 
-REPO_URL="https://github.com/<user>/doti3.git"
+REPO_URL="https://github.com/Rinfella/dotfiles-i3.git"
 DOTI3_DIR="$HOME/.config/doti3"
 
 RED='\033[0;31m'
