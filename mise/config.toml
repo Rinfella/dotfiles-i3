@@ -205,3 +205,43 @@ for theme in "$HOME/.config/doti3"/rofi/*.rasi; do
 done
 mise dot status
 """
+
+[tasks.doctor]
+description = "System health check: nvim checkhealth, i3 syntax, symlink matrix validation"
+run = """
+echo "=== 1. Checking i3wm Configuration ==="
+i3 -C "$HOME/.config/doti3/i3/config" && echo "✓ i3 syntax valid"
+
+echo "\\n=== 2. Checking Neovim Health ==="
+nvim --headless -c "checkhealth" -c "qa" > /tmp/nvim-health.log 2>&1 && echo "✓ Neovim checkhealth generated (/tmp/nvim-health.log)"
+
+echo "\\n=== 3. Checking Dotfile Symlink Matrix ==="
+mise dot status
+
+echo "\\n=== 4. Checking Mise Managed Tools ==="
+mise ls
+"""
+
+[tasks.clean]
+description = "Clean orphaned packages, pacman cache, and prune unused mise tool versions"
+run = """
+echo "=== 1. Checking for Orphaned Pacman Packages ==="
+orphans=$(pacman -Qtdq 2>/dev/null || true)
+if [ -n "$orphans" ]; then
+  echo "Removing orphaned packages: $orphans"
+  sudo pacman -Rns --noconfirm $orphans
+else
+  echo "No orphaned packages found."
+fi
+
+echo "\\n=== 2. Cleaning Pacman Cache (keeping 2 most recent) ==="
+if command -v paccache >/dev/null 2>&1; then
+  sudo paccache -r -k 2
+else
+  echo "paccache not found, skipping cache trim."
+fi
+
+echo "\\n=== 3. Pruning Unused Mise Tool Builds ==="
+mise prune --yes
+echo "✓ Mise clean complete."
+"""

@@ -30,6 +30,16 @@ map("n", "<leader>xl", "<cmd>Trouble lsp toggle focus=false<cr>", { desc = "LSP 
 map("n", "<leader>xq", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
 map("n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List (Trouble)" })
 
+-- Fast Diagnostic Navigation (Native Floating Popups)
+map("n", "[d", function() vim.diagnostic.goto_prev({ float = true }) end, { desc = "Previous Diagnostic" })
+map("n", "]d", function() vim.diagnostic.goto_next({ float = true }) end, { desc = "Next Diagnostic" })
+
+-- Fast Quickfix & Location List Navigation
+map("n", "[q", "<cmd>cprev<cr>", { desc = "Previous Quickfix Item" })
+map("n", "]q", "<cmd>cnext<cr>", { desc = "Next Quickfix Item" })
+map("n", "[l", "<cmd>lprev<cr>", { desc = "Previous Location Item" })
+map("n", "]l", "<cmd>lnext<cr>", { desc = "Next Location Item" })
+
 -- === 99 (AI Agent) ===
 map("n", "<leader>9v", function() require("99").visual() end, { desc = "99: Visual Selection" })
 map("n", "<leader>9V", function() require("99").visual({ prompt = true }) end, { desc = "99: Visual (Prompt)" })

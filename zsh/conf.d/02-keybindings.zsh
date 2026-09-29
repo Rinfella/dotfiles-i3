@@ -60,7 +60,7 @@ bindkey -M viins '^?' backward-delete-char
 # Shift + Tab to go backwards in completion menu
 bindkey -M viins '^[[Z' reverse-menu-complete
 
-# Magic Ctrl+Z: 
+# Magic Ctrl+Z:
 # Hit Ctrl+Z to background a process (like nvim).
 # Hit Ctrl+Z on an empty prompt to instantly bring it back (fg).
 fancy-ctrl-z () {
@@ -74,3 +74,19 @@ fancy-ctrl-z () {
 }
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
+
+# Ctrl+Y: Interactive Yazi CWD Picker
+# Launches yazi inline, changing shell CWD to selected folder on exit (q)
+yazi-cwd-widget() {
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    builtin cd -- "$cwd"
+  fi
+  rm -f -- "$tmp"
+  zle && zle reset-prompt
+}
+zle -N yazi-cwd-widget
+bindkey -M viins '^y' yazi-cwd-widget
+bindkey -M vicmd '^y' yazi-cwd-widget
+bindkey '^y' yazi-cwd-widget
