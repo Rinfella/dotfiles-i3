@@ -17,6 +17,8 @@ Universal tool runtime version manager and dotfiles manager.
    - `mise run setup` — Full bootstrap pipeline
    - `mise run packages` — Synchronize pacman/AUR packages
    - `mise run verify` — Smoke-test i3, nvim, rofi, and dotfiles
+   - `mise run doctor` — System health diagnostic (nvim checkhealth, i3 syntax, symlink matrix)
+   - `mise run clean` — Clean orphaned packages (`pacman -Qtdq`), trim pacman cache, and prune mise builds
    - `mise run cron` — Sync crontabs
    - `mise run udev` — Write monitor hotplug rule
    - `mise run systemd` — Enable and reload user systemd units

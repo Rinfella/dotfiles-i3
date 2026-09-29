@@ -33,9 +33,10 @@ Terminal multiplexer configuration with session persistence and Vim integration.
 | `Prefix + ,` | Rename current window |
 | `Prefix + &` | Close current window |
 
-### Sessions
+### Sessions & Projects
 | Key | Action |
 |-----|--------|
+| `Prefix + F` | Interactive fuzzy project switcher popup (auto-creates/attaches session) |
 | `Prefix + n` | Create new named session |
 | `Prefix + r` | Rename current session |
 | `Prefix + s` | Interactive session switcher |

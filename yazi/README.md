@@ -6,13 +6,10 @@ Blazing fast terminal file manager written in Rust.
 - `yazi` (managed by mise)
 - `ffmpegthumbnailer`, `7zip`, `jq`, `fd`, `ripgrep`, `fzf`
 
-## Shell Wrapper (`y`)
-Configured in `zsh/conf.d/03-aliases.zsh`:
-```bash
-y           # opens yazi, and changes shell CWD to match on quit
-```
-Press `q` to quit and **stay in the directory** you navigated to.
-Press `Q` to quit without changing directory.
+## Shell Integration
+- **`y` alias:** Launches yazi, syncing the active shell directory on exit with `q`
+- **`Ctrl+Y` shortcut:** Interactive popup picker bound in Zsh (`zsh/conf.d/02-keybindings.zsh`) that instantly navigates to the selected folder on `q`
+- **Opener rules:** Configured to invoke `xdg-open` (system default) for PDFs and general files, `feh` for image auto-zooming, and `mpv` for audio/video media
 
 ## Keybinds
 

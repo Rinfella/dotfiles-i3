@@ -61,14 +61,22 @@ nvim/
 | `<leader>gg` | Lazygit (full TUI) |
 | `<leader>gb` | Blame current line |
 
-### Diagnostics (Trouble)
+### Diagnostics & Quickfix
 | Key | Action |
 |-----|--------|
-| `<leader>xx` | Workspace diagnostics |
-| `<leader>xX` | Buffer diagnostics |
-| `<leader>xs` | Symbols |
-| `<leader>xl` | LSP references |
-| `<leader>xq` | Quickfix list |
+| `[d` / `]d` | Previous / next diagnostic with floating popup |
+| `[q` / `]q` | Previous / next quickfix list item |
+| `[l` / `]l` | Previous / next location list item |
+| `<leader>xx` | Workspace diagnostics (Trouble) |
+| `<leader>xX` | Buffer diagnostics (Trouble) |
+| `<leader>xs` | Symbols (Trouble) |
+| `<leader>xl` | LSP references (Trouble) |
+| `<leader>xq` | Quickfix list (Trouble) |
+| `<leader>xL` | Location list (Trouble) |
+| `gd` | Go to definition |
+| `K` | LSP hover documentation |
+| `<leader>rn` | Rename symbol |
+| `<leader>ca` | Code actions |
 
 ### Notes (Obsidian)
 | Key | Action |

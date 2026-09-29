@@ -14,11 +14,12 @@ Files are sourced in numerical order at interactive shell startup:
 |------|---------|
 | `00-mise.zsh` | Mise shims in PATH + runtime & dotfile aliases (`mr`, `mdot`, etc.) |
 | `00-tmux.zsh` | Auto-attach or create tmux session |
+| `01-theme.zsh` | Centralized Catppuccin Mocha palette, FZF_DEFAULT_OPTS, and BAT_THEME |
 | `01-options.zsh` | History sharing, auto-cd, correction |
-| `02-keybindings.zsh` | Vi-mode keys, magic Ctrl+Z (toggle foreground/bg) |
+| `02-keybindings.zsh` | Vi-mode keys, magic Ctrl+Z, Ctrl+Y Yazi CWD widget |
 | `03-aliases.zsh` | Core aliases (git, docker, arch, php, etc.) |
 | `04-mise-node.zsh` | Node / npm environment compatibility |
-| `05-tools.zsh` | `navi` widget (`Ctrl+G`), `thefuck` |
+| `05-tools.zsh` | `navi` widget (`Ctrl+G`), dynamic `direnv` hook, `thefuck` |
 | `10-plugins.zsh` | Autosuggestions, syntax highlighting, atuin integration |
 
 ## Key Shell Shortcuts
@@ -27,6 +28,7 @@ Files are sourced in numerical order at interactive shell startup:
 |-----|--------|
 | `Ctrl+R` | Atuin fuzzy history search (or fallback fzf) |
 | `Ctrl+G` | Interactive `navi` command cheat sheet widget |
+| `Ctrl+Y` | Interactive `yazi` file manager popup (changes directory on exit with `q`) |
 | `Ctrl+Z` | Magic toggle: background current app / resume it immediately |
 | `Up / Down` | History substring search (types prefix, filters matching commands) |
 | `Alt+.` | Insert last argument from previous command |

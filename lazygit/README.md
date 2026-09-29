@@ -6,6 +6,12 @@ Simple terminal UI for Git commands.
 - `lazygit` (managed by mise)
 - Config: `config.yml` (symlinked to `~/.config/lazygit/config.yml`)
 
+## Configuration Highlights (`config.yml`)
+- **Theme:** Catppuccin Mocha palette with highlighted blue borders (`#89b4fa`) and mauve author tag badges (`#cba6f7`)
+- **Pager:** Integrated with `delta --paging=never` via `diffRenderers` for rich syntax diffs
+- **Icons:** Nerd Fonts v3 with file tree view enabled
+- **Editor:** Configured with `editPreset: "nvim"` to open files directly in Neovim
+
 ## Launching
 ```bash
 lg          # shorthand zsh alias
