@@ -71,6 +71,10 @@ truncation_symbol = "…/"
 "Music" = "󰝚 "
 "Pictures" = " "
 "Developer" = "󰲋 "
+"projects" = "󰲋 "
+".config/doti3" = " doti3"
+".config" = " "
+"obsidian-notes" = "󱞁 notes"
 
 [git_branch]
 symbol = ""
