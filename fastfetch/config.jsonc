@@ -1,11 +1,13 @@
-// Catppuccin Mocha Minimal Clean Fastfetch with Kitty Animated Logo
+// Catppuccin Mocha Minimal Clean Fastfetch
 {
     "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
     "logo": {
-        "type": "kitty",
-        "source": "~/.config/fastfetch/assets/arch.gif",
-        "width": 16,
-        "height": 8,
+        "type": "file",
+        "source": "~/.config/fastfetch/assets/arch.txt",
+        "color": {
+            "1": "magenta",
+            "2": "blue"
+        },
         "padding": {
             "top": 1,
             "left": 1,
