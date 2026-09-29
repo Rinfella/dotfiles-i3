@@ -39,6 +39,9 @@ export ANDROID_HOME=/opt/android-sdk
 # GUI Settings
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 
+# Mise shims (highest priority for CLI tools & runtimes)
+export PATH="$HOME/.local/share/mise/shims:$PATH"
+
 # Composer global
 export PATH="$HOME/bin:$HOME/.config/composer/vendor/bin:$PATH"
 

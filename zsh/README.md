@@ -12,13 +12,13 @@ Files are sourced in numerical order at interactive shell startup:
 
 | File | Purpose |
 |------|---------|
+| `00-mise.zsh` | Mise shims in PATH + runtime & dotfile aliases (`mr`, `mdot`, etc.) |
 | `00-tmux.zsh` | Auto-attach or create tmux session |
 | `01-options.zsh` | History sharing, auto-cd, correction |
 | `02-keybindings.zsh` | Vi-mode keys, magic Ctrl+Z (toggle foreground/bg) |
 | `03-aliases.zsh` | Core aliases (git, docker, arch, php, etc.) |
 | `04-mise-node.zsh` | Node / npm environment compatibility |
 | `05-tools.zsh` | `navi` widget (`Ctrl+G`), `thefuck` |
-| `06-mise.zsh` | Mise activation + `mr`, `mu`, `mi` aliases |
 | `10-plugins.zsh` | Autosuggestions, syntax highlighting, atuin integration |
 
 ## Key Shell Shortcuts
@@ -55,9 +55,12 @@ lg               # lazygit TUI
 gfb              # interactive fuzzy branch switcher (fzf)
 ```
 
-### Development & Containers
+### Development & Mise
 ```bash
 mr / mu / mi     # mise run / mise use / mise install
+mup / mls        # mise upgrade / mise ls
+mdot / mdota     # mise dot / mise dot apply
+mdots / mdotd    # mise dot status / mise dot diff
 d / dc / dcu     # docker / compose / compose up -d
 ldc              # lazydocker TUI
 art / tink       # php artisan / php artisan tinker

@@ -43,10 +43,11 @@ return {
             },
             presets = { bottom_search = true, command_palette = true, long_message_to_split = true },
             routes = {
-                -- Filter out deprecation warnings
-                { filter = { event = "notify", find = "deprecat" }, opts = { skip = true } },
-                { filter = { event = "msg_show", find = "deprecat" }, opts = { skip = true } },
-                { filter = { event = "msg_show", find = "vim.tbl_flatten" }, opts = { skip = true } },
+                -- Filter out deprecation warnings from plugin internals
+                { filter = { event = "notify",   find = "deprecat" },       opts = { skip = true } },
+                { filter = { event = "msg_show", find = "deprecat" },       opts = { skip = true } },
+                { filter = { event = "msg_show", find = "tbl_flatten" },    opts = { skip = true } },
+                { filter = { event = "msg_show", find = "img_folder" },     opts = { skip = true } },
             },
         },
     },

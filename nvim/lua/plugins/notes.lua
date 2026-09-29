@@ -41,7 +41,7 @@ return {
                 return tostring(os.date("%Y%m%d")) .. "-" .. suffix
             end,
             attachments = {
-                img_folder = "assets/imgs",
+                folder = "assets/imgs",
             },
             picker = {
                 name = "telescope.nvim",
