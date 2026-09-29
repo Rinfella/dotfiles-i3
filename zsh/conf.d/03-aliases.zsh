@@ -101,11 +101,6 @@ if command -v lazydocker >/dev/null 2>&1; then
   alias ldc='lazydocker'
 fi
 
-# duf — better df (disk usage overview with pretty output)
-if command -v duf >/dev/null 2>&1; then
-  alias df='duf'
-fi
-
 # ==========================================
 # AWS CLI
 # ==========================================
