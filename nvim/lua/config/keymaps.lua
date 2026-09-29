@@ -6,11 +6,7 @@ map("n", "<leader>w", "<cmd>write<cr>", { desc = "Save" })
 map("n", "<leader>q", "<cmd>quit<cr>", { desc = "Quit" })
 map("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear Highlight" })
 
--- === Navigation ===
-map("n", "<C-h>", "<C-w>h", { desc = "Window Left" })
-map("n", "<C-j>", "<C-w>j", { desc = "Window Down" })
-map("n", "<C-k>", "<C-w>k", { desc = "Window Up" })
-map("n", "<C-l>", "<C-w>l", { desc = "Window Right" })
+-- === Navigation (managed by vim-tmux-navigator: <C-h>, <C-j>, <C-k>, <C-l>) ===
 
 -- === Editor Tools ===
 map("n", "<leader>e", "<cmd>Neotree reveal<cr>", { desc = "Explorer Reveal" })

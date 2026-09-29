@@ -31,6 +31,11 @@ M.servers = {
         args = { "--stdio" },
         root = { ".git" },
     },
+    css = {
+        binary = "vscode-css-language-server",
+        args = { "--stdio" },
+        root = { ".git" },
+    },
     json = {
         binary = "vscode-json-language-server",
         args = { "--stdio" },

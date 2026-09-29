@@ -1,0 +1,48 @@
+# ~/.config/lazygit/config.yml
+# Catppuccin Mocha theme & QOL settings
+
+gui:
+  theme:
+    activeBorderColor:
+      - '#89b4fa' # Blue
+      - bold
+    inactiveBorderColor:
+      - '#585b70' # Surface2
+    optionsTextColor:
+      - '#89b4fa' # Blue
+    selectedLineBgColor:
+      - '#313244' # Surface0
+    cherryPickedCommitBgColor:
+      - '#45475a' # Surface1
+    cherryPickedCommitFgColor:
+      - '#89b4fa' # Blue
+    unstagedChangesColor:
+      - '#f38ba8' # Red
+    defaultFgColor:
+      - '#cdd6f4' # Text
+    searchingActiveBorderColor:
+      - '#f9e2af' # Yellow
+
+  # UI enhancements
+  authorColors:
+    'rf': '#cba6f7'
+    'Rinfella': '#cba6f7'
+  showIcons: true
+  nerdFontsVersion: "3"
+  showFileTree: true
+
+git:
+  paging:
+    colorArg: always
+    pager: delta --paging=never
+  autoFetch: true
+  autoRefresh: true
+  branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --"
+
+update:
+  method: never
+
+os:
+  editPreset: "nvim"
+
+promptToReturnFromSubprocess: false
