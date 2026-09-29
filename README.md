@@ -1,21 +1,30 @@
 # doti3
 
-Dotfiles for **Arch Linux + i3wm**. Managed with symlinks via `deploy.sh`.
+Dotfiles for **Arch Linux + i3wm**. Managed with [mise](https://mise.jdx.dev).
 
 ---
 
-## ⚡ TLDR / Quick Reference
+## ⚡ Fresh Machine (One-liner)
 
 ```bash
-# Clone & deploy
-git clone <repo> ~/.config/doti3
-cd ~/.config/doti3
-./deploy.sh --dry-run        # preview what will be linked
-./deploy.sh                  # apply symlinks
-./deploy.sh --verify         # check symlinks + smoke-test i3/rofi/nvim configs
-./deploy.sh --prune          # remove stale doti3 symlinks
-./deploy.sh --install-deps   # also install packages
+curl -fsSL https://raw.githubusercontent.com/<user>/doti3/main/bootstrap.sh | bash
 ```
+
+Installs `git` → `yay` → `mise` → clones repo → runs full setup automatically.
+
+## ⚡ Day-to-day
+
+```bash
+mise dot apply               # apply / re-apply all dotfile symlinks
+mise dot status              # check symlink status
+mise dot diff                # preview pending changes
+mise run packages            # install / sync all packages via yay
+mise run verify              # smoke-test i3 + nvim configs
+mise run cron                # reinstall crontab entries
+mise run setup               # full re-run: packages + dotfiles + cron + udev + verify
+```
+
+> **Legacy:** `deploy.sh` is preserved as a fallback but no longer the primary tool.
 
 | Task | Keybind / Command |
 |---|---|
@@ -40,7 +49,31 @@ cd ~/.config/doti3
 | WM | i3wm |
 | Shell | zsh |
 
-### deploy.sh
+### bootstrap.sh
+
+Cold-start script. Only needed once on a fresh machine. Safe to re-run.
+
+```
+pacman -S git base-devel
+  → build + install yay
+  → yay -S mise
+  → git clone doti3
+  → snapshot ~/.config backup
+  → mise run setup
+```
+
+### mise tasks
+
+| Task | Command | What it does |
+|---|---|---|
+| Full setup | `mise run setup` | packages → dotfiles → cron → udev → verify |
+| Packages | `mise run packages` | `yay -S` all packages |
+| Dotfiles | `mise run dotfiles` | `mise dot apply` |
+| Cron | `mise run cron` | Install crontab from `cron/` |
+| Udev | `mise run udev` | Install monitor hotplug rule |
+| Verify | `mise run verify` | Smoke-test i3 + nvim |
+
+### deploy.sh (legacy)
 
 ```bash
 ./deploy.sh [--dry-run] [--install-deps] [--verify] [--prune]

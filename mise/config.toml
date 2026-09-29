@@ -1,8 +1,8 @@
 # ~/.config/doti3/mise/config.toml
-# mise global runtime version configuration
+# mise global config: runtimes, dotfiles, and tasks
 # See: https://mise.jdx.dev
 #
-# Synced to ~/.config/mise/config.toml via deploy.sh
+# Symlinked to ~/.config/mise/config.toml via deploy.sh (legacy) or mise dot apply
 #
 # Node: core backend (prebuilt binaries)
 # PHP:  registry backend (vfox-php community binaries)
@@ -16,3 +16,127 @@ gradle = "9.4.1"
 experimental = true
 jobs = 4
 disable_backends = ["asdf"]
+dotfiles.root = "~/.config/doti3"
+
+# -----------------------------------------------------------------------------
+# Dotfiles — symlinks managed by `mise dot apply`
+# Source paths are relative to dotfiles.root (~/.config/doti3)
+# On a fresh machine: mise dot apply creates these symlinks
+# On current machine: already exist, mise dot apply is a no-op
+# -----------------------------------------------------------------------------
+
+[dotfiles]
+# Home directory files
+"~/.zshenv"       = { source = "~/.config/doti3/zsh/.zshenv", mode = "symlink" }
+"~/.screenlayout" = { source = "~/.config/doti3/screenlayout", mode = "symlink" }
+
+# XDG_CONFIG_HOME flat files
+"~/.config/starship.toml"          = { source = "~/.config/doti3/starship.toml", mode = "symlink" }
+"~/.config/.curlrc"                = { source = "~/.config/doti3/curlrc", mode = "symlink" }
+"~/.config/wgetrc"                 = { source = "~/.config/doti3/wgetrc", mode = "symlink" }
+"~/.config/inputrc"                = { source = "~/.config/doti3/inputrc", mode = "symlink" }
+"~/.config/npmrc"                  = { source = "~/.config/doti3/npmrc", mode = "symlink" }
+"~/.config/yarnrc"                 = { source = "~/.config/doti3/yarnrc", mode = "symlink" }
+"~/.config/gitconfig"              = { source = "~/.config/doti3/gitconfig", mode = "symlink" }
+"~/.config/mimeapps.list"          = { source = "~/.config/doti3/mimeapps.list", mode = "symlink" }
+"~/.config/pavucontrol.ini"        = { source = "~/.config/doti3/pavucontrol.ini", mode = "symlink" }
+"~/.config/composer/composer.json" = { source = "~/.config/doti3/composer/composer.json", mode = "symlink" }
+"~/.config/composer/composer.lock" = { source = "~/.config/doti3/composer/composer.lock", mode = "symlink" }
+
+# XDG_CONFIG_HOME directories
+"~/.config/ai"          = { source = "~/.config/doti3/ai", mode = "symlink" }
+"~/.config/alacritty"   = { source = "~/.config/doti3/alacritty", mode = "symlink" }
+"~/.config/atuin"       = { source = "~/.config/doti3/atuin", mode = "symlink" }
+"~/.config/autostart"   = { source = "~/.config/doti3/autostart", mode = "symlink" }
+"~/.config/bat"         = { source = "~/.config/doti3/bat", mode = "symlink" }
+"~/.config/dunst"       = { source = "~/.config/doti3/dunst", mode = "symlink" }
+"~/.config/fastfetch"   = { source = "~/.config/doti3/fastfetch", mode = "symlink" }
+"~/.config/fontconfig"  = { source = "~/.config/doti3/fontconfig", mode = "symlink" }
+"~/.config/git"         = { source = "~/.config/doti3/git", mode = "symlink" }
+"~/.config/gtk-2.0"     = { source = "~/.config/doti3/gtk-2.0", mode = "symlink" }
+"~/.config/gtk-3.0"     = { source = "~/.config/doti3/gtk-3.0", mode = "symlink" }
+"~/.config/gtk-4.0"     = { source = "~/.config/doti3/gtk-4.0", mode = "symlink" }
+"~/.config/i3"          = { source = "~/.config/doti3/i3", mode = "symlink" }
+"~/.config/kitty"       = { source = "~/.config/doti3/kitty", mode = "symlink" }
+"~/.config/lazygit"     = { source = "~/.config/doti3/lazygit", mode = "symlink" }
+"~/.config/mise"        = { source = "~/.config/doti3/mise", mode = "symlink" }
+"~/.config/nvim"        = { source = "~/.config/doti3/nvim", mode = "symlink" }
+"~/.config/nwg-look"    = { source = "~/.config/doti3/nwg-look", mode = "symlink" }
+"~/.config/opencode"    = { source = "~/.config/doti3/opencode", mode = "symlink" }
+"~/.config/picom"       = { source = "~/.config/doti3/picom", mode = "symlink" }
+"~/.config/polybar"     = { source = "~/.config/doti3/polybar", mode = "symlink" }
+"~/.config/rbw"         = { source = "~/.config/doti3/rbw", mode = "symlink" }
+"~/.config/ripgrep"     = { source = "~/.config/doti3/ripgrep", mode = "symlink" }
+"~/.config/rofi"        = { source = "~/.config/doti3/rofi", mode = "symlink" }
+"~/.config/systemd"     = { source = "~/.config/doti3/systemd", mode = "symlink" }
+"~/.config/tmux"        = { source = "~/.config/doti3/tmux", mode = "symlink" }
+"~/.config/vim"         = { source = "~/.config/doti3/vim", mode = "symlink" }
+"~/.config/wireplumber" = { source = "~/.config/doti3/wireplumber", mode = "symlink" }
+"~/.config/X11"         = { source = "~/.config/doti3/X11", mode = "symlink" }
+"~/.config/xsettingsd"  = { source = "~/.config/doti3/xsettingsd", mode = "symlink" }
+"~/.config/yazi"        = { source = "~/.config/doti3/yazi", mode = "symlink" }
+"~/.config/zsh"         = { source = "~/.config/doti3/zsh", mode = "symlink" }
+
+# XDG_DATA_HOME directories
+"~/.local/share/easyeffects" = { source = "~/.config/doti3/easyeffects", mode = "symlink" }
+"~/.local/share/rofi/themes" = { source = "~/.config/doti3/rofi-themes", mode = "symlink" }
+
+# -----------------------------------------------------------------------------
+# Tasks — run with `mise run <task>`
+# -----------------------------------------------------------------------------
+
+[tasks.setup]
+description = "Full bootstrap: packages → dotfiles → cron → udev → verify"
+depends = ["packages", "dotfiles", "cron", "udev", "verify"]
+run = "echo 'Setup complete — restart your shell and log out/in to start i3.'"
+
+[tasks.packages]
+description = "Install all packages via yay (AUR + official)"
+run = """
+yay -S --needed --noconfirm \
+  i3-wm picom polybar rofi dunst alacritty kitty yazi tmux \
+  neovim vim fastfetch starship fzf thefuck navi lazygit \
+  blueman brightnessctl playerctl maim xdotool feh thunar \
+  easyeffects imagemagick i3blocks polkit-gnome network-manager-applet \
+  clipmenu rbw rofi-rbw composer php \
+  bat eza fd jq ripgrep zoxide git-delta direnv glow lazydocker duf \
+  zsh-history-substring-search re2c
+"""
+
+[tasks.dotfiles]
+description = "Apply dotfile symlinks via mise dot apply"
+run = "mise bootstrap dotfiles apply --yes"
+
+[tasks.cron]
+description = "Install crontab entries from doti3/cron/"
+run = """
+CRON_DIR="$HOME/.config/doti3/cron"
+if [ -d "$CRON_DIR" ] && [ -n "$(ls -A "$CRON_DIR")" ]; then
+  cat "$CRON_DIR"/* | crontab -
+  echo "Crontab installed."
+else
+  echo "No cron entries found, skipping."
+fi
+"""
+
+[tasks.udev]
+description = "Install udev monitor hotplug rule"
+run = """
+RULE_SRC="$HOME/.config/doti3/X11/udev/99-monitor-hotplug.rules"
+RULE_DST="/etc/udev/rules.d/99-monitor-hotplug.rules"
+if [ -f "$RULE_SRC" ]; then
+  sudo cp "$RULE_SRC" "$RULE_DST"
+  sudo udevadm control --reload-rules
+  echo "udev rule installed."
+else
+  echo "No udev rule found at $RULE_SRC, skipping."
+fi
+"""
+
+[tasks.verify]
+description = "Smoke-test configs: i3, nvim"
+run = """
+i3 -C && echo "i3 config OK"
+nvim --headless +q 2>/dev/null && echo "nvim OK"
+mise dot status
+"""
