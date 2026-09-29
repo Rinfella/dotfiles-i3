@@ -4,13 +4,39 @@
 #
 # Symlinked to ~/.config/mise/config.toml via deploy.sh (legacy) or mise dot apply
 #
-# Node: core backend (prebuilt binaries)
-# PHP:  registry backend (vfox-php community binaries)
+# Runtimes
+# python left as system pacman (too many system dependents)
+# thefuck left as system pacman (python-based, no mise plugin)
 
 [tools]
-php = "8.5"
-node = "24"
+# languages / runtimes
+php    = "8.5"
+node   = "24"
 gradle = "9.4.1"
+go     = "latest"
+deno   = "latest"
+
+# CLI tools (managed by mise, removed from pacman)
+atuin      = "latest"
+bat        = "latest"
+delta      = "latest"
+direnv     = "latest"
+duf        = "latest"
+eza        = "latest"
+fd         = "latest"
+fzf        = "latest"
+glow       = "latest"
+jq         = "latest"
+lazydocker = "latest"
+lazygit    = "latest"
+navi       = "latest"
+neovim     = "latest"
+ripgrep    = "latest"
+starship   = "latest"
+fastfetch  = "latest"
+yazi       = "latest"
+yt-dlp     = "latest"
+zoxide     = "latest"
 
 [settings]
 experimental = true
@@ -94,13 +120,11 @@ run = "echo 'Setup complete — restart your shell and log out/in to start i3.'"
 description = "Install all packages via yay (AUR + official)"
 run = """
 yay -S --needed --noconfirm \
-  i3-wm picom polybar rofi dunst alacritty kitty yazi tmux \
-  neovim vim fastfetch starship fzf thefuck navi lazygit \
+  i3-wm picom polybar rofi dunst alacritty kitty tmux vim \
   blueman brightnessctl playerctl maim xdotool feh thunar \
   easyeffects imagemagick i3blocks polkit-gnome network-manager-applet \
   clipmenu rbw rofi-rbw composer php \
-  bat eza fd jq ripgrep zoxide git-delta direnv glow lazydocker duf \
-  zsh-history-substring-search re2c
+  thefuck zsh-history-substring-search re2c
 """
 
 [tasks.dotfiles]
