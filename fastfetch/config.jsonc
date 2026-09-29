@@ -1,9 +1,11 @@
-// Catppuccin Mocha Minimal Clean Fastfetch
+// Catppuccin Mocha Minimal Clean Fastfetch with Kitty Image Protocol
 {
     "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
     "logo": {
-        "type": "file",
-        "source": "~/.config/fastfetch/assets/arch.txt",
+        "type": "kitty",
+        "source": "~/.config/fastfetch/assets/arch.png",
+        "width": 16,
+        "height": 8,
         "padding": {
             "top": 1,
             "left": 1,
