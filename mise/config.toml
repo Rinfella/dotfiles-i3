@@ -147,6 +147,9 @@ if [ -d "$CRON_DIR" ]; then
   CURRENT_CRON="$(crontab -l 2>/dev/null || true)"
   for cronfile in "$CRON_DIR"/*; do
     [ -f "$cronfile" ] || continue
+    case "$(basename "$cronfile")" in
+      *.md|README*|.*) continue ;;
+    esac
     while IFS= read -r line; do
       [ -z "$line" ] || [[ "$line" == \\#* ]] && continue
       if ! grep -qF "$line" <<< "$CURRENT_CRON"; then

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Low battery notification watcher for Dunst / Polybar
+
+BAT_PATH="/sys/class/power_supply/BAT0"
+
+if [ ! -d "$BAT_PATH" ]; then
+    exit 0
+fi
+
+CAPACITY=$(cat "$BAT_PATH/capacity" 2>/dev/null || echo 100)
+STATUS=$(cat "$BAT_PATH/status" 2>/dev/null || echo "Unknown")
+
+if [ "$STATUS" = "Discharging" ]; then
+    if [ "$CAPACITY" -le 5 ]; then
+        notify-send -u critical -i battery-empty "⚡ CRITICAL BATTERY: ${CAPACITY}%" "Connect charger immediately! System will hibernate soon."
+    elif [ "$CAPACITY" -le 15 ]; then
+        notify-send -u normal -i battery-caution "🔋 Low Battery Warning" "Battery level is at ${CAPACITY}%. Plug in AC adapter."
+    fi
+fi

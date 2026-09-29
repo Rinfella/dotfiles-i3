@@ -20,6 +20,7 @@ Files are sourced in numerical order at interactive shell startup:
 | `03-aliases.zsh` | Core aliases (git, docker, arch, php, etc.) |
 | `04-mise-node.zsh` | Node / npm environment compatibility |
 | `05-tools.zsh` | `navi` widget (`Ctrl+G`), dynamic `direnv` hook, `thefuck` |
+| `07-worktrees.zsh` | Git worktree helpers for AI agents & parallel branch development (`gwa`, `gws`, `gwr`, `gwm`) |
 | `10-plugins.zsh` | Autosuggestions, syntax highlighting, atuin integration |
 
 ## Key Shell Shortcuts

@@ -36,7 +36,8 @@ Terminal multiplexer configuration with session persistence and Vim integration.
 ### Sessions & Projects
 | Key | Action |
 |-----|--------|
-| `Prefix + F` | Interactive fuzzy project switcher popup (auto-creates/attaches session) |
+| `Prefix + p` | Interactive fuzzy project switcher popup (auto-creates/attaches session to `~/projects` or `~/.config`) |
+| `Prefix + F` | `tmux-fzf` plugin launcher menu |
 | `Prefix + n` | Create new named session |
 | `Prefix + r` | Rename current session |
 | `Prefix + s` | Interactive session switcher |

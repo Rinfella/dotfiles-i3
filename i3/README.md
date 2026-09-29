@@ -90,6 +90,8 @@ i3 window manager configuration for Arch Linux.
 
 ## Scripts (`i3/scripts/`)
 - `autodetect-display` — triggered automatically via udev on HDMI/DP plug
+- `battery-alert` — battery charge monitor issuing Dunst alerts for low/critical battery
+- `bat-health` — battery health and degradation calculator
 - `lock-screen` — blurred screenshot lock via `i3lock`
 - `powermenu` — rofi-based logout/reboot/poweroff
 - `screen-layout` — rofi monitor selector

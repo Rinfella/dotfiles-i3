@@ -7,14 +7,15 @@ Status bar configuration for i3wm.
 - JetBrains Mono Nerd Font, Font Awesome / Material icons
 - `i3-wm`, `wireplumber` (audio), `brightnessctl`, `networkmanager`
 
-## Modules & Behavior
+## Modules & Interactive Clicks
 - **Workspaces:** i3 workspace status with icons
 - **Window Title:** Active focused window
 - **CPU / Memory / Temp:** Hardware resource monitors
-- **Volume / Audio:** Interactive click to mute, scroll to adjust volume
+- **Volume / Audio:** Left-click opens `pavucontrol`, scroll adjusts volume, middle-click toggles mute
 - **Brightness:** Scroll to increase/decrease display brightness
-- **Network / WiFi:** Active connection status
-- **Battery:** Charge state + percentage
+- **Network / WiFi:** Left-click opens `nmtui` in Kitty terminal for instant WiFi selection
+- **Bluetooth:** Left-click opens `bluetui` in Kitty
+- **Battery:** Charge state, percentage, and dynamic ramp icons
 - **Date / Clock:** Time and calendar pop-over
 
 ## Management
