@@ -1,12 +1,20 @@
 #!/usr/bin/env bash
 # Interactive fuzzy tmux session & project switcher popup
 
-selected=$( (
+# 1. Existing active sessions
+# 2. Dotfiles directory (~/.config/doti3)
+# 3. Only direct git repositories / project root folders inside ~/projects
+candidates=$( (
   tmux list-sessions -F '#S' 2>/dev/null
-  fd --min-depth 1 --max-depth 2 --type d . "$HOME/projects" "$HOME/.config" 2>/dev/null
+  [ -d "$HOME/.config/doti3" ] && echo "$HOME/.config/doti3"
+  if [ -d "$HOME/projects" ]; then
+    fd --min-depth 1 --max-depth 2 --type d --type l . "$HOME/projects" 2>/dev/null
+  fi
 ) | fzf --reverse --prompt='Tmux Project > ' --border=rounded )
 
-[ -z "$selected" ] && exit 0
+[ -z "$candidates" ] && exit 0
+
+selected="$candidates"
 
 if tmux has-session -t "$selected" 2>/dev/null; then
   tmux switch-client -t "$selected"
