@@ -1,108 +1,132 @@
-# vanilla-nvim/
+# nvim
 
-<a href="https://dotfyle.com/Rinfella/vanilla-nvim"><img src="https://dotfyle.com/Rinfella/vanilla-nvim/badges/plugins?style=flat" /></a>
-<a href="https://dotfyle.com/Rinfella/vanilla-nvim"><img src="https://dotfyle.com/Rinfella/vanilla-nvim/badges/leaderkey?style=flat" /></a>
-<a href="https://dotfyle.com/Rinfella/vanilla-nvim"><img src="https://dotfyle.com/Rinfella/vanilla-nvim/badges/plugin-manager?style=flat" /></a>
+Neovim config using [lazy.nvim](https://github.com/folke/lazy.nvim).
 
+## Prerequisites
+- `neovim` >= 0.10 (managed by mise)
+- `git`, `ripgrep` (fd, rg for Telescope)
+- A Nerd Font (JetBrains Mono Nerd Font recommended)
+- Node.js (for LSP servers — managed by mise)
+- `obsidian-notes` vault at `~/Documents/obsidian-notes`
 
-## Install Instructions
-
- > Install requires Neovim 0.9+. Always review the code before installing a configuration.
-
-Clone the repository and install the plugins:
-
-```sh
-git clone git@github.com:Rinfella/vanilla-nvim ~/.config/Rinfella/vanilla-nvim
+## Structure
+```
+nvim/
+├── init.lua              # Entry point, loads lazy.nvim
+├── lazy-lock.json        # Plugin lockfile
+└── lua/
+    ├── config/
+    │   ├── keymaps.lua   # All keybindings
+    │   ├── options.lua   # Vim options
+    │   └── autocmds.lua  # Autocommands + LSP attach
+    └── plugins/
+        ├── coding.lua    # LSP, completion, formatting, treesitter
+        ├── editor.lua    # Telescope, Neo-tree, gitsigns, trouble
+        ├── notes.lua     # obsidian.nvim, render-markdown
+        ├── ui.lua        # Noice, notify, alpha dashboard, colorscheme
+        ├── terminal.lua  # toggleterm
+        ├── neoclip.lua   # Clipboard history
+        └── 99.lua        # AI agent integration
 ```
 
-Open Neovim with this config:
+## Keybinds
 
-```sh
-NVIM_APPNAME=Rinfella/vanilla-nvim/ nvim
+> Leader = `Space`
+
+### Core
+| Key | Action |
+|-----|--------|
+| `<leader>w` | Save |
+| `<leader>q` | Quit |
+| `<Esc>` | Clear search highlight |
+| `<C-h/j/k/l>` | Navigate splits |
+
+### Explorer (Neo-tree)
+| Key | Action |
+|-----|--------|
+| `<leader>e` | Reveal current file in tree |
+| `<leader>o` | Toggle file tree |
+
+### Telescope (Find)
+| Key | Action |
+|-----|--------|
+| `<leader>ff` | Find files |
+| `<leader>fg` | Live grep |
+| `<leader>fb` | Buffers |
+| `<leader>fh` | Help tags |
+
+### Git
+| Key | Action |
+|-----|--------|
+| `<leader>gg` | Lazygit (full TUI) |
+| `<leader>gb` | Blame current line |
+
+### Diagnostics (Trouble)
+| Key | Action |
+|-----|--------|
+| `<leader>xx` | Workspace diagnostics |
+| `<leader>xX` | Buffer diagnostics |
+| `<leader>xs` | Symbols |
+| `<leader>xl` | LSP references |
+| `<leader>xq` | Quickfix list |
+
+### Notes (Obsidian)
+| Key | Action |
+|-----|--------|
+| `<leader>nn` | New note |
+| `<leader>nf` | Find/search notes |
+| `<leader>nq` | Quick switch |
+| `<leader>ng` | Search by tags |
+| `<leader>nd` | Today's daily note |
+| `<leader>ny` | Yesterday |
+| `<leader>nm` | Tomorrow |
+| `<leader>nt` | Insert template |
+| `<leader>ni` | New note from template |
+| `<leader>ns` | New scratch note |
+| `<leader>nb` | Backlinks |
+| `<leader>nl` | Outgoing links |
+| `<leader>nL` | Link word to new note |
+| `<leader>nk` | *(visual)* Link selection |
+| `<leader>nx` | *(visual)* Extract → new note |
+| `<leader>nr` | Rename note |
+| `<leader>nw` | Switch workspace |
+| `<CR>` | Toggle checkbox `[ ]→[x]→[-]` |
+| `gf` | Follow wikilink under cursor |
+
+### Terminal (ToggleTerm)
+| Key | Action |
+|-----|--------|
+| `<leader>th` | Horizontal terminal |
+| `<leader>tf` | Floating terminal |
+
+### Clipboard
+| Key | Action |
+|-----|--------|
+| `<leader>ch` | Clipboard history (Neoclip) |
+
+### AI (99)
+| Key | Action |
+|-----|--------|
+| `<leader>9v` | Visual selection |
+| `<leader>9V` | Visual with prompt |
+| `<leader>9s` | Stop requests |
+| `<leader>9l` | View logs |
+| `<leader>9i` | Info |
+
+## Plugin Management
+```bash
+nvim                    # opens nvim, lazy auto-installs on first run
+:Lazy                   # open plugin manager UI
+:Lazy update            # update all plugins
+:Lazy sync              # install + update + clean
+:checkhealth            # diagnose plugin/LSP issues
 ```
 
-## Plugins
-
-### colorscheme
-
-+ [folke/tokyonight.nvim](https://dotfyle.com/plugins/folke/tokyonight.nvim)
-### completion
-
-+ [zbirenbaum/copilot.lua](https://dotfyle.com/plugins/zbirenbaum/copilot.lua)
-+ [hrsh7th/nvim-cmp](https://dotfyle.com/plugins/hrsh7th/nvim-cmp)
-### diagnostics
-
-+ [folke/trouble.nvim](https://dotfyle.com/plugins/folke/trouble.nvim)
-### editing-support
-
-+ [windwp/nvim-autopairs](https://dotfyle.com/plugins/windwp/nvim-autopairs)
-### file-explorer
-
-+ [nvim-neo-tree/neo-tree.nvim](https://dotfyle.com/plugins/nvim-neo-tree/neo-tree.nvim)
-### fuzzy-finder
-
-+ [nvim-telescope/telescope.nvim](https://dotfyle.com/plugins/nvim-telescope/telescope.nvim)
-### git
-
-+ [lewis6991/gitsigns.nvim](https://dotfyle.com/plugins/lewis6991/gitsigns.nvim)
-### icon
-
-+ [echasnovski/mini.icons](https://dotfyle.com/plugins/echasnovski/mini.icons)
-### indent
-
-+ [lukas-reineke/indent-blankline.nvim](https://dotfyle.com/plugins/lukas-reineke/indent-blankline.nvim)
-### keybinding
-
-+ [folke/which-key.nvim](https://dotfyle.com/plugins/folke/which-key.nvim)
-### lsp-installer
-
-+ [williamboman/mason.nvim](https://dotfyle.com/plugins/williamboman/mason.nvim)
-### markdown-and-latex
-
-+ [MeanderingProgrammer/render-markdown.nvim](https://dotfyle.com/plugins/MeanderingProgrammer/render-markdown.nvim)
-### marks
-
-+ [ThePrimeagen/harpoon](https://dotfyle.com/plugins/ThePrimeagen/harpoon)
-### note-taking
-
-+ [obsidian-nvim/obsidian.nvim](https://dotfyle.com/plugins/obsidian-nvim/obsidian.nvim)
-### nvim-dev
-
-+ [MunifTanjim/nui.nvim](https://dotfyle.com/plugins/MunifTanjim/nui.nvim)
-+ [nvim-lua/plenary.nvim](https://dotfyle.com/plugins/nvim-lua/plenary.nvim)
-+ [nvim-lua/popup.nvim](https://dotfyle.com/plugins/nvim-lua/popup.nvim)
-### plugin-manager
-
-+ [folke/lazy.nvim](https://dotfyle.com/plugins/folke/lazy.nvim)
-### session
-
-+ [rmagatti/auto-session](https://dotfyle.com/plugins/rmagatti/auto-session)
-### snippet
-
-+ [rafamadriz/friendly-snippets](https://dotfyle.com/plugins/rafamadriz/friendly-snippets)
-+ [L3MON4D3/LuaSnip](https://dotfyle.com/plugins/L3MON4D3/LuaSnip)
-### startup
-
-+ [goolord/alpha-nvim](https://dotfyle.com/plugins/goolord/alpha-nvim)
-### statusline
-
-+ [nvim-lualine/lualine.nvim](https://dotfyle.com/plugins/nvim-lualine/lualine.nvim)
-### syntax
-
-+ [nvim-treesitter/nvim-treesitter](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter)
-### terminal-integration
-
-+ [akinsho/toggleterm.nvim](https://dotfyle.com/plugins/akinsho/toggleterm.nvim)
-### utility
-
-+ [rcarriga/nvim-notify](https://dotfyle.com/plugins/rcarriga/nvim-notify)
-+ [doctorfree/cheatsheet.nvim](https://dotfyle.com/plugins/doctorfree/cheatsheet.nvim)
-+ [folke/noice.nvim](https://dotfyle.com/plugins/folke/noice.nvim)
-+ [0xJohnnyboy/scretch.nvim](https://dotfyle.com/plugins/0xJohnnyboy/scretch.nvim)
-## Language Servers
-
-+ html
-+ intelephense
-
-
- This readme was generated by [Dotfyle](https://dotfyle.com)
+## Obsidian Templates
+Located in `~/Documents/obsidian-notes/templates/`:
+- `daily_notes.md` — Focus / Log / Notes / Tomorrow sections
+- `default_note_template.md` — Minimal general note
+- `meeting.md` — Agenda / Notes / Action Items / Decisions
+- `project.md` — Goal / Tasks / Links
+- `bug.md` — Repro steps / Expected / Actual / Fix
+- `inbox.md` — Quick capture with timestamp
