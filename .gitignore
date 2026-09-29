@@ -33,11 +33,13 @@ zsh/.zsh_history
 ai/*
 !ai/kb/
 !ai/skills/
+!ai/superpowers/
 !ai/RULES.md
 !ai/README.md
 !ai/AGENTS.md
 ai/env*
 ai/*.env
+docs/
 opencode/.caveman-active
 opencode/kb
 opencode/memory
