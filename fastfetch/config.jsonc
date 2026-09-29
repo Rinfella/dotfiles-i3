@@ -4,10 +4,6 @@
     "logo": {
         "type": "file",
         "source": "~/.config/fastfetch/assets/arch.txt",
-        "color": {
-            "1": "magenta",
-            "2": "blue"
-        },
         "padding": {
             "top": 1,
             "left": 1,
@@ -17,7 +13,7 @@
     "display": {
         "separator": " 󰅂 ",
         "key": {
-            "width": 8
+            "width": 10
         }
     },
     "modules": [
@@ -30,12 +26,6 @@
             "format": "\u001b[38;2;69;71;90m────────────────────────\u001b[0m"
         },
         {
-            "key": "󰣇 os",
-            "type": "os",
-            "format": "{3} ({12})",
-            "keyColor": "34"
-        },
-        {
             "key": " wm",
             "type": "wm",
             "format": "{1}",
@@ -46,6 +36,12 @@
             "type": "uptime",
             "format": "{2}h {3}m",
             "keyColor": "32"
+        },
+        {
+            "key": "󰌽 kernel",
+            "type": "kernel",
+            "format": "{1} {2}",
+            "keyColor": "34"
         },
         {
             "key": "󰍛 cpu",
