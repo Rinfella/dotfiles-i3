@@ -15,15 +15,37 @@ return {
                     path = vim.fn.expand("~/Documents/obsidian-notes"),
                 },
             },
-            ui = { enable = false }, -- Optional: clean UI
+            ui = { enable = false },
             daily_notes = {
                 folder = "notes/daily-notes",
                 date_format = "%Y-%m-%d",
+                template = "daily_notes.md",
             },
-
+            templates = {
+                folder = "templates",
+                date_format = "%Y-%m-%d",
+                time_format = "%H:%M",
+                substitutions = {},
+            },
             completion = { nvim_cmp = true },
-
             legacy_commands = false,
+            note_id_func = function(title)
+                local suffix = ""
+                if title ~= nil then
+                    suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+                else
+                    for _ = 1, 4 do
+                        suffix = suffix .. string.char(math.random(65, 90))
+                    end
+                end
+                return tostring(os.date("%Y%m%d")) .. "-" .. suffix
+            end,
+            attachments = {
+                img_folder = "assets/imgs",
+            },
+            picker = {
+                name = "telescope.nvim",
+            },
         },
     },
 
@@ -32,15 +54,6 @@ return {
         "MeanderingProgrammer/render-markdown.nvim",
         ft = "markdown",
         opts = {},
-    },
-
-    -- Scretch
-    {
-        "0xJohnnyboy/scretch.nvim",
-        cmd = "Scretch",
-        opts = {
-            scretch_dir = vim.fn.stdpath("data") .. "/scretch",
-        },
     },
 
     -- Cheatsheet

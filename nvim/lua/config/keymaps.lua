@@ -42,33 +42,38 @@ map("n", "<leader>9l", function() require("99").view_logs() end, { desc = "99: V
 map("n", "<leader>9i", function() require("99").info() end, { desc = "99: Info" })
 
 -- === Notes (Grouped under <leader>n) ===
--- Obsidian
-map("n", "<leader>nn", "<cmd>Obsidian new<cr>", { desc = "Obsidian: New Note" })
-map("n", "<leader>nf", "<cmd>Obsidian search<cr>", { desc = "Obsidian: Find Note" })
-map("n", "<leader>nd", "<cmd>Obsidian today<cr>", { desc = "Obsidian: Daily Note" })
-map("n", "<leader>ny", "<cmd>Obsidian yesterday<cr>", { desc = "Obsidian: Yesterday" })
-map("n", "<leader>nm", "<cmd>Obsidian tomorrow<cr>", { desc = "Obsidian: Tomorrow" })
--- Show backlinks (what links to this note?) - Crucial for Zettelkasten
-map("n", "<leader>nb", "<cmd>Obsidian backlinks<cr>", { desc = "Obsidian: Backlinks" })
--- Show outgoing links (what does this note link to?)
-map("n", "<leader>nl", "<cmd>Obsidian links<cr>", { desc = "Obsidian: Outgoing Links" })
--- Open the current note in the actual Obsidian App
-map("n", "<leader>no", "<cmd>Obsidian open<cr>", { desc = "Obsidian: Open in App" })
-map("n", "<leader>ng", "<cmd>Obsidian tags<cr>", { desc = "Obsidian: Search Tags" })
--- Toggle Checkbox (cycles [ ] -> [x] -> [-])
+-- Navigation
+map("n", "<leader>nn", "<cmd>Obsidian new<cr>",           { desc = "Obsidian: New Note" })
+map("n", "<leader>nf", "<cmd>Obsidian search<cr>",        { desc = "Obsidian: Find Note" })
+map("n", "<leader>nq", "<cmd>Obsidian quick_switch<cr>",  { desc = "Obsidian: Quick Switch" })
+map("n", "<leader>ng", "<cmd>Obsidian tags<cr>",          { desc = "Obsidian: Search Tags" })
+
+-- Daily Notes
+map("n", "<leader>nd", "<cmd>Obsidian today<cr>",         { desc = "Obsidian: Daily Note" })
+map("n", "<leader>ny", "<cmd>Obsidian yesterday<cr>",     { desc = "Obsidian: Yesterday" })
+map("n", "<leader>nm", "<cmd>Obsidian tomorrow<cr>",      { desc = "Obsidian: Tomorrow" })
+
+-- Templates & Creation
+map("n", "<leader>nt", "<cmd>Obsidian template<cr>",      { desc = "Obsidian: Insert Template" })
+map("n", "<leader>ni", "<cmd>Obsidian new_from_template<cr>", { desc = "Obsidian: New from Template" })
+map("v", "<leader>nx", "<cmd>ObsidianExtractNote<cr>",    { desc = "Obsidian: Extract Selection → Note" })
+map("n", "<leader>ns", "<cmd>Obsidian new<cr>",           { desc = "Obsidian: New Scratch/Inbox" })
+
+-- Links & Graph
+map("n", "<leader>nb", "<cmd>Obsidian backlinks<cr>",     { desc = "Obsidian: Backlinks" })
+map("n", "<leader>nl", "<cmd>Obsidian links<cr>",         { desc = "Obsidian: Outgoing Links" })
+map("n", "<leader>nL", "<cmd>Obsidian link_new<cr>",      { desc = "Obsidian: Link to New Note" })
+map("v", "<leader>nk", "<cmd>Obsidian link<cr>",          { desc = "Obsidian: Link Selection" })
+
+-- Checkbox
 map("n", "<leader>nc", "<cmd>ObsidianToggleCheckbox<cr>", { desc = "Obsidian: Toggle Checkbox" })
--- Extract selected text to a new note
-map("v", "<leader>nx", "<cmd>ObsidianExtractNote<cr>", { desc = "Obsidian: Extract Selection" })
 
--- Scretch (Scratchpad)
-map("n", "<leader>ns", "<cmd>Scretch<cr>", { desc = "Scretch: New" })
-map("n", "<leader>nS", "<cmd>Scretch new_named<cr>", { desc = "Scretch: New Named" })
-map("n", "<leader>nl", "<cmd>Scretch last<cr>", { desc = "Scretch: Open Last" })
-map("n", "<leader>nF", "<cmd>Scretch search<cr>", { desc = "Scretch: Find (Telescope)" })
-map("n", "<leader>nG", "<cmd>Scretch grep<cr>", { desc = "Scretch: Grep (Telescope)" })
+-- Rename / workspace
+map("n", "<leader>nr", "<cmd>Obsidian rename<cr>",        { desc = "Obsidian: Rename Note" })
+map("n", "<leader>nw", "<cmd>Obsidian workspace<cr>",     { desc = "Obsidian: Switch Workspace" })
 
--- Neoclip History
-map("n", "<leader>nc", "<cmd>Telescope neoclip initial_mode=normal<cr>", { desc = "Neoclip History" })
+-- Clipboard / Neoclip (moved off <leader>nc to avoid collision)
+map("n", "<leader>ch", "<cmd>Telescope neoclip initial_mode=normal<cr>", { desc = "Clipboard History (Neoclip)" })
 
 -- === Terminal ===
 map("n", "<leader>th", "<cmd>ToggleTerm direction=horizontal<cr>", { desc = "Term Horizontal" })
