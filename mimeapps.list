@@ -9,12 +9,13 @@ x-scheme-handler/spice=org.remmina.Remmina.desktop;
 x-scheme-handler/vnc=org.remmina.Remmina.desktop;
 x-scheme-handler/remmina=org.remmina.Remmina.desktop;
 application/x-remmina=org.remmina.Remmina.desktop;
-text/csv=nvim.desktop;wps-office-et.desktop;wps-office-prometheus.desktop;com.google.Chrome.desktop;
+text/csv=nvim.desktop;wps-office-et.desktop;wps-office-prometheus.desktop;com.google.Chrome.desktop;antigravity-ide.desktop;vim.desktop;userapp-nvim-T51IW3.desktop;userapp-kitty -e nvim-BJPZV3.desktop;
 application/sql=nvim.desktop;
 audio/flac=deadbeef.desktop;
 application/yaml=org.x.editor.desktop;dev.zed.Zed.desktop;vim.desktop;nvim.desktop;
-text/plain=nvim.desktop;
+text/plain=nvim.desktop;userapp-kitty -e nvim-BJPZV3.desktop;
 image/png=com.google.Chrome.desktop;gimp.desktop;
+application/json=userapp-kitty -e nvim-BJPZV3.desktop;
 
 [Default Applications]
 x-scheme-handler/discord=vesktop.desktop
@@ -28,3 +29,6 @@ audio/flac=deadbeef.desktop
 x-scheme-handler/mailto=google-chrome.desktop
 x-scheme-handler/antigravity=antigravity.desktop
 x-scheme-handler/tabularis=tabularis-handler.desktop
+text/csv=userapp-kitty -e nvim-BJPZV3.desktop
+text/plain=userapp-kitty -e nvim-BJPZV3.desktop
+application/json=userapp-kitty -e nvim-BJPZV3.desktop
