@@ -1,20 +1,20 @@
 [Presets]
-lastLoadedOutputPreset=Crinacle32B
+lastLoadedOutputPreset=Flat Default
 
 [StreamInputs]
 inputDevice=alsa_input.pci-0000_06_00.6.HiFi__Mic1__source
 visiblePage=pluginsPage
 
 [StreamOutputs]
-mostUsedPresets=Crinacle32B
+mostUsedPresets=Crinacle32B,Flat Default,Waner SG2
 outputDevice=alsa_output.pci-0000_06_00.6.HiFi__Speaker__sink
 plugins=equalizer#0
-usedPresets=Crinacle32B:676
+usedPresets=Crinacle32B:1303,Flat Default:54,Waner SG2:2
 visiblePage=pluginsPage
 visiblePlugin=equalizer#0
 
 [Window]
-height=966
-outputAutoloadingFallbackPreset=Crinacle32B
+height=1008
+outputAutoloadingFallbackPreset=Flat Default
 outputAutoloadingUsesFallback=true
 width=939
