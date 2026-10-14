@@ -27,6 +27,25 @@
                     "name": "OmniRoute (Free Overflow Round-Robin)",
                     "limit": { "context": 200000, "output": 8192 }
                 },
+                "auto/subscription": {
+                    "name": "OmniRoute (Subscription First: AGY/Google One)",
+                    "limit": { "context": 1048576, "output": 65536 },
+                    "reasoning": true
+                },
+                "auto/best-coding": {
+                    "name": "OmniRoute (Best Coding Auto)",
+                    "limit": { "context": 200000, "output": 8192 },
+                    "reasoning": true
+                },
+                "auto/best-reasoning": {
+                    "name": "OmniRoute (Best Reasoning Auto)",
+                    "limit": { "context": 1048576, "output": 65536 },
+                    "reasoning": true
+                },
+                "auto/best-free": {
+                    "name": "OmniRoute (Best 100% Free Auto)",
+                    "limit": { "context": 200000, "output": 8192 }
+                },
                 "kiro/claude-sonnet-4.5": {
                     "name": "Claude Sonnet 4.5 (Kiro)",
                     "limit": { "context": 200000, "output": 8192 },
@@ -105,13 +124,13 @@
                     "limit": { "context": 128000, "output": 8192 },
                     "reasoning": true
                 },
-                "nvidia/mistralai/devstral-2-123b-instruct-2512": {
-                    "name": "Devstral 123B (NVIDIA NIM)",
+                "nvidia/google/gemma-4-31b-it": {
+                    "name": "Gemma 4 31B (NVIDIA NIM)",
                     "limit": { "context": 131072, "output": 8192 },
                     "reasoning": true
                 },
-                "nvidia/nvidia/nemotron-3-ultra-550b-a55b": {
-                    "name": "Nemotron 3 Ultra 550B (NVIDIA NIM)",
+                "nvidia/nvidia/nemotron-3-super-120b-a12b": {
+                    "name": "Nemotron 3 Super 120B (NVIDIA NIM)",
                     "limit": { "context": 131072, "output": 8192 },
                     "reasoning": true
                 },
@@ -136,34 +155,35 @@
                     "name": "DeepSeek V3 (LiteRouter)",
                     "limit": { "context": 131072, "output": 8192 }
                 },
-                "ollama-cloud/qwen3.5:397b": {
-                    "name": "Qwen 3.5 397B (Ollama Cloud)",
+                "ollama-cloud/nemotron-3-super": {
+                    "name": "Nemotron 3 Super (Ollama Cloud)",
                     "limit": { "context": 131072, "output": 8192 }
                 },
-                "ollama-cloud/deepseek-v4-pro": {
-                    "name": "DeepSeek V4 Pro (Ollama Cloud)",
-                    "limit": { "context": 131072, "output": 8192 },
-                    "reasoning": true
+                "ollama-cloud/gemma4:31b": {
+                    "name": "Gemma 4 31B (Ollama Cloud)",
+                    "limit": { "context": 131072, "output": 8192 }
                 },
                 "ollama-cloud/deepseek-v4-flash": {
                     "name": "DeepSeek V4 Flash (Ollama Cloud)",
-                    "limit": { "context": 131072, "output": 8192 }
-                },
-                "ollama-cloud/gpt-oss:20b": {
-                    "name": "GPT-OSS 20B (Ollama Cloud)",
                     "limit": { "context": 131072, "output": 8192 }
                 },
                 "openrouter/openrouter/free": {
                     "name": "OpenRouter Free Auto",
                     "limit": { "context": 131072, "output": 8192 }
                 },
-                "bedrock/anthropic.claude-sonnet-4-5": {
-                    "name": "Claude Sonnet 4.5 (Bedrock Quarantined)",
-                    "limit": { "context": 200000, "output": 8192 }
+                "bedrock/anthropic.claude-3-5-sonnet-20241022-v2:0": {
+                    "name": "Claude 3.5 Sonnet v2 (Bedrock Quarantined)",
+                    "limit": { "context": 200000, "output": 8192 },
+                    "reasoning": true
                 },
-                "bedrock/anthropic.claude-opus-4-6": {
-                    "name": "Claude Opus 4.6 (Bedrock Quarantined)",
-                    "limit": { "context": 200000, "output": 8192 }
+                "bedrock/anthropic.claude-3-7-sonnet-20250219-v1:0": {
+                    "name": "Claude 3.7 Sonnet (Bedrock Quarantined)",
+                    "limit": { "context": 200000, "output": 8192 },
+                    "reasoning": true
+                },
+                "bedrock/amazon.nova-pro-v1:0": {
+                    "name": "Amazon Nova Pro (Bedrock Quarantined)",
+                    "limit": { "context": 300000, "output": 8192 }
                 }
             }
         }
@@ -221,6 +241,15 @@
             "command": ["mcp-server-github"],
             "enabled": true,
             "environment": {"GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_TOKEN}"}
+        },
+        "omniroute": {
+            "type": "local",
+            "command": ["omniroute", "--mcp"],
+            "enabled": true,
+            "environment": {
+                "OMNIROUTE_API_KEY": "{env:OMNIROUTE_API_KEY}",
+                "OMNIROUTE_BASE_URL": "http://127.0.0.1:20128"
+            }
         }
     },
     "command": {
@@ -343,6 +372,21 @@
             "template": "Audit the codebase in $ARGUMENTS (or current working directory if empty). Follow procedure in ~/.config/opencode/kb/global/skills/audit-codebase.md strictly. Intelligently detect the tech stack, read READMEs and business logic, map out architecture, and act as a strict critic on security vulnerabilities, flaws, and technical debt. Deliver an executive report with pros, cons, and prioritized fixes.",
             "description": "Deep codebase & security audit",
             "agent": "code-reviewer"
+        },
+        "explore": {
+            "template": "Explore repository files, directory patterns, and symbol references for $ARGUMENTS using zero paid quota.",
+            "description": "Fast repo exploration via free models",
+            "agent": "explore"
+        },
+        "deep-debug": {
+            "template": "Perform deep architectural debugging and root-cause analysis on $ARGUMENTS. Investigate stack traces, async race conditions, and memory leaks.",
+            "description": "Deep architectural debugging",
+            "agent": "deep-debugger"
+        },
+        "docs": {
+            "template": "Draft, update, or audit documentation, docstrings, or README files for $ARGUMENTS adhering to project standards.",
+            "description": "Write and update documentation",
+            "agent": "docs"
         }
     },
     "agent": {
@@ -355,10 +399,28 @@
                 "bash": "allow"
             }
         },
+        "deep-debugger": {
+            "description": "Deep architectural debugging, complex concurrency, and root-cause analysis for stubborn bugs.",
+            "mode": "subagent",
+            "model": "omniroute/combo-reason-architect",
+            "permission": {
+                "edit": "allow",
+                "bash": "allow"
+            }
+        },
+        "explore": {
+            "description": "Fast repository exploration, file pattern discovery, and symbol navigation with zero paid quota.",
+            "mode": "subagent",
+            "model": "omniroute/combo-free-overflow",
+            "permission": {
+                "edit": "deny",
+                "bash": "allow"
+            }
+        },
         "test": {
             "description": "Write and run tests. Creates test cases, runs suite, reports failures.",
             "mode": "subagent",
-            "model": "omniroute/kiro/qwen3-coder-next",
+            "model": "omniroute/mistral/codestral-latest",
             "permission": {
                 "edit": "allow",
                 "bash": "allow"
@@ -385,10 +447,19 @@
         "devops": {
             "description": "DevOps and system administration. Diagnoses systemd, Docker, journalctl, network ports, and package updates.",
             "mode": "subagent",
-            "model": "omniroute/combo-code-heavy",
+            "model": "omniroute/combo-fast-chat",
             "permission": {
                 "edit": "allow",
                 "bash": "allow"
+            }
+        },
+        "docs": {
+            "description": "Documentation, changelogs, docstrings, and README drafting using fast free models.",
+            "mode": "subagent",
+            "model": "omniroute/combo-fast-chat",
+            "permission": {
+                "edit": "allow",
+                "bash": "deny"
             }
         },
         "fastapi": {

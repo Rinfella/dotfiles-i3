@@ -40,6 +40,7 @@ All defined in `opencode.json`. Lazy loading via `enabled: false`.
 
 | Server | State | Command |
 |--------|-------|---------|
+| omniroute | enabled | `omniroute --mcp` (stdio transport to local router :20128) |
 | sequential-thinking | enabled | `npx @modelcontextprotocol/server-sequential-thinking` |
 | filesystem | enabled | `npx @modelcontextprotocol/server-filesystem` |
 | firecrawl | disabled | `npx firecrawl-mcp` — needs `FIRECRAWL_API_KEY` |
@@ -70,13 +71,18 @@ Restart opencode after changing `opencode.json` — config loads once at startup
 
 | Agent | Mode | Model | Use |
 |-------|------|-------|-----|
-| `@debug` | subagent | Claude Haiku 4 | Debug errors |
-| `@test` | subagent | Claude Haiku 4 | Write/run tests |
-| `@code-reviewer` | subagent | Claude Sonnet 4 | Code review (read-only) |
-| `@plan` | subagent | Claude Haiku 4 | Architecture/planning (read-only) |
+| `@deep-debugger` | subagent | `omniroute/combo-reason-architect` | Deep architectural debugging & root-cause analysis |
+| `@explore` | subagent | `omniroute/combo-free-overflow` | Fast zero-cost repo exploration & file search (read-only) |
+| `@test` | subagent | `omniroute/mistral/codestral-latest` | Write and execute tests |
+| `@code-reviewer` | subagent | `omniroute/combo-reason-architect` | Strict architectural & security review (read-only) |
+| `@plan` | subagent | `omniroute/combo-fast-chat` | Architecture planning & step-by-step roadmaps (read-only) |
+| `@devops` | subagent | `omniroute/combo-fast-chat` | System administration, Docker, systemd, journalctl |
+| `@docs` | subagent | `omniroute/combo-fast-chat` | Documentation, changelogs, docstrings, README drafting |
+| `@fastapi` | subagent | `omniroute/combo-code-heavy` | Python FastAPI & Pydantic v2 specialist |
 
 ## Slash Commands
 
+### Analysis & Docs: `/audit`, `/explore`, `/deep-debug`, `/docs`
 ### Laravel/Filament: `/filament`, `/seed`, `/debug`, `/audit-db`, `/test`, `/make-migration`, `/make-service`, `/make-observer`, `/make-policy`, `/make-job`
 ### System (Arch): `/sys-update`, `/sys-service`, `/sys-packages`, `/sys-logs`, `/sys-stats`
 
@@ -91,8 +97,10 @@ edit:  **/.env, **/config/*.key → deny
 
 ## Model
 
-- Primary: `amazon-bedrock/anthropic.claude-sonnet-4-20250514-v1:0`
-- Small: `amazon-bedrock/anthropic.claude-haiku-4-20250514-v1:0`
+- Primary: `omniroute/combo-code-heavy` (local proxy router)
+- Small: `omniroute/combo-fast-chat` (fast low-latency router)
+- Free Fallbacks: OpenRouter Free Auto, Mistral Codestral, Gemma 4, Nemotron 3
+- Quarantined: AWS Bedrock models (manual selection only)
 - Theme: Catppuccin
 - Rate-limit fallback: auto-cycle via circuit breaker
 

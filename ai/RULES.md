@@ -44,6 +44,19 @@ Rule: Project beats agent beats global. Same key defined higher hides lower.
 | **OpenCode** | `~/.config/opencode/kb → ~/.config/ai/kb`<br>`~/.config/opencode/superpowers → ~/.config/ai/superpowers`<br>`~/.config/opencode/skills → ~/.config/ai/skills`<br>`~/.config/opencode/memory → ~/.config/ai/config/memory` | `~/.config/opencode/opencode.json`<br>`~/.config/opencode/plugins/`<br>`~/.config/opencode/commands/` |
 | **Codex CLI** | `~/.config/codex/.env → ~/.config/ai/env`<br>`~/.config/codex/kb → ~/.config/ai/kb` | `~/.config/codex/config.toml`<br>`~/.config/codex/skills/` (agent-native) |
 
+## OmniRoute Proxy & Routing Gateway (:20128)
+
+OmniRoute acts as the unified AI proxy backbone at `http://127.0.0.1:20128`.
+
+- **API Base**: `http://127.0.0.1:20128/v1` (OpenAI-compatible)
+- **Token Auth**: `Authorization: Bearer ${OMNIROUTE_API_KEY}` (sourced from `~/.config/ai/env`)
+- **MCP Server**: `omniroute --mcp` (stdio transport configured in `~/.config/ai/mcp/mcp_config.json`)
+- **Primary Orchestrator**: `combo-code-heavy` (AGY Sonnet 4.6 with 5h rolling refresh first, priority fallback)
+- **Zero-Cost Subagents**: `combo-free-overflow` (round-robin across Mistral Codestral, NVIDIA Nemotron, Kiro, Ollama)
+- **Quarantined Bedrock**: `bedrock/...` (quarantined; manual opt-in via `/model` or `deep-debugger` subagent)
+- **Shared Memory**: SQLite FTS5 + Vector hybrid store (`memories` table for project standards & Ponytail)
+- **Web Search**: Firecrawl backend via `/v1/search` and `omniroute_web_search` tool
+
 ## Separation of Concerns
 
 ### GLOBAL (~/.config/ai/) — Shared, never agent-specific
