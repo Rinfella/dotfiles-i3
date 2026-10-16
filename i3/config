@@ -65,6 +65,7 @@ bindsym $mod+Shift+m exec --no-startup-id ~/.screenlayout/extended-right.sh
 bindsym $mod+Shift+u exec --no-startup-id ~/.screenlayout/extended-up.sh
 bindsym $mod+m exec --no-startup-id ~/.screenlayout/mirror.sh
 bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/screen-layout
+bindsym $mod+Shift+o exec --no-startup-id ~/.config/i3/scripts/toggle-dp-rotation
 
 # Bluetooth toggle 
 bindsym $mod+Shift+b exec --no-startup-id sudo rfkill toggle bluetooth && pkill -RTMIN+10 i3blocks
