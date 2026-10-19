@@ -24,7 +24,7 @@ fi
 # For ThinkPad laptop: check lid state
 LID_OPEN=true
 if [[ "$IS_THINKPAD" == "true" ]]; then
-    if grep -q "open" /proc/acpi/button/lid/LID0/state 2>/dev/null; then
+    if grep -q "open" /proc/acpi/button/lid/LID/state 2>/dev/null; then
         LID_OPEN=true
     else
         LID_OPEN=false
