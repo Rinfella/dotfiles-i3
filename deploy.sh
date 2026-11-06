@@ -1,21 +1,15 @@
 #!/bin/bash
 #
-# doti3 Deployment Script
-# Manages dotfile configurations via symlinks from central doti3 directory
+# DEPRECATED: This script is superseded by `mise dot apply`.
 #
-# Usage: ./deploy.sh [--dry-run] [--install-deps] [--verify] [--prune]
+# Use these instead:
+#   mise dot apply    -- apply / re-apply all dotfile symlinks
+#   mise dot status   -- chheck symlink status
+#   mise dot diff     -- preview pending changes
+#   mise run setup    -- full fresh-machine setup
 #
-# Features:
-#   - Symlinks config directories from doti3 to ~/.config
-#   - Symlinks specific config files (starship.toml, .zshenv, .screenlayout)
-#   - Backs up existing configs before creating symlinks (rotates, keeps 3)
-#   - Skips missing apps gracefully
-#   - Optional dependency installation
-#   - Optional verification (symlink integrity + config smoke tests)
-#   - Optional prune of stale doti3 symlinks
-#   - Installs cron entries from doti3/cron
-#   - Optional dry-run mode
-#
+# This file is retained for historical reference only.
+# -----------------------------------------------------------------------------
 
 set -euo pipefail
 
