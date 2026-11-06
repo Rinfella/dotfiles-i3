@@ -21,3 +21,5 @@ if [[ $- == *i* ]] && [ -z "$TMUX" ] && command -v tmux >/dev/null 2>&1; then
       session_count=$(tmux list-sessions 2>/dev/null | wc -l)
       exec tmux -u new-session -s "session$((session_count + 1))"
     fi
+  fi
+fi
