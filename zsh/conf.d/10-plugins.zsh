@@ -51,3 +51,8 @@ if command -v atuin >/dev/null 2>&1 && command -v fzf >/dev/null 2>&1; then
   zle -N _fzf_atuin_search
   bindkey '^R' _fzf_atuin_search
 fi
+
+# --- Atuin shell integration ---
+if command -v atuin >/dev/null 2>&1; then
+  eval "$(atuin init zsh)"
+fi
