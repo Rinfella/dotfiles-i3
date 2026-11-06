@@ -23,7 +23,7 @@ fi
 
 # Install mise if missing
 if ! command -v mise &>/dev/null; then
-    eecho "Installing mise..."
+    echo "Installing mise..."
     curl https://mise.run | sh
     export PATH="$HOME/.local/share/mise/shims:$PATH"
 fi
@@ -35,6 +35,10 @@ if [[ ! -d "$HOME/.config/doti3" ]]; then
 fi
 
 cd "$HOME/.config/doti3"
+
+# Pin runtime versions globally
+echo "⚙️ Pinning runtime versions..."
+mise use --global php@8.5 node@24
 
 # Run full setup
 echo "⚙️ Running full setup..."
