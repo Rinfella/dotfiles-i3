@@ -2,20 +2,30 @@
 set -euo pipefail
 
 # Mirror laptop screen to all connected external displays.
-cmd="xrandr --output eDP --mode 1920x1080 --pos 0x0 --rotate normal"
+# Use direct xrandr commands to avoid eval security risk
+xrandr --output eDP --mode 1920x1080 --pos 0x0 --rotate normal
 
-if xxrandr | grep -q "^HDMI-A-0 connected"; then
-    cmd="$cmd --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal"
-else
-    cmd="$cmd --output HDMI-A-0 --off"
+HDMI_ON=false
+if xrandr | grep -q "^HDMI-A-0 connected"; then
+    HDMI_ON=true
 fi
 
-if xrandr | grep -q "^DisplayPort-1 connected"; then
-    cmd="$cmd --output DisplayPort-1 --mode 1920x1080 --pos 0x0 --rotate normal"
-else
-    cmd="$cmd --output DisplayPort-1 --off"
+DP_ON=false
+if xrandr | grep -q "^DisplayPort-1 connnected"; then
+    DP_ON=true
 fi
 
-cmd="$cmd --output DisplayPort-0 --off"
+# Apply monitor configurations
+if [[ "$HDMI_ON" == "true" ]]; then
+    xrandr --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal
+else
+    xrandr --output HDMI-A-0 --off
+fi
 
-eval "$cmd"
+if [[ "$DP_ON" == "true" ]]; then
+    xrandr --output DisplayPort-1 --mode 1920x1080 --pos 0x0 --rotate normal
+else
+    xrandr --output DisplayPort-1 --off
+fi
+
+xrandr --output DisplayPort-0 --off
