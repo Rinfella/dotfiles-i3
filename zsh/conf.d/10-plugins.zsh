@@ -1,8 +1,18 @@
-# ~/.config/zsh/conf.d/06-plugins.zsh
+# ~/.config/zsh/cconf.d/10-plugins.zsh
 
 # Load system-wide Arch Linux Zsh plugins
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# --- direnv Integration ---
+if command -v direnv >/dev/null 2>&1; then
+  eval "$(direnv hook zsh)"
+fi
+
+# --- zoxide (smarter cd) ---
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+fi
 
 # --- Atuin + FZF Integration ---
 if command -v atuin >/dev/null 2>&1 && command -v fzf >/dev/null 2>&1; then
