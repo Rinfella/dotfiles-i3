@@ -83,7 +83,7 @@ The following configuration files reside directly in the root of `doti3/` and ar
 | `yarnrc` | `~/.config/yarnrc` | Global Yarn cache and storage path overrides |
 | `pavucontrol.ini` | `~/.config/pavucontrol.ini` | PulseAudio / PipeWire Volume Control window geometry & tab state |
 | `mimeapps.list` | `~/.config/mimeapps.list` | XDG default application associations (browsers, editors, image viewers) |
-| `deploy.sh` | — | Legacy bash deployment script with rotational backups (superseded by `mise dot apply`) |
+| `deploy.sh` | — | **DEPRECATED** — Legacy bash deployment script (superseded by `mise dot apply`; see [`ai/kb/project/deploy-deprecation.md`](./ai/kb/project/deploy-deprecation.md)) |
 | `bootstrap.sh` | — | Cold-start one-liner bootstrap script for fresh Arch-based Linux machines |
 
 ---
