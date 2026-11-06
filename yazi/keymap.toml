@@ -12,7 +12,7 @@ keymap = [
 	{ on = [ "j" ],         run = "arrow 1",    desc = "Move cursor down" },
 	{ on = [ "k" ],         run = "arrow -1",   desc = "Move cursor up" },
 	{ on = [ "h" ],         run = "leave",      desc = "Go to parent directory" },
-	{ on = [ "l" ],         run = "enter",      desc = "Enter selected directory" },
+	{ on = [ "l" ],         run = "open --with", desc = "Open selected files" },
 	
 	# Secondary navigation (arrows - for non-vim users)
 	{ on = [ "<Down>" ],    run = "arrow 1",    desc = "Move cursor down" },
@@ -48,7 +48,7 @@ keymap = [
 	{ on = [ "<C-r>" ],     run = "toggle_all --state=none", desc = "Invert selection" },
 
 	# File operations
-	{ on = [ "<Enter>" ],   run = "open --with", desc = "Open selected files" },
+	{ on = [ "<Enter>" ],   run = "enter",      desc = "Enter selected directory" },
 	{ on = [ "o" ],   run = "open --with", desc = "Open selected files" },
 	{ on = [ "<C-Enter>" ], run = "open --interactive", desc = "Open interactively" },
 	{ on = [ "O" ], run = "open --interactive", desc = "Open interactively" },

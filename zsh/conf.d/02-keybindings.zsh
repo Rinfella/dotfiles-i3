@@ -90,3 +90,7 @@ zle -N yazi-cwd-widget
 bindkey -M viins '^y' yazi-cwd-widget
 bindkey -M vicmd '^y' yazi-cwd-widget
 bindkey '^y' yazi-cwd-widget
+
+# Alternative binding for tmux
+bindkey -M viins '^e' yazi-cwd-widget
+bindkey -M vicmd '^e' yazi-cwd-widget
