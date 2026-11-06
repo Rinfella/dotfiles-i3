@@ -41,11 +41,11 @@ All defined in `opencode.json`. Lazy loading via `enabled: false`.
 | Server | State | Command |
 |--------|-------|---------|
 | omniroute | enabled | `omniroute --mcp` (stdio transport to local router :20128) |
+| context7 | enabled | `npx @upstash/context7-mcp` (library docs lookup via `CONTEXT7_API_KEY`) |
+| firecrawl | enabled | `npx firecrawl-mcp` (deep web search & scraping via `FIRECRAWL_API_KEY`) |
 | sequential-thinking | enabled | `npx @modelcontextprotocol/server-sequential-thinking` |
-| filesystem | enabled | `npx @modelcontextprotocol/server-filesystem` |
-| firecrawl | disabled | `npx firecrawl-mcp` — needs `FIRECRAWL_API_KEY` |
-| github | disabled | `npx @modelcontextprotocol/server-github` — needs `GITHUB_TOKEN` |
-| context7 | disabled | remote `https://mcp.context7.com/mcp` — needs `CONTEXT7_API_KEY` |
+| github | enabled | `npx @modelcontextprotocol/server-github` — uses `GITHUB_TOKEN` |
+| filesystem | disabled | `npx @modelcontextprotocol/server-filesystem` |
 | playwright | disabled | `npx @playwright/mcp@latest` |
 | fetch | disabled | `uvx mcp-server-fetch` |
 | memory | disabled | `npx @modelcontextprotocol/server-memory` |
@@ -75,14 +75,15 @@ Restart opencode after changing `opencode.json` — config loads once at startup
 | `@explore` | subagent | `omniroute/combo-free-overflow` | Fast zero-cost repo exploration & file search (read-only) |
 | `@test` | subagent | `omniroute/mistral/codestral-latest` | Write and execute tests |
 | `@code-reviewer` | subagent | `omniroute/combo-reason-architect` | Strict architectural & security review (read-only) |
-| `@plan` | subagent | `omniroute/combo-fast-chat` | Architecture planning & step-by-step roadmaps (read-only) |
+| `@plan` | primary | `omniroute/combo-reason-architect` | Architecture planning & step-by-step roadmaps (read-only) |
 | `@devops` | subagent | `omniroute/combo-fast-chat` | System administration, Docker, systemd, journalctl |
 | `@docs` | subagent | `omniroute/combo-fast-chat` | Documentation, changelogs, docstrings, README drafting |
 | `@fastapi` | subagent | `omniroute/combo-code-heavy` | Python FastAPI & Pydantic v2 specialist |
 
 ## Slash Commands
 
-### Analysis & Docs: `/audit`, `/explore`, `/deep-debug`, `/docs`
+### Analysis, Docs & Web: `/audit`, `/explore`, `/deep-debug`, `/docs`, `/web-docs`
+### Workflow & Quality: `/refactor-ponytail`, `/git-pr`, `/commit`, `/review`
 ### Laravel/Filament: `/filament`, `/seed`, `/debug`, `/audit-db`, `/test`, `/make-migration`, `/make-service`, `/make-observer`, `/make-policy`, `/make-job`
 ### System (Arch): `/sys-update`, `/sys-service`, `/sys-packages`, `/sys-logs`, `/sys-stats`
 

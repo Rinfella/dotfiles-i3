@@ -1,0 +1,6 @@
+{
+    "device": "alsa_output.pci-0000_06_00.6.HiFi__Headphones__sink",
+    "device-description": "Ryzen HD Audio Controller Headphones",
+    "device-profile": "Headphones",
+    "preset-name": "Flat Default"
+}

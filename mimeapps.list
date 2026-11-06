@@ -32,3 +32,4 @@ x-scheme-handler/tabularis=tabularis-handler.desktop
 text/csv=userapp-kitty -e nvim-BJPZV3.desktop
 text/plain=userapp-kitty -e nvim-BJPZV3.desktop
 application/json=userapp-kitty -e nvim-BJPZV3.desktop
+x-scheme-handler/rpi-imager=com.raspberrypi.rpi-imager-uri-handler.desktop
