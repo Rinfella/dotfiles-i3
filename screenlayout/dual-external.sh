@@ -1,6 +1,6 @@
 #!/bin/bash
 # Dual external: HDMI (left, primary) + DP-1 Type-C (right, portrait), laptop closed/off
-set -e
+set -euo pipefail
 
 if ! xrandr | grep -q "^DisplayPort-1 connected"; then
     notify-send -u normal "Screen Layout" "DP-1 (Type-C) not connected, cannot apply dual-external layout"

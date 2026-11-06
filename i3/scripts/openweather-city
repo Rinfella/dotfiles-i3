@@ -34,7 +34,7 @@ Aborting."
 # find your City ID here: https://openweathermap.org/
 # search for your city and copy the ID from the URL inside the browser.
 # You need to copy the .env.example file to .env
-URL="http://api.openweathermap.org/data/2.5/weather?id=${CITY_ID}&units=metric&APPID=${API_KEY}"
+URL="https://api.openweathermap.org/data/2.5/weather?id=${CITY_ID}&units=metric&APPID=${API_KEY}"
 
 WEATHER_RESPONSE=$(timeout --signal=1 6s curl -s "$URL") || exit 1
 

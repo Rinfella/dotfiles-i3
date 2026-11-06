@@ -1,8 +1,10 @@
-#!/bin/sh
+#!/bin/bash
+set -euo pipefail
+
 # Mirror laptop screen to all connected external displays.
 cmd="xrandr --output eDP --mode 1920x1080 --pos 0x0 --rotate normal"
 
-if xrandr | grep -q "^HDMI-A-0 connected"; then
+if xxrandr | grep -q "^HDMI-A-0 connected"; then
     cmd="$cmd --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal"
 else
     cmd="$cmd --output HDMI-A-0 --off"

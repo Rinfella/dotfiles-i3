@@ -1,6 +1,6 @@
 #!/bin/bash
 # Laptop (left) + DP-1 Type-C (right, portrait, primary)
-set -e
+set -euo pipefail
 
 if ! xrandr | grep -q "^DisplayPort-1 connected"; then
     notify-send -u normal "Screen Layout" "DP-1 (Type-C) not connected"

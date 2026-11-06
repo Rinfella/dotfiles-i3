@@ -1,6 +1,6 @@
 #!/bin/bash
 # Triple display: Laptop (leftmost) + HDMI (center, primary) + DP-1 Type-C (rightmost, portrait)
-set -e
+set -euo pipefail
 
 if ! xrandr | grep -q "^DisplayPort-1 connected"; then
     notify-send -u normal "Screen Layout" "DP-1 (Type-C) not connected, cannot apply triple layout"
