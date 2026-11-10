@@ -3,6 +3,9 @@
 
 LAYOUT_DIR="$HOME/.screenlayout"
 
+# Layout override: set to true to use DP portrait mode for dual-external (lid closed)
+DUAL_EXTERNAL_PORTRAIT=false
+
 # Detect if this is a ThinkPad T14 Gen 1 (laptop)
 PRODUCT_NAME=$(cat /sys/class/dmi/id/product_name 2>/dev/null || echo "")
 IS_THINKPAD=false
@@ -45,8 +48,13 @@ if [[ "$IS_THINKPAD" == "false" ]]; then
 elif [[ "$HDMI_CONNECTED" == "true" && "$DP_CONNECTED" == "true" ]]; then
     # Laptop with both HDMI and DP connected
     if [[ "$LID_OPEN" == "false" ]]; then
-        LAYOUT="dual-external"
-        echo "Laptop: Dual external connected + lid closed, applying dual-external layout..."
+        if [[ "$DUAL_EXTERNAL_PORTRAIT" == "true" ]]; then
+            LAYOUT="dual-external-portrait"
+            echo "Laptop: Dual external connected + lid closed + portrait DP, applying dual-external-portrait layout..."
+        else
+            LAYOUT="dual-external"
+            echo "Laptop: Dual external connected + lid closed, applying dual-external layout..."
+        fi
     else
         LAYOUT="triple-extended"
         echo "Laptop: Dual external connected + lid open, applying triple-extended layout..."

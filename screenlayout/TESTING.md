@@ -26,7 +26,7 @@
 **What to check:**
 - All three monitors should be active again
 - Run: `xrandr --listmonitors` (should show 3 monitors)
-- DP-1 should still be in portrait mode
+- DP-1 should be in landscape mode (default)
 
 **Result:** ✅ / ❌
 
@@ -106,7 +106,6 @@
 - Login succeeds (doesn't crash before you even log in)
 - Session starts normally
 - All monitors are detected
-- This was completely broken before the xorg downgrade
 
 **Result:** ✅ / ❌
 
@@ -135,7 +134,8 @@ grep EE /var/log/Xorg.0.log | tail -10
 
 - ✅ No unexpected logouts
 - ✅ Monitors auto-configure within 3-4 seconds of plug/unplug
-- ✅ Portrait rotation works both manually and automatically
+- ✅ Landscape mode works automatically for all DP-1 layouts
+- ✅ Portrait mode available via rotation toggle (Win+Shift+O) or dual-external-portrait layout
 - ✅ Can log in with all monitors connected
 - ✅ i3 reload preserves layout correctly
 
