@@ -1,31 +1,19 @@
 #!/bin/bash
 set -euo pipefail
 
-# Mirror laptop screen to all connected external displays.
-# Use direct xrandr commands to avoid eval security risk
-xrandr --output eDP --mode 1920x1080 --pos 0x0 --rotate normal
+# Mirror laptop screen to all connected external displays
+xrandr --output eDP --primary --mode 1920x1080 --pos 0x0 --rotate normal
 
-HDMI_ON=false
+# Mirror HDMI-A-0 to all connected displays (if connected)
 if xrandr | grep -q "^HDMI-A-0 connected"; then
-    HDMI_ON=true
+    xrandr --output HDMI-A-0 --mode 1920x1080 --pos 0x0 --rotate normal
 fi
 
-DP_ON=false
-if xrandr | grep -q "^DisplayPort-1 connnected"; then
-    DP_ON=true
-fi
-
-# Apply monitor configurations
-if [[ "$HDMI_ON" == "true" ]]; then
-    xrandr --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal
-else
-    xrandr --output HDMI-A-0 --off
-fi
-
-if [[ "$DP_ON" == "true" ]]; then
+# Mirror DisplayPort-1 to all connected displays (if connected)
+if xrandr | grep -q "^DisplayPort-1 connected"; then
     xrandr --output DisplayPort-1 --mode 1920x1080 --pos 0x0 --rotate normal
-else
-    xrandr --output DisplayPort-1 --off
 fi
 
+# Turn off DisplayPort-0
 xrandr --output DisplayPort-0 --off
+

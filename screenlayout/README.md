@@ -10,17 +10,17 @@ Xrandr monitor configurations for multi-display and laptop setups.
 | Script | Layout Mode | i3 Keybind |
 |---|---|---|
 | `single.sh` | Laptop internal display only (eDP-1) | `Mod+Shift+s` |
-| `extended-right.sh` | External monitor placed to the right | `Mod+Shift+m` |
-| `extended-up.sh` | External monitor placed above laptop | `Mod+Shift+u` |
-| `extended-left.sh` | External monitor placed to the left | — |
-| `mirror.sh` | Duplicate laptop display onto external display | `Mod+m` |
-| `hdmi-only.sh` | Turn off laptop screen, use HDMI only | — |
-| `dp-only.sh` | Turn off laptop screen, use DisplayPort Type-C only (portrait) | — |
-| `dp-extended-right.sh` | Laptop + DisplayPort Type-C portrait (right) | — |
-| `dual-external.sh` | HDMI + DP Type-C portrait (laptop closed) | — |
-| `dual-landscape.sh` | HDMI + DP Type-C landscape (laptop closed) | — |
-| `triple-extended.sh` | Laptop + HDMI + DP Type-C portrait | — |
-| `triple-landscape.sh` | Laptop + HDMI + DP Type-C landscape | — |
+| `extended-right.sh` | Ext Right (laptop + HDMI) | `Mod+Shift+m` |
+| `extended-up.sh` | Ext Up (laptop + HDMI) | `Mod+Shift+u` |
+| `extended-left.sh` | Ext Left (laptop + HDMI) | — |
+| `mirror.sh` | Mirror all displays | `Mod+m` |
+| `hdmi-only.sh` | HDMI only (laptop closed) | — |
+| `dp-only.sh` | DP only (landscape, laptop closed) | — |
+| `dp-extended-right.sh` | Laptop + DP landscape (right) | — |
+| `dual-external.sh` | Dual Ext landscape (laptop closed, HDMI + DP) | — |
+| `dual-external-portrait.sh` | Dual Ext portrait (laptop closed, HDMI + DP) | — |
+| `triple-extended.sh` | Triple Ext DP portrait (laptop + HDMI + DP) | — |
+| `triple-landscape.sh` | Triple Ext landscape (laptop + HDMI + DP) | — |
 
 Interactive switcher in i3: **`Mod+Shift+p`** (opens Rofi screen-layout picker).
 
@@ -31,23 +31,18 @@ Interactive switcher in i3: **`Mod+Shift+p`** (opens Rofi screen-layout picker).
 **Symptoms:**
 - Plugging Type-C DP monitor logs you out immediately
 - Cannot log back in while Type-C DP is connected
-- Xorg crash with `drmmode_do_crtc_dpms cannot get last vblank counter`
+- Xorg crash with `drmode_do_crtc_dpms cannot get last vblank counter`
 
-**Solution Applied (Oct 2026):**
-1. **Downgraded xorg-server** to `21.1.24-1` and added to `IgnorePkg` in `/etc/pacman.conf`
-2. **Two-pass xrandr rotation** in portrait layout scripts:
-   - Pass 1: Bring up all outputs in landscape to establish canvas
-   - Pass 2: Apply rotation after 0.5s sleep (lets Type-C alt-mode plane initialize)
-3. **Connectivity guards** in all DP-1 scripts — graceful failure with notifications instead of crashes
+**Solution Applied (Nov 2026):**
+1. **Removed xorg-server** from `IgnorePkg` in `/etc/pacman.conf`
+2. **Added dual-external-portrait.sh** as a dedicated portrait layout option
 
-**Portrait layout scripts affected:**
-- `triple-extended.sh`, `dual-external.sh`, `dp-extended-right.sh`, `dp-only.sh`
+**All DP layouts default to landscape (`--rotate normal`) for simplicity.**
+Use portrait mode only where you need it (triple-extended, dual-external-portrait).
 
-**To upgrade xorg-server later** (when 21.1.26+ fixes the regression):
+**To enable portrait mode:**
 ```bash
-sudo sed -i 's/^IgnorePkg = xorg-server xorg-server-common/#IgnorePkg =/' /etc/pacman.conf
-sudo pacman -Syu
-# Test Type-C DP rotation — if it crashes again, re-apply downgrade
+xrandr --output DisplayPort-1 --rotate left
 ```
 
 ## Quick Rotation Toggle

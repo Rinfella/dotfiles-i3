@@ -1,5 +1,5 @@
 #!/bin/bash
-# DP-1 Type-C monitor only (portrait), laptop closed/off
+# DP-1 Type-C monitor only (landscape), laptop closed/off
 set -euo pipefail
 
 if ! xrandr | grep -q "^DisplayPort-1 connected"; then
@@ -12,6 +12,3 @@ xrandr --output eDP --off \
        --output DisplayPort-1 --primary --auto --pos 0x0 --rotate normal \
        --output DisplayPort-0 --off
 
-sleep 0.5
-
-xrandr --output DisplayPort-1 --rotate left

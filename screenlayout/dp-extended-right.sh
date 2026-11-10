@@ -1,5 +1,5 @@
 #!/bin/bash
-# Laptop (left) + DP-1 Type-C (right, portrait, primary)
+# Laptop (left) + DP-1 Type-C (right, landscape, primary)
 set -euo pipefail
 
 if ! xrandr | grep -q "^DisplayPort-1 connected"; then
@@ -14,4 +14,3 @@ xrandr --output eDP --mode 1920x1080 --pos 0x0 --rotate normal \
 
 sleep 0.5
 
-xrandr --output DisplayPort-1 --rotate left
