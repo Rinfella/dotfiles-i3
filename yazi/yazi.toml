@@ -17,9 +17,9 @@ edit = [
   { run = '${EDITOR:=nvim} "$@"', desc = "$EDITOR", block = true, for = "unix" }
 ]
 open = [
-  { run = 'google-chrome-stable "$@"', desc = "Chrome", mime = "application/pdf", for = "linux" },
-  { run = 'feh --auto-zoom "$@"', desc = "feh", mime = "image/*", for = "linux" },
-  { run = 'xdg-open "$@"', desc = "Open", for = "linux" }
+  { run = 'xdg-open "$@"', desc = "Default Application", for = "linux" },
+  { run = 'feh --auto-zoom "$@"', desc = "feh (Image Viewer)", mime = "image/*", for = "linux" },
+  { run = 'google-chrome-stable "$@"', desc = "Chrome", for = "linux" }
 ]
 play = [
   { run = 'mpv "$@"', orphan = true, for = "unix" }

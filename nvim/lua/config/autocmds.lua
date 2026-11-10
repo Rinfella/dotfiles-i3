@@ -22,6 +22,7 @@ autocmd("FileType", {
             blade = { "laravel_lsp" },
             lua = { "lua" },
             html = { "html" },
+            css = { "css" },
             json = { "json" },
             go = { "go" },
             rust = { "rust" },
@@ -52,22 +53,10 @@ autocmd({ "FocusLost", "BufLeave" }, {
     end,
 })
 
--- 3. Native Auto-Format
+-- 3. LSP Attach (Keymaps & Buffer Settings — Formatting is managed exclusively by conform.nvim)
 autocmd("LspAttach", {
     group = augroup("NativeLspAttach", { clear = true }),
     callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-
-        -- Enable Autoformat if server supports it
-        if client.server_capabilities.documentFormattingProvider then
-            autocmd("BufWritePre", {
-                buffer = args.buf,
-                callback = function()
-                    vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
-                end,
-            })
-        end
-
         -- Keymaps specific to LSP buffers
         local opts = { buffer = args.buf, desc = "LSP" }
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)

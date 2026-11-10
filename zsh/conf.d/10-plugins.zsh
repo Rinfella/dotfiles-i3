@@ -1,16 +1,31 @@
-# ~/.config/zsh/conf.d/06-plugins.zsh
+# ~/.config/zsh/cconf.d/10-plugins.zsh
 
 # Load system-wide Arch Linux Zsh plugins
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# --- direnv Integration ---
+if command -v direnv >/dev/null 2>&1; then
+  eval "$(direnv hook zsh)"
+fi
+
+# --- zoxide (smarter cd) ---
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+fi
+
 # --- Atuin + FZF Integration ---
 if command -v atuin >/dev/null 2>&1 && command -v fzf >/dev/null 2>&1; then
   # 1. Stop Atuin from taking over your keybindings
   export ATUIN_NOBIND="true"
-  
-  # 2. Initialize Atuin so it silently records history in the background
-  eval "$(atuin init zsh)"
+
+  # 2. Initialize Atuin silently in background (cached init script)
+  _atuin_cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/atuin.zsh"
+  if [[ ! -s "$_atuin_cache" ]]; then
+    mkdir -p "${_atuin_cache:h}"
+    atuin init zsh > "$_atuin_cache" 2>/dev/null
+  fi
+  source "$_atuin_cache"
 
   # 3. Create a custom widget to use fzf as the frontend
   _fzf_atuin_search() {
@@ -35,4 +50,9 @@ if command -v atuin >/dev/null 2>&1 && command -v fzf >/dev/null 2>&1; then
   # 4. Bind the new widget to Ctrl+R
   zle -N _fzf_atuin_search
   bindkey '^R' _fzf_atuin_search
+fi
+
+# --- Atuin shell integration ---
+if command -v atuin >/dev/null 2>&1; then
+  eval "$(atuin init zsh)"
 fi

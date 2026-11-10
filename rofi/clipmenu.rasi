@@ -1,7 +1,7 @@
 configuration {
     font:                "Noto Sans Regular 11";
     show-icons:          true;
-    display-drun:        "ClipBoarde";
+    display-dmenu:       "Clipboard";
     scroll-method:       0;
     disable-history:     true;
     sidebar-mode:        false;

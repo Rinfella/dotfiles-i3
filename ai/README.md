@@ -16,7 +16,7 @@ Single source of truth for Gemini CLI, OpenCode, Codex CLI.
 │   ├── global/rules/            ← Cross-agent dev rules (loaded every session)
 │   ├── global/skills/           ← Domain skill guides (referenced by commands)
 │   └── project/                 ← Per-project context, plans, templates
-├── skills/                      ← Global shareable skills (6 native)
+├── skills/                      ← Global shareable skills (7 native)
 ├── superpowers/                 ← Process skills framework (14 skills, git-managed)
 └── config/
     ├── memory/                  ← Shared agent memory (persona/human/project)
@@ -201,7 +201,7 @@ File: `~/.config/ai/env`
 │   ├── global/rules/       (4 files: 00-global-directives, 01-tall-stack, 02-infrastructure, 03-cicd)
 │   ├── global/skills/      (22 files: Laravel helpers, sysadmin, git, etc.)
 │   └── project/            (active-task, architecture, plans, MCP_EXTRAS)
-├── skills/                 (6 native skills)
+├── skills/                 (7 native skills: audit-codebase, code-simplifier, devops-helper, firecrawl, git-diff-reviewer, laravel-assistant, modern-web-developer)
 ├── superpowers/            (14 process skills, git repo)
 ├── RULES.md                (this file)
 └── config/

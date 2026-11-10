@@ -18,19 +18,19 @@ fi
 
 # Preferred layout ordering: "key:icon:Custom Display Title"
 ORDERED_LAYOUTS=(
-    "autodetect:󰑐:Auto Detect"
-    "triple-extended:󰍺:Triple Screen (DP Portrait)"
-    "triple-landscape:󰍺:Triple Screen (DP Landscape)"
-    "dual-external:󰍹:Dual External (DP Portrait)"
-    "dual-landscape:󰍹:Dual External (DP Landscape)"
-    "mirror::Mirror All Displays"
-    "extended-right:➡:Extended Right (HDMI)"
-    "extended-up:⬆:Extended Up (HDMI)"
-    "extended-left:⬅:Extended Left (HDMI)"
-    "single::Single (Laptop Only)"
+    "autodetect:󰓑:Auto Detect"
+    "triple-extended:󰍺:Triple Ext (DP P)"
+    "triple-landscape:󰍺:Triple Ext (DP L)"
+    "dual-external:󰍹:Dual Ext (DP L)"
+    "dual-external-portrait:󰍹:Dual Ext (DP P)"
+    "mirror::Mirror All"
+    "extended-right:➡:Ext Right (HDMI)"
+    "extended-up:⬆:Ext Up (HDMI)"
+    "extended-left:⬅:Ext Left (HDMI)"
+    "single::Single"
     "hdmi-only:󰍹:HDMI Only"
-    "dp-extended-right:󰡁:DP Extended Right"
-    "dp-only:󰡁:DP Only"
+    "dp-extended-right:󰡁:DP Ext Right (L)"
+    "dp-only:󰡁:DP Only (L)"
 )
 
 declare -A processed

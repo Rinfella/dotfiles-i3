@@ -23,3 +23,8 @@ Whenever a new feature is requested:
 - Write modular, framework-agnostic code where possible.
 - Follow POSIX standards for portability.
 - Keep cloud configurations separate from business logic.
+
+## 6. Central AI Hub & Tool Awareness
+- **Live Web Research**: Use `omniroute_web_search` for fresh documentation and technical lookups.
+- **Persistent Memory**: Use `omniroute_memory_search` to recall shared engineering rules and previous bug resolutions.
+- **Subagent Offloading**: When tasks require wide file scans or test runs, delegate to specialized subagents (`explore`, `test`, `devops`) to preserve primary reasoning quota.

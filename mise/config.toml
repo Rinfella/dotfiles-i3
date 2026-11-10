@@ -1,18 +1,250 @@
 # ~/.config/doti3/mise/config.toml
-# mise global runtime version configuration
+# mise global config: runtimes, dotfiles, and tasks
 # See: https://mise.jdx.dev
 #
-# Synced to ~/.config/mise/config.toml via deploy.sh
+# Symlinked to ~/.config/mise/config.toml via deploy.sh (legacy) or mise dot apply
 #
-# Node: core backend (prebuilt binaries)
-# PHP:  registry backend (vfox-php community binaries)
+# Runtimes
+# python left as system pacman (too many system dependents)
+# thefuck left as system pacman (python-based, no mise plugin)
 
 [tools]
-php = "8.5"
-node = "24"
+# languages / runtimes
+php    = "8.5"
+node   = "24"
 gradle = "9.4.1"
+go     = "latest"
+deno   = "latest"
+
+# CLI tools (managed by mise, removed from pacman)
+atuin      = "latest"
+bat        = "latest"
+delta      = "latest"
+direnv     = "latest"
+duf        = "latest"
+eza        = "latest"
+glow       = "latest"
+lazydocker = "latest"
+lazygit    = "latest"
+navi       = "latest"
+neovim     = "latest"
+starship   = "latest"
+fastfetch  = "latest"
+yazi       = "latest"
+yt-dlp     = "latest"
+zoxide     = "latest"
 
 [settings]
 experimental = true
 jobs = 4
 disable_backends = ["asdf"]
+dotfiles.root = "~/.config/doti3"
+
+# -----------------------------------------------------------------------------
+# Dotfiles — symlinks managed by `mise dot apply`
+# Source paths are relative to dotfiles.root (~/.config/doti3)
+# On a fresh machine: mise dot apply creates these symlinks
+# On current machine: already exist, mise dot apply is a no-op
+# -----------------------------------------------------------------------------
+
+[dotfiles]
+# Home directory files
+"~/.zshenv"       = { source = "~/.config/doti3/zsh/.zshenv", mode = "symlink" }
+"~/.screenlayout" = { source = "~/.config/doti3/screenlayout", mode = "symlink" }
+
+# XDG_CONFIG_HOME flat files
+"~/.config/starship.toml"          = { source = "~/.config/doti3/starship.toml", mode = "symlink" }
+"~/.config/.curlrc"                = { source = "~/.config/doti3/curlrc", mode = "symlink" }
+"~/.config/wgetrc"                 = { source = "~/.config/doti3/wgetrc", mode = "symlink" }
+"~/.config/inputrc"                = { source = "~/.config/doti3/inputrc", mode = "symlink" }
+"~/.config/npmrc"                  = { source = "~/.config/doti3/npmrc", mode = "symlink" }
+"~/.config/yarnrc"                 = { source = "~/.config/doti3/yarnrc", mode = "symlink" }
+"~/.config/gitconfig"              = { source = "~/.config/doti3/gitconfig", mode = "symlink" }
+"~/.config/mimeapps.list"          = { source = "~/.config/doti3/mimeapps.list", mode = "symlink" }
+"~/.config/pavucontrol.ini"        = { source = "~/.config/doti3/pavucontrol.ini", mode = "symlink" }
+"~/.config/composer/composer.json" = { source = "~/.config/doti3/composer/composer.json", mode = "symlink" }
+"~/.config/composer/composer.lock" = { source = "~/.config/doti3/composer/composer.lock", mode = "symlink" }
+
+# XDG_CONFIG_HOME directories
+"~/.config/ai"          = { source = "~/.config/doti3/ai", mode = "symlink" }
+"~/.config/alacritty"   = { source = "~/.config/doti3/alacritty", mode = "symlink" }
+"~/.config/atuin"       = { source = "~/.config/doti3/atuin", mode = "symlink" }
+"~/.config/autostart"   = { source = "~/.config/doti3/autostart", mode = "symlink" }
+"~/.config/bat"         = { source = "~/.config/doti3/bat", mode = "symlink" }
+"~/.config/dunst"       = { source = "~/.config/doti3/dunst", mode = "symlink" }
+"~/.config/fastfetch"   = { source = "~/.config/doti3/fastfetch", mode = "symlink" }
+"~/.config/fontconfig"  = { source = "~/.config/doti3/fontconfig", mode = "symlink" }
+"~/.config/git"         = { source = "~/.config/doti3/git", mode = "symlink" }
+"~/.config/gtk-2.0"     = { source = "~/.config/doti3/gtk-2.0", mode = "symlink" }
+"~/.config/gtk-3.0"     = { source = "~/.config/doti3/gtk-3.0", mode = "symlink" }
+"~/.config/gtk-4.0"     = { source = "~/.config/doti3/gtk-4.0", mode = "symlink" }
+"~/.config/i3"          = { source = "~/.config/doti3/i3", mode = "symlink" }
+"~/.config/kitty"       = { source = "~/.config/doti3/kitty", mode = "symlink" }
+"~/.config/lazygit"     = { source = "~/.config/doti3/lazygit", mode = "symlink" }
+"~/.config/mise"        = { source = "~/.config/doti3/mise", mode = "symlink" }
+"~/.config/nvim"        = { source = "~/.config/doti3/nvim", mode = "symlink" }
+"~/.config/nwg-look"    = { source = "~/.config/doti3/nwg-look", mode = "symlink" }
+"~/.config/opencode"    = { source = "~/.config/doti3/opencode", mode = "symlink" }
+"~/.config/picom"       = { source = "~/.config/doti3/picom", mode = "symlink" }
+"~/.config/polybar"     = { source = "~/.config/doti3/polybar", mode = "symlink" }
+"~/.config/rbw"         = { source = "~/.config/doti3/rbw", mode = "symlink" }
+"~/.config/ripgrep"     = { source = "~/.config/doti3/ripgrep", mode = "symlink" }
+"~/.config/rofi"        = { source = "~/.config/doti3/rofi", mode = "symlink" }
+"~/.config/systemd"     = { source = "~/.config/doti3/systemd", mode = "symlink" }
+"~/.config/tmux"        = { source = "~/.config/doti3/tmux", mode = "symlink" }
+"~/.config/vim"         = { source = "~/.config/doti3/vim", mode = "symlink" }
+"~/.config/wireplumber" = { source = "~/.config/doti3/wireplumber", mode = "symlink" }
+"~/.config/X11"         = { source = "~/.config/doti3/X11", mode = "symlink" }
+"~/.config/xsettingsd"  = { source = "~/.config/doti3/xsettingsd", mode = "symlink" }
+"~/.config/yazi"        = { source = "~/.config/doti3/yazi", mode = "symlink" }
+"~/.config/zsh"         = { source = "~/.config/doti3/zsh", mode = "symlink" }
+
+# XDG_DATA_HOME directories
+"~/.local/share/easyeffects" = { source = "~/.config/doti3/easyeffects", mode = "symlink" }
+"~/.local/share/rofi/themes" = { source = "~/.config/doti3/rofi-themes", mode = "symlink" }
+
+# -----------------------------------------------------------------------------
+# Tasks — run with `mise run <task>`
+# -----------------------------------------------------------------------------
+
+[tasks.setup]
+description = "Full bootstrap: packages → dotfiles → env → cron → udev → systemd → verify"
+depends = ["packages", "dotfiles", "env", "cron", "udev", "systemd", "verify"]
+run = "echo 'Setup complete — restart your shell and log out/in to start i3.'"
+
+[tasks.packages]
+description = "Install all packages via yay (AUR + official)"
+run = """
+yay -S --needed --noconfirm \
+  i3-wm picom polybar rofi dunst alacritty kitty tmux vim \
+  blueman brightnessctl playerctl maim xdotool feh thunar \
+  easyeffects imagemagick i3blocks polkit-gnome network-manager-applet \
+  clipmenu rbw rofi-rbw composer php \
+  fzf ripgrep fd jq \
+  thefuck zsh-history-substring-search re2c
+"""
+
+[tasks.dotfiles]
+description = "Apply dotfile symlinks via mise dot apply"
+run = "mise bootstrap dotfiles apply --yes"
+
+[tasks.env]
+description = "Initialize .env files from templates if missing"
+run = """
+ENV_EXAMPLE="$HOME/.config/doti3/i3/scripts/.env.example"
+ENV_FILE="$HOME/.config/doti3/i3/scripts/.env"
+if [ -f "$ENV_EXAMPLE" ] && [ ! -f "$ENV_FILE" ]; then
+  cp "$ENV_EXAMPLE" "$ENV_FILE"
+  echo "Created i3/scripts/.env from template."
+fi
+"""
+
+[tasks.cron]
+description = "Install crontab entries from doti3/cron/"
+run = """
+CRON_DIR="$HOME/.config/doti3/cron"
+if [ -d "$CRON_DIR" ]; then
+  CURRENT_CRON="$(crontab -l 2>/dev/null || true)"
+  for cronfile in "$CRON_DIR"/*; do
+    [ -f "$cronfile" ] || continue
+    case "$(basename "$cronfile")" in
+      *.md|README*|.*) continue ;;
+    esac
+    while IFS= read -r line; do
+      [ -z "$line" ] || [[ "$line" == \\#* ]] && continue
+      if ! grep -qF "$line" <<< "$CURRENT_CRON"; then
+        CURRENT_CRON="$(printf '%s\\n%s' "$CURRENT_CRON" "$line")"
+      fi
+    done < "$cronfile"
+  done
+  printf '%s\\n' "$CURRENT_CRON" | crontab -
+  echo "Crontab synced."
+fi
+"""
+
+[tasks.udev]
+description = "Install udev monitor hotplug rule"
+run = """
+UDEV_RULE="/etc/udev/rules.d/99-monitor-hotplug.rules"
+UDEV_CMD="/usr/bin/su $USER -c $HOME/.config/i3/scripts/autodetect-display"
+
+if [ ! -f "$UDEV_RULE" ] || ! grep -q "$HOME/.config/i3" "$UDEV_RULE" 2>/dev/null; then
+  printf 'ACTION=="change", SUBSYSTEM=="drm", RUN+="%s"\\n' "$UDEV_CMD" | sudo tee "$UDEV_RULE" > /dev/null
+  sudo udevadm control --reload-rules
+  echo "udev monitor hotplug rule created/updated."
+else
+  echo "udev rule already present and up to date."
+fi
+"""
+
+[tasks.systemd]
+description = "Reload user systemd daemon and enable user service units"
+run = """
+if [ -n "${XDG_RUNTIME_DIR:-}" ] && [ -d "$XDG_RUNTIME_DIR" ]; then
+  systemctl --user daemon-reload
+  for svc in "$HOME/.config/systemd/user"/*.service; do
+    if [ -f "$svc" ]; then
+      svc_name=$(basename "$svc")
+      systemctl --user enable "$svc_name" >/dev/null 2>&1 || true
+    fi
+  done
+  loginctl enable-linger "$USER" 2>/dev/null || true
+  echo "systemd user services reloaded and enabled."
+fi
+"""
+
+[tasks.verify]
+description = "Smoke-test configs: i3, rofi, nvim, dotfiles status"
+run = """
+if command -v i3 >/dev/null 2>&1; then
+  i3 -C "$HOME/.config/doti3/i3/config" && echo "i3 config OK"
+fi
+if command -v nvim >/dev/null 2>&1; then
+  nvim --headless +qa 2>/dev/null && echo "nvim OK"
+fi
+for theme in "$HOME/.config/doti3"/rofi/*.rasi; do
+  [ -f "$theme" ] || continue
+  rofi -theme "$theme" -dump-theme >/dev/null 2>&1 && echo "rofi theme OK: $(basename "$theme")"
+done
+mise dot status
+"""
+
+[tasks.doctor]
+description = "System health check: nvim checkhealth, i3 syntax, symlink matrix validation"
+run = """
+echo "=== 1. Checking i3wm Configuration ==="
+i3 -C "$HOME/.config/doti3/i3/config" && echo "✓ i3 syntax valid"
+
+echo "\\n=== 2. Checking Neovim Health ==="
+nvim --headless -c "checkhealth" -c "qa" > /tmp/nvim-health.log 2>&1 && echo "✓ Neovim checkhealth generated (/tmp/nvim-health.log)"
+
+echo "\\n=== 3. Checking Dotfile Symlink Matrix ==="
+mise dot status
+
+echo "\\n=== 4. Checking Mise Managed Tools ==="
+mise ls
+"""
+
+[tasks.clean]
+description = "Clean orphaned packages, pacman cache, and prune unused mise tool versions"
+run = """
+echo "=== 1. Checking for Orphaned Pacman Packages ==="
+orphans=$(pacman -Qtdq 2>/dev/null || true)
+if [ -n "$orphans" ]; then
+  echo "Removing orphaned packages: $orphans"
+  sudo pacman -Rns --noconfirm $orphans
+else
+  echo "No orphaned packages found."
+fi
+
+echo "\\n=== 2. Cleaning Pacman Cache (keeping 2 most recent) ==="
+if command -v paccache >/dev/null 2>&1; then
+  sudo paccache -r -k 2
+else
+  echo "paccache not found, skipping cache trim."
+fi
+
+echo "\\n=== 3. Pruning Unused Mise Tool Builds ==="
+mise prune --yes
+echo "✓ Mise clean complete."
+"""

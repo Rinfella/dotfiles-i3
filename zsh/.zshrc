@@ -13,6 +13,20 @@ for config_file in "$ZDOTDIR/conf.d/"*.zsh; do
   source "$config_file"
 done
 
-# Initialize Starship prompt (must be at the end)
-eval "$(starship init zsh)"
+# Initialize Starship prompt (cached init script for instant startup)
+if command -v starship >/dev/null 2>&1; then
+  _starship_bin="${commands[starship]}"
+  _starship_cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/starship.zsh"
+  if [[ ! -s "$_starship_cache" || "$_starship_bin" -nt "$_starship_cache" ]]; then
+    mkdir -p "${_starship_cache:h}"
+    starship init zsh > "$_starship_cache" 2>/dev/null
+  fi
+  [[ -s "$_starship_cache" ]] && source "$_starship_cache"
+fi
+
+# Fastfetch banner on interactive terminal launch (skipped in non-interactive / subagent commands)
+if [[ -o interactive ]] && [ -z "$FASTFETCH_RUN" ] && [ -z "$SSH_CONNECTION" ] && [ -z "$SUBAGENT" ] && command -v fastfetch >/dev/null 2>&1; then
+  export FASTFETCH_RUN=1
+  fastfetch
+fi
 

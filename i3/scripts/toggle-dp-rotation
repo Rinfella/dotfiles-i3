@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Toggle DisplayPort-1 rotation between portrait (left) and landscape (normal)
+
+if ! xrandr | grep -q "^DisplayPort-1 connected"; then
+    notify-send -u normal "Display Rotation" "DisplayPort-1 not connected"
+    exit 1
+fi
+
+# Get current rotation from the connection line
+current_rotation=$(xrandr --query --verbose | grep "^DisplayPort-1 connected" | grep -oP '(?<=\) )\w+(?= \()')
+
+if [[ "$current_rotation" == "left" ]]; then
+    xrandr --output DisplayPort-1 --rotate normal
+    notify-send -u low "Display Rotation" "DisplayPort-1 → Landscape"
+else
+    xrandr --output DisplayPort-1 --rotate left
+    notify-send -u low "Display Rotation" "DisplayPort-1 → Portrait"
+fi

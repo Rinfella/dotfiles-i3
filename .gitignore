@@ -38,6 +38,7 @@ ai/*
 !ai/AGENTS.md
 ai/env*
 ai/*.env
+docs/
 opencode/.caveman-active
 opencode/kb
 opencode/memory

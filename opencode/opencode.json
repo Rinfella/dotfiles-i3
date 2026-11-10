@@ -10,160 +10,235 @@
             },
             "models": {
                 "combo-code-heavy": {
-                    "name": "OmniRoute (Code Heavy Priority)",
-                    "limit": { "context": 200000, "output": 8192 },
+                    "name": "OmniRoute (Code Heavy Priority - Multi-Provider)",
+                    "limit": {
+                        "context": 1048576,
+                        "output": 65536
+                    },
                     "reasoning": true
                 },
                 "combo-reason-architect": {
-                    "name": "OmniRoute (Reason & Architect Priority)",
-                    "limit": { "context": 1048576, "output": 65536 },
+                    "name": "OmniRoute (Reason & Architect Priority - Multi-Provider)",
+                    "limit": {
+                        "context": 1048576,
+                        "output": 65536
+                    },
                     "reasoning": true
                 },
                 "combo-fast-chat": {
-                    "name": "OmniRoute (Fast Chat Round-Robin)",
-                    "limit": { "context": 200000, "output": 8192 }
+                    "name": "OmniRoute (Fast Chat Round-Robin - 100% Free)",
+                    "limit": {
+                        "context": 1048576,
+                        "output": 65536
+                    }
                 },
                 "combo-free-overflow": {
-                    "name": "OmniRoute (Free Overflow Round-Robin)",
-                    "limit": { "context": 200000, "output": 8192 }
+                    "name": "OmniRoute (Free Overflow Round-Robin - All Free Providers)",
+                    "limit": {
+                        "context": 1048576,
+                        "output": 65536
+                    }
                 },
-                "kiro/claude-sonnet-4.5": {
-                    "name": "Claude Sonnet 4.5 (Kiro)",
-                    "limit": { "context": 200000, "output": 8192 },
+                "auto/best-coding": {
+                    "name": "OmniRoute (Best Coding Auto)",
+                    "limit": {
+                        "context": 262144,
+                        "output": 16384
+                    },
                     "reasoning": true
                 },
-                "kiro/claude-haiku-4.5": {
-                    "name": "Claude Haiku 4.5 (Kiro)",
-                    "limit": { "context": 200000, "output": 8192 }
-                },
-                "kiro/qwen3-coder-next": {
-                    "name": "Qwen 3 Coder Next (Kiro)",
-                    "limit": { "context": 131072, "output": 8192 },
+                "auto/best-reasoning": {
+                    "name": "OmniRoute (Best Reasoning Auto)",
+                    "limit": {
+                        "context": 1048576,
+                        "output": 65536
+                    },
                     "reasoning": true
                 },
-                "kiro/deepseek-3.2": {
-                    "name": "DeepSeek V3.2 (Kiro)",
-                    "limit": { "context": 131072, "output": 8192 },
-                    "reasoning": true
+                "auto/best-fast": {
+                    "name": "OmniRoute (Best Fast Auto)",
+                    "limit": {
+                        "context": 1048576,
+                        "output": 65536
+                    }
                 },
-                "kiro/glm-5": {
-                    "name": "GLM-5 (Kiro)",
-                    "limit": { "context": 131072, "output": 8192 }
-                },
-                "kiro/minimax-m2.5": {
-                    "name": "MiniMax M2.5 (Kiro)",
-                    "limit": { "context": 200000, "output": 8192 }
-                },
-                "kiro/minimax-m2.1": {
-                    "name": "MiniMax M2.1 (Kiro)",
-                    "limit": { "context": 200000, "output": 8192 }
+                "auto/best-free": {
+                    "name": "OmniRoute (Best 100% Free Auto)",
+                    "limit": {
+                        "context": 1048576,
+                        "output": 65536
+                    }
                 },
                 "agy/claude-sonnet-4-6": {
-                    "name": "Claude Sonnet 4.6 (AGY Paid Subscription)",
-                    "limit": { "context": 200000, "output": 8192 },
+                    "name": "Claude Sonnet 4.6 (AGY Dual Account Pool)",
+                    "limit": {
+                        "context": 200000,
+                        "output": 8192
+                    },
                     "reasoning": true
                 },
-                "agy/claude-sonnet-4-6-high": {
-                    "name": "Claude Sonnet 4.6 High (AGY Paid Subscription)",
-                    "limit": { "context": 200000, "output": 8192 },
+                "agy/claude-opus-4-6-thinking": {
+                    "name": "Claude Opus 4.6 Thinking (AGY Dual Account Pool)",
+                    "limit": {
+                        "context": 1048576,
+                        "output": 65536
+                    },
                     "reasoning": true
                 },
-                "agy/gemini-3.1-pro-low": {
-                    "name": "Gemini 3.1 Pro (AGY)",
-                    "limit": { "context": 1048576, "output": 65536 },
+                "agy/gemini-3.8-flash-high": {
+                    "name": "Gemini 3.8 Flash High (AGY 1M Context)",
+                    "limit": {
+                        "context": 1048576,
+                        "output": 65536
+                    },
                     "reasoning": true
                 },
-                "agy/gemini-3.7-flash-high": {
-                    "name": "Gemini 3.7 Flash High (AGY)",
-                    "limit": { "context": 1048576, "output": 65536 },
+                "agy/gemini-3.8-flash-medium": {
+                    "name": "Gemini 3.8 Flash Medium (AGY 1M Context)",
+                    "limit": {
+                        "context": 1048576,
+                        "output": 65536
+                    },
                     "reasoning": true
                 },
-                "agy/gemini-3.7-flash-medium": {
-                    "name": "Gemini 3.7 Flash Medium (AGY)",
-                    "limit": { "context": 1048576, "output": 65536 },
-                    "reasoning": true
+                "agy/gemini-3.8-flash-low": {
+                    "name": "Gemini 3.8 Flash Low (AGY 1M Context)",
+                    "limit": {
+                        "context": 1048576,
+                        "output": 65536
+                    }
                 },
-                "agy/gemini-3.7-flash-low": {
-                    "name": "Gemini 3.7 Flash Low (AGY)",
-                    "limit": { "context": 1048576, "output": 65536 }
+                "agy/gemini-3.8-flash-tiered": {
+                    "name": "Gemini 3.8 Flash Tiered (AGY 1M Context)",
+                    "limit": {
+                        "context": 1048576,
+                        "output": 65536
+                    }
+                },
+                "agy/gemini-3.5-flash-lite": {
+                    "name": "Gemini 3.5 Flash Lite (AGY Ultra Fast)",
+                    "limit": {
+                        "context": 1048576,
+                        "output": 65536
+                    }
+                },
+                "agy/gemini-3-flash": {
+                    "name": "Gemini 3 Flash (AGY Fast)",
+                    "limit": {
+                        "context": 1048576,
+                        "output": 65536
+                    }
                 },
                 "mistral/codestral-latest": {
-                    "name": "Codestral Latest (Mistral)",
-                    "limit": { "context": 256000, "output": 8192 },
+                    "name": "Codestral Latest (Mistral 256k)",
+                    "limit": {
+                        "context": 256000,
+                        "output": 8192
+                    }
+                },
+                "free-ai/qwen-coder": {
+                    "name": "Qwen 3.6 Coder 35B (Free-AI)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
                     "reasoning": true
                 },
-                "mistral/devstral-latest": {
-                    "name": "Devstral Latest (Mistral)",
-                    "limit": { "context": 128000, "output": 8192 }
+                "free-ai/qwen7b": {
+                    "name": "Qwen 3.6 35B (Free-AI Fast)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
                 },
-                "mistral/mistral-small-latest": {
-                    "name": "Mistral Small Latest",
-                    "limit": { "context": 128000, "output": 8192 }
+                "kilocode/kilo-auto/free": {
+                    "name": "KiloCode Auto Free Tier",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
                 },
-                "mistral/mistral-large-latest": {
-                    "name": "Mistral Large Latest",
-                    "limit": { "context": 128000, "output": 8192 },
+                "kilocode/nvidia/nemotron-3.5-super-vl:free": {
+                    "name": "Nemotron 3.5 Super VL (KiloCode Free)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
                     "reasoning": true
                 },
-                "nvidia/mistralai/devstral-2-123b-instruct-2512": {
-                    "name": "Devstral 123B (NVIDIA NIM)",
-                    "limit": { "context": 131072, "output": 8192 },
-                    "reasoning": true
+                "kilocode/recursive/flint-v1.0:free": {
+                    "name": "Flint 1.0 (KiloCode Free)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
                 },
-                "nvidia/nvidia/nemotron-3-ultra-550b-a55b": {
-                    "name": "Nemotron 3 Ultra 550B (NVIDIA NIM)",
-                    "limit": { "context": 131072, "output": 8192 },
-                    "reasoning": true
-                },
-                "nvidia/nvidia/llama-3.3-nemotron-super-49b-v1": {
-                    "name": "Llama 3.3 Nemotron 49B (NVIDIA NIM)",
-                    "limit": { "context": 131072, "output": 8192 }
-                },
-                "nvidia/qwen/qwen3.5-397b-a17b": {
-                    "name": "Qwen 3.5 397B (NVIDIA NIM)",
-                    "limit": { "context": 131072, "output": 8192 }
-                },
-                "literouter/deepseek-r1": {
-                    "name": "DeepSeek R1 (LiteRouter)",
-                    "limit": { "context": 131072, "output": 16384 },
-                    "reasoning": true
-                },
-                "literouter/deepseek-v4-flash": {
-                    "name": "DeepSeek V4 Flash (LiteRouter)",
-                    "limit": { "context": 131072, "output": 8192 }
-                },
-                "literouter/deepseek-v3": {
-                    "name": "DeepSeek V3 (LiteRouter)",
-                    "limit": { "context": 131072, "output": 8192 }
-                },
-                "ollama-cloud/qwen3.5:397b": {
-                    "name": "Qwen 3.5 397B (Ollama Cloud)",
-                    "limit": { "context": 131072, "output": 8192 }
-                },
-                "ollama-cloud/deepseek-v4-pro": {
-                    "name": "DeepSeek V4 Pro (Ollama Cloud)",
-                    "limit": { "context": 131072, "output": 8192 },
-                    "reasoning": true
-                },
-                "ollama-cloud/deepseek-v4-flash": {
-                    "name": "DeepSeek V4 Flash (Ollama Cloud)",
-                    "limit": { "context": 131072, "output": 8192 }
-                },
-                "ollama-cloud/gpt-oss:20b": {
-                    "name": "GPT-OSS 20B (Ollama Cloud)",
-                    "limit": { "context": 131072, "output": 8192 }
+                "ollama-cloud/gemma4:31b": {
+                    "name": "Gemma 4 31B (Ollama Cloud)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
                 },
                 "openrouter/openrouter/free": {
                     "name": "OpenRouter Free Auto",
-                    "limit": { "context": 131072, "output": 8192 }
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
                 },
-                "bedrock/anthropic.claude-sonnet-4-5": {
-                    "name": "Claude Sonnet 4.5 (Bedrock Quarantined)",
-                    "limit": { "context": 200000, "output": 8192 }
+                "openrouter/cohere/north-mini-code:free": {
+                    "name": "Cohere North Mini Code (OpenRouter Free)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
+                    "reasoning": true
                 },
-                "bedrock/anthropic.claude-opus-4-6": {
-                    "name": "Claude Opus 4.6 (Bedrock Quarantined)",
-                    "limit": { "context": 200000, "output": 8192 }
+                "openrouter/nvidia/nemotron-3.5-lightning:free": {
+                    "name": "Nemotron 3.5 Lightning (OpenRouter Free)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
+                    "reasoning": true
+                },
+                "openrouter/dots-studio/dots-3-note-preview:free": {
+                    "name": "Dots 3 Note Preview (OpenRouter Free)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
+                },
+                "literouter/deepseek-v3.2": {
+                    "name": "DeepSeek V3.2 (LiteRouter)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
+                },
+                "kiro/claude-sonnet-4.5": {
+                    "name": "Claude Sonnet 4.5 (Kiro - Quota resets 1st)",
+                    "limit": {
+                        "context": 200000,
+                        "output": 8192
+                    },
+                    "reasoning": true
+                },
+                "kiro/claude-haiku-4.5": {
+                    "name": "Claude Haiku 4.5 (Kiro - Quota resets 1st)",
+                    "limit": {
+                        "context": 200000,
+                        "output": 8192
+                    }
+                },
+                "kiro/qwen3-coder-next": {
+                    "name": "Qwen 3 Coder Next (Kiro - Quota resets 1st)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
+                    "reasoning": true
                 }
             }
         }
@@ -187,8 +262,13 @@
     "autoupdate": false,
     "lsp": {
         "laravel-lsp": {
-            "command": ["/home/rf/.config/composer/vendor/bin/laravel-lsp"],
-            "extensions": [".php", ".blade.php"]
+            "command": [
+                "/home/rf/.config/composer/vendor/bin/laravel-lsp"
+            ],
+            "extensions": [
+                ".php",
+                ".blade.php"
+            ]
         }
     },
     "watcher": {
@@ -213,14 +293,56 @@
     "mcp": {
         "sequential-thinking": {
             "type": "local",
-            "command": ["mcp-server-sequential-thinking"],
+            "command": [
+                "mcp-server-sequential-thinking"
+            ],
             "enabled": true
         },
         "github": {
             "type": "local",
-            "command": ["mcp-server-github"],
+            "command": [
+                "mcp-server-github"
+            ],
             "enabled": true,
-            "environment": {"GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_TOKEN}"}
+            "environment": {
+                "GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_TOKEN}"
+            }
+        },
+        "omniroute": {
+            "type": "local",
+            "command": [
+                "omniroute",
+                "--mcp"
+            ],
+            "enabled": true,
+            "environment": {
+                "OMNIROUTE_API_KEY": "{env:OMNIROUTE_API_KEY}",
+                "OMNIROUTE_BASE_URL": "http://127.0.0.1:20128"
+            }
+        },
+        "context7": {
+            "type": "local",
+            "command": [
+                "npx",
+                "-y",
+                "@upstash/context7-mcp"
+            ],
+            "enabled": true,
+            "environment": {
+                "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
+            }
+        },
+        "firecrawl": {
+            "type": "local",
+            "command": [
+                "npx",
+                "-y",
+                "firecrawl-mcp"
+            ],
+            "enabled": true,
+            "environment": {
+                "FIRECRAWL_API_KEY": "{env:FIRECRAWL_API_KEY}"
+            }
         }
     },
     "command": {
@@ -343,6 +465,36 @@
             "template": "Audit the codebase in $ARGUMENTS (or current working directory if empty). Follow procedure in ~/.config/opencode/kb/global/skills/audit-codebase.md strictly. Intelligently detect the tech stack, read READMEs and business logic, map out architecture, and act as a strict critic on security vulnerabilities, flaws, and technical debt. Deliver an executive report with pros, cons, and prioritized fixes.",
             "description": "Deep codebase & security audit",
             "agent": "code-reviewer"
+        },
+        "explore": {
+            "template": "Explore repository files, directory patterns, and symbol references for $ARGUMENTS using zero paid quota.",
+            "description": "Fast repo exploration via free models",
+            "agent": "explore"
+        },
+        "deep-debug": {
+            "template": "Perform deep architectural debugging and root-cause analysis on $ARGUMENTS. Investigate stack traces, async race conditions, and memory leaks.",
+            "description": "Deep architectural debugging",
+            "agent": "deep-debugger"
+        },
+        "docs": {
+            "template": "Draft, update, or audit documentation, docstrings, or README files for $ARGUMENTS adhering to project standards.",
+            "description": "Write and update documentation",
+            "agent": "docs"
+        },
+        "refactor-ponytail": {
+            "template": "Apply Ponytail lazy senior dev principles (YAGNI, stdlib first, delete boilerplate, boring over clever, single runnable assert check) to $ARGUMENTS.",
+            "description": "Ponytail lazy senior dev code simplification",
+            "agent": "refactor"
+        },
+        "git-pr": {
+            "template": "Inspect the git diff of current branch against main and generate a production-ready Pull Request title and description.",
+            "description": "Draft Pull Request description from git diff",
+            "agent": "docs"
+        },
+        "web-docs": {
+            "template": "Lookup official up-to-date documentation and code patterns for $ARGUMENTS using Context7 and Firecrawl.",
+            "description": "Search framework and library documentation",
+            "agent": "docs"
         }
     },
     "agent": {
@@ -355,10 +507,28 @@
                 "bash": "allow"
             }
         },
+        "deep-debugger": {
+            "description": "Deep architectural debugging, complex concurrency, and root-cause analysis for stubborn bugs.",
+            "mode": "subagent",
+            "model": "omniroute/combo-reason-architect",
+            "permission": {
+                "edit": "allow",
+                "bash": "allow"
+            }
+        },
+        "explore": {
+            "description": "Fast repository exploration, file pattern discovery, and symbol navigation with zero paid quota.",
+            "mode": "subagent",
+            "model": "omniroute/combo-free-overflow",
+            "permission": {
+                "edit": "deny",
+                "bash": "allow"
+            }
+        },
         "test": {
             "description": "Write and run tests. Creates test cases, runs suite, reports failures.",
             "mode": "subagent",
-            "model": "omniroute/kiro/qwen3-coder-next",
+            "model": "omniroute/mistral/codestral-latest",
             "permission": {
                 "edit": "allow",
                 "bash": "allow"
@@ -385,10 +555,19 @@
         "devops": {
             "description": "DevOps and system administration. Diagnoses systemd, Docker, journalctl, network ports, and package updates.",
             "mode": "subagent",
-            "model": "omniroute/combo-code-heavy",
+            "model": "omniroute/combo-fast-chat",
             "permission": {
                 "edit": "allow",
                 "bash": "allow"
+            }
+        },
+        "docs": {
+            "description": "Documentation, changelogs, docstrings, and README drafting using fast free models.",
+            "mode": "subagent",
+            "model": "omniroute/combo-fast-chat",
+            "permission": {
+                "edit": "allow",
+                "bash": "deny"
             }
         },
         "fastapi": {
@@ -437,8 +616,14 @@
     },
     "formatter": {
         "php-cs-fixer": {
-            "command": ["vendor/bin/php-cs-fixer", "fix", "$FILE"],
-            "extensions": [".php"]
+            "command": [
+                "vendor/bin/php-cs-fixer",
+                "fix",
+                "$FILE"
+            ],
+            "extensions": [
+                ".php"
+            ]
         }
     }
 }

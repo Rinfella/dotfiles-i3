@@ -6,11 +6,7 @@ map("n", "<leader>w", "<cmd>write<cr>", { desc = "Save" })
 map("n", "<leader>q", "<cmd>quit<cr>", { desc = "Quit" })
 map("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear Highlight" })
 
--- === Navigation ===
-map("n", "<C-h>", "<C-w>h", { desc = "Window Left" })
-map("n", "<C-j>", "<C-w>j", { desc = "Window Down" })
-map("n", "<C-k>", "<C-w>k", { desc = "Window Up" })
-map("n", "<C-l>", "<C-w>l", { desc = "Window Right" })
+-- === Navigation (managed by vim-tmux-navigator: <C-h>, <C-j>, <C-k>, <C-l>) ===
 
 -- === Editor Tools ===
 map("n", "<leader>e", "<cmd>Neotree reveal<cr>", { desc = "Explorer Reveal" })
@@ -34,6 +30,16 @@ map("n", "<leader>xl", "<cmd>Trouble lsp toggle focus=false<cr>", { desc = "LSP 
 map("n", "<leader>xq", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
 map("n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List (Trouble)" })
 
+-- Fast Diagnostic Navigation (Native Floating Popups)
+map("n", "[d", function() vim.diagnostic.goto_prev({ float = true }) end, { desc = "Previous Diagnostic" })
+map("n", "]d", function() vim.diagnostic.goto_next({ float = true }) end, { desc = "Next Diagnostic" })
+
+-- Fast Quickfix & Location List Navigation
+map("n", "[q", "<cmd>cprev<cr>", { desc = "Previous Quickfix Item" })
+map("n", "]q", "<cmd>cnext<cr>", { desc = "Next Quickfix Item" })
+map("n", "[l", "<cmd>lprev<cr>", { desc = "Previous Location Item" })
+map("n", "]l", "<cmd>lnext<cr>", { desc = "Next Location Item" })
+
 -- === 99 (AI Agent) ===
 map("n", "<leader>9v", function() require("99").visual() end, { desc = "99: Visual Selection" })
 map("n", "<leader>9V", function() require("99").visual({ prompt = true }) end, { desc = "99: Visual (Prompt)" })
@@ -42,33 +48,35 @@ map("n", "<leader>9l", function() require("99").view_logs() end, { desc = "99: V
 map("n", "<leader>9i", function() require("99").info() end, { desc = "99: Info" })
 
 -- === Notes (Grouped under <leader>n) ===
--- Obsidian
-map("n", "<leader>nn", "<cmd>Obsidian new<cr>", { desc = "Obsidian: New Note" })
-map("n", "<leader>nf", "<cmd>Obsidian search<cr>", { desc = "Obsidian: Find Note" })
-map("n", "<leader>nd", "<cmd>Obsidian today<cr>", { desc = "Obsidian: Daily Note" })
-map("n", "<leader>ny", "<cmd>Obsidian yesterday<cr>", { desc = "Obsidian: Yesterday" })
-map("n", "<leader>nm", "<cmd>Obsidian tomorrow<cr>", { desc = "Obsidian: Tomorrow" })
--- Show backlinks (what links to this note?) - Crucial for Zettelkasten
-map("n", "<leader>nb", "<cmd>Obsidian backlinks<cr>", { desc = "Obsidian: Backlinks" })
--- Show outgoing links (what does this note link to?)
-map("n", "<leader>nl", "<cmd>Obsidian links<cr>", { desc = "Obsidian: Outgoing Links" })
--- Open the current note in the actual Obsidian App
-map("n", "<leader>no", "<cmd>Obsidian open<cr>", { desc = "Obsidian: Open in App" })
-map("n", "<leader>ng", "<cmd>Obsidian tags<cr>", { desc = "Obsidian: Search Tags" })
--- Toggle Checkbox (cycles [ ] -> [x] -> [-])
-map("n", "<leader>nc", "<cmd>ObsidianToggleCheckbox<cr>", { desc = "Obsidian: Toggle Checkbox" })
--- Extract selected text to a new note
-map("v", "<leader>nx", "<cmd>ObsidianExtractNote<cr>", { desc = "Obsidian: Extract Selection" })
+-- Navigation
+map("n", "<leader>nn", "<cmd>Obsidian new<cr>",           { desc = "Obsidian: New Note" })
+map("n", "<leader>nf", "<cmd>Obsidian search<cr>",        { desc = "Obsidian: Find Note" })
+map("n", "<leader>nq", "<cmd>Obsidian quick_switch<cr>",  { desc = "Obsidian: Quick Switch" })
+map("n", "<leader>ng", "<cmd>Obsidian tags<cr>",          { desc = "Obsidian: Search Tags" })
 
--- Scretch (Scratchpad)
-map("n", "<leader>ns", "<cmd>Scretch<cr>", { desc = "Scretch: New" })
-map("n", "<leader>nS", "<cmd>Scretch new_named<cr>", { desc = "Scretch: New Named" })
-map("n", "<leader>nl", "<cmd>Scretch last<cr>", { desc = "Scretch: Open Last" })
-map("n", "<leader>nF", "<cmd>Scretch search<cr>", { desc = "Scretch: Find (Telescope)" })
-map("n", "<leader>nG", "<cmd>Scretch grep<cr>", { desc = "Scretch: Grep (Telescope)" })
+-- Daily Notes
+map("n", "<leader>nd", "<cmd>Obsidian today<cr>",         { desc = "Obsidian: Daily Note" })
+map("n", "<leader>ny", "<cmd>Obsidian yesterday<cr>",     { desc = "Obsidian: Yesterday" })
+map("n", "<leader>nm", "<cmd>Obsidian tomorrow<cr>",      { desc = "Obsidian: Tomorrow" })
 
--- Neoclip History
-map("n", "<leader>nc", "<cmd>Telescope neoclip initial_mode=normal<cr>", { desc = "Neoclip History" })
+-- Templates & Creation
+map("n", "<leader>nt", "<cmd>Obsidian template<cr>",      { desc = "Obsidian: Insert Template" })
+map("n", "<leader>ni", "<cmd>Obsidian new_from_template<cr>", { desc = "Obsidian: New from Template" })
+map("v", "<leader>nx", "<cmd>ObsidianExtractNote<cr>",    { desc = "Obsidian: Extract Selection → Note" })
+map("n", "<leader>ns", "<cmd>Obsidian new<cr>",           { desc = "Obsidian: New Scratch/Inbox" })
+
+-- Links & Graph
+map("n", "<leader>nb", "<cmd>Obsidian backlinks<cr>",     { desc = "Obsidian: Backlinks" })
+map("n", "<leader>nl", "<cmd>Obsidian links<cr>",         { desc = "Obsidian: Outgoing Links" })
+map("n", "<leader>nL", "<cmd>Obsidian link_new<cr>",      { desc = "Obsidian: Link to New Note" })
+map("v", "<leader>nk", "<cmd>Obsidian link<cr>",          { desc = "Obsidian: Link Selection" })
+
+-- Rename / workspace
+map("n", "<leader>nr", "<cmd>Obsidian rename<cr>",        { desc = "Obsidian: Rename Note" })
+map("n", "<leader>nw", "<cmd>Obsidian workspace<cr>",     { desc = "Obsidian: Switch Workspace" })
+
+-- Clipboard / Neoclip (moved off <leader>nc to avoid collision)
+map("n", "<leader>ch", "<cmd>Telescope neoclip initial_mode=normal<cr>", { desc = "Clipboard History (Neoclip)" })
 
 -- === Terminal ===
 map("n", "<leader>th", "<cmd>ToggleTerm direction=horizontal<cr>", { desc = "Term Horizontal" })

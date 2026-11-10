@@ -1,0 +1,102 @@
+# ~/.config/tmux/tmux-nerd-font-window-name.yml
+config:
+  fallback-icon: ""
+  show-name: true
+  icon-position: "left"
+  multi-pane-icon: "󰤽"
+
+icons:
+  # Shells
+  zsh: ""
+  bash: ""
+  sh: ""
+  fish: ""
+
+  # Editors & Viewers
+  nvim: ""
+  vim: ""
+  vi: ""
+  nano: ""
+  emacs: ""
+  hx: "󰔤"
+  helix: "󰔤"
+  bat: "󰈙"
+  glow: "󰈙"
+  man: "󰏥"
+  less: "󰏥"
+
+  # AI & Dev Agents
+  opencode: "󱚣"
+  claude: "󱚣"
+  copilot: "󱚣"
+  gemini: "󱚣"
+
+  # File Managers & TUI Tools
+  yazi: "󰈮"
+  ranger: "󰈮"
+  lf: "󰈮"
+  nnn: "󰈮"
+  fzf: ""
+  navi: "󰘳"
+
+  # Git & Version Control
+  git: "󰊢"
+  lazygit: "󰊢"
+  gitui: "󰊢"
+  gh: ""
+
+  # Containers & Monitoring
+  docker: "󰡨"
+  dockerd: "󰡨"
+  lazydocker: "󰡨"
+  k9s: "󱃾"
+  kubectl: "󱃾"
+  btop: "󰄛"
+  htop: "󰄛"
+  top: "󰄛"
+  glances: "󰄛"
+  fastfetch: "󰍹"
+  neofetch: "󰍹"
+
+  # Languages & Runtimes
+  python: "󰌠"
+  python3: "󰌠"
+  ipython: "󰌠"
+  node: "󰎙"
+  nodejs: "󰎙"
+  bun: "󰎙"
+  deno: "󰎙"
+  npm: "󰎙"
+  pnpm: "󰎙"
+  yarn: "󰎙"
+  php: "󰌟"
+  composer: "󰌟"
+  artisan: "󰌟"
+  go: "󰟓"
+  rustc: "󱘗"
+  cargo: "󱘗"
+  ruby: ""
+  gem: ""
+  java: ""
+  gradle: ""
+  lua: ""
+  zig: ""
+  elixir: ""
+
+  # Environment & Package Managers
+  mise: "󰒓"
+  direnv: "󰒓"
+  pacman: "󰮯"
+  yay: "󰮯"
+  paru: "󰮯"
+
+  # Network & Databases
+  curl: "󰌠"
+  wget: "󰌠"
+  ssh: "󰢬"
+  tmux: ""
+  mysql: "󰆼"
+  mariadb: "󰆼"
+  psql: "󰆼"
+  redis-cli: "󰆼"
+  mongosh: "󰆼"

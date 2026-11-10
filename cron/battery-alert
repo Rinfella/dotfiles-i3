@@ -1,0 +1,2 @@
+# Check battery level and alert via dunst if discharging & low
+*/3 * * * * ~/.config/i3/scripts/battery-alert

@@ -1,0 +1,25 @@
+# ~/.config/doti3/mise/tasks.toml
+# Common workflows for mise run <task>
+
+[tasks.update]
+description = "Upgrade all mise tools and dotfiles"
+run = [
+  "mise upgrade --bump",
+  "mise run packages",
+  "git -C ~/.config/doti3 fetch --pprune --all",
+  "git -C ~/.config/doti3 pull --ff-only"
+]
+
+[tasks.backup]
+description = "Create git archive backup of current state"
+run = [
+  "git -C ~/.config/doti3 archive --format=tar.gz --output=~/doti3-backup-$(date +%Y%m%d%H%M%S).tar.gz HEAD"
+]
+
+[tasks.cleanup]
+description = "Clean up temporary files and caches"
+run = [
+  "mise cache clean",
+  "rm -rf ~/.cache/zsh/starship.zsh",
+  "rm -rf ~/.cache/zsh/atuin.zsh"
+]

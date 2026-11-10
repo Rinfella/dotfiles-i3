@@ -26,7 +26,6 @@ alias vim='VIMINIT="source $XDG_CONFIG_HOME/vim/vimrc" vim'
 # z <dir>  — jump to frecent match
 # zi       — interactive fzf picker
 if command -v zoxide >/dev/null 2>&1; then
-  alias cd='z'
   alias cdi='zi'
 fi
 
@@ -35,9 +34,9 @@ if command -v bat >/dev/null 2>&1; then
   alias cat='bat'
   alias catp='bat --plain'           # no decorations, raw content
   alias bh='bat --paging=always'     # bat with pager for big files
-  alias batd='bat --diff'            # explicit git-diff view (only changed lines)
+  alias batd='git diff | bat -l diff' # pipe git diff through bat for syntax highlighting
   alias batl='bat --list-languages'  # list all supported syntax languages
-  alias catn='/usr/bin/cat'          # escape hatch: real cat, bypass bat entirely
+  alias catn='\command cat'           # escape hatch: real cat, bypass bat entirely
 fi
 
 # eza — modern ls with icons
@@ -49,10 +48,6 @@ if command -v eza >/dev/null 2>&1; then
   alias tree='eza --tree --icons'
 fi
 
-# fd — modern find
-if command -v fd >/dev/null 2>&1; then
-  alias find='fd'
-fi
 
 # jq — pretty JSON
 alias json='jq .'
@@ -99,11 +94,6 @@ alias dlogs="docker logs -f"
 # lazydocker — Docker TUI (like lazygit for containers)
 if command -v lazydocker >/dev/null 2>&1; then
   alias ldc='lazydocker'
-fi
-
-# duf — better df (disk usage overview with pretty output)
-if command -v duf >/dev/null 2>&1; then
-  alias df='duf'
 fi
 
 # ==========================================
