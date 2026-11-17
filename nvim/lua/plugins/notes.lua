@@ -27,7 +27,6 @@ return {
                 time_format = "%H:%M",
                 substitutions = {},
             },
-            completion = { nvim_cmp = true },
             legacy_commands = false,
             note_id_func = function(title)
                 local suffix = ""
@@ -42,6 +41,14 @@ return {
             end,
             attachments = {
                 folder = "assets/imgs",
+            },
+            cli = {
+                enable = false,
+            },
+            open = {
+                func = function(uri)
+                    vim.ui.open(uri)
+                end,
             },
             picker = {
                 name = "telescope.nvim",

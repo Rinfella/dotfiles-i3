@@ -120,13 +120,17 @@ yay -S --needed --noconfirm \
   blueman brightnessctl playerctl maim xdotool feh thunar \
   easyeffects imagemagick i3blocks polkit-gnome network-manager-applet \
   clipmenu rbw rofi-rbw composer php \
-  fzf ripgrep fd jq \
+  fzf ripgrep fd jq chafa \
   thefuck zsh-history-substring-search re2c
 """
 
 [tasks.dotfiles]
 description = "Apply dotfile symlinks via mise dot apply"
 run = "mise bootstrap dotfiles apply --yes"
+
+[tasks.npm]
+description = "Install global npm packages (mermaid-cli, etc.)"
+run = "npm install -g @mermaid-js/mermaid-cli"
 
 [tasks.env]
 description = "Initialize .env files from templates if missing"

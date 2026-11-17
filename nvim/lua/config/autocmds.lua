@@ -68,10 +68,10 @@ autocmd("LspAttach", {
 
 -- 4. Yank Highlight
 autocmd("TextYankPost", {
-    callback = function() vim.highlight.on_yank() end,
+    callback = function() vim.hl.on_yank() end,
 })
 
--- Autocmd for opening directoory as `nvim .` using telescope file browser
+-- Autocmd for opening directory as `nvim .` using telescope file browser
 vim.api.nvim_create_autocmd("VimEnter", {
     callback = function()
         local arg = vim.fn.argv()[1]
@@ -79,16 +79,22 @@ vim.api.nvim_create_autocmd("VimEnter", {
             vim.cmd.cd(arg)
             require("telescope").extensions.file_browser.file_browser({ path = arg })
         end
-    end,
-})
 
--- 5. Plugin Update Reminder
-vim.api.nvim_create_autocmd("VimEnter", {
-    callback = function()
         vim.defer_fn(function()
             if require("lazy.status").has_updates() then
                 vim.notify("🔄 Plugin updates available! Run :Lazy to update", vim.log.levels.INFO)
             end
         end, 3000)
+    end,
+})
+
+-- 6. Open current markdown file in Obsidian GUI app
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function()
+        vim.keymap.set("n", "<leader>mp", function()
+            local file = vim.fn.expand("%:p")
+            vim.cmd("silent !obsidian " .. vim.fn.shellescape(file) .. " &")
+        end, { desc = "Open in Obsidian" })
     end,
 })

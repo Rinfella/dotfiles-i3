@@ -186,7 +186,7 @@ bindsym XF86AudioMicMute exec amixer sset Capture toggle
 bindsym XF86AudioPlay exec --no-startup-id playerctl -a play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
-bindsym XF66AudioStop exec --no-startup-id playerctl stop
+bindsym XF86AudioStop exec --no-startup-id playerctl stop
 
 # Fallback media control shortcuts
 bindsym $mod+F9 exec --no-startup-id playerctl -a play-pause
@@ -307,7 +307,6 @@ set $lightgrey      #f0f0f0
 set $grey		    #b0b5bd
 set $mediumgrey		#8b8b8b
 set $yellowbrown	#e1b700
-set $black          #000000
 set $lightblack     #232b2b
 
 # define colors for windows:
