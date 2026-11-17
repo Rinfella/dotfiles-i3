@@ -129,8 +129,23 @@
                         "output": 65536
                     }
                 },
+                "agy/gemini-3.1-flash-lite": {
+                    "name": "Gemini 3.1 Flash Lite (AGY)",
+                    "limit": {
+                        "context": 1048576,
+                        "output": 65536
+                    }
+                },
+                "agy/gpt-oss-120b-medium": {
+                    "name": "GPT-OSS 120B Medium (AGY)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
+                    "reasoning": true
+                },
                 "mistral/codestral-latest": {
-                    "name": "Codestral Latest (Mistral 256k)",
+                    "name": "Codestral Latest (Mistral 256k - 947ms)",
                     "limit": {
                         "context": 256000,
                         "output": 8192
@@ -166,12 +181,13 @@
                     },
                     "reasoning": true
                 },
-                "kilocode/recursive/flint-v1.0:free": {
-                    "name": "Flint 1.0 (KiloCode Free)",
+                "free-ai/qwen3-coder": {
+                    "name": "Qwen 3 Coder (Free-AI)",
                     "limit": {
                         "context": 131072,
                         "output": 8192
-                    }
+                    },
+                    "reasoning": true
                 },
                 "ollama-cloud/gemma4:31b": {
                     "name": "Gemma 4 31B (Ollama Cloud)",
@@ -179,6 +195,22 @@
                         "context": 131072,
                         "output": 8192
                     }
+                },
+                "ollama-cloud/kimi-k2.6": {
+                    "name": "Kimi K2.6 (Ollama Cloud)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
+                    "reasoning": true
+                },
+                "ollama-cloud/nemotron-3-super": {
+                    "name": "Nemotron 3 Super (Ollama Cloud)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
+                    "reasoning": true
                 },
                 "openrouter/openrouter/free": {
                     "name": "OpenRouter Free Auto",
@@ -234,6 +266,267 @@
                 },
                 "kiro/qwen3-coder-next": {
                     "name": "Qwen 3 Coder Next (Kiro - Quota resets 1st)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
+                    "reasoning": true
+                },
+                "kiro/deepseek-3.2": {
+                    "name": "DeepSeek 3.2 (Kiro - Quota resets 1st)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
+                },
+                "kiro/glm-5": {
+                    "name": "GLM 5 (Kiro - Quota resets 1st)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
+                    "reasoning": true
+                },
+                "kiro/minimax-m2.1": {
+                    "name": "MiniMax M2.1 (Kiro - Quota resets 1st)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
+                },
+                "kiro/minimax-m2.5": {
+                    "name": "MiniMax M2.5 (Kiro - Quota resets 1st)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
+                },
+                "nvidia/nvidia/nemotron-3.5-super-vl-120b-a12b": {
+                    "name": "Nemotron 3.5 Super VL 120B (NVIDIA NIM)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
+                    "reasoning": true
+                },
+                "fastrouter/deepseek/deepseek-v4.1-flash": {
+                    "name": "DeepSeek V4.1 Flash (FastRouter Ultrafast)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
+                    "reasoning": true
+                },
+                "fastrouter/fastrouter/auto": {
+                    "name": "FastRouter Auto Free",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
+                },
+                "fastrouter/Qwen/Qwen2.5-72B-Instruct": {
+                    "name": "Qwen 2.5 72B Instruct (FastRouter)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
+                },
+                "tokenharbor/deepseek-v4.1-flash:free": {
+                    "name": "DeepSeek V4.1 Flash Free (TokenHarbor)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
+                    "reasoning": true
+                },
+                "tokenharbor/mimo-v2.6-flash:free": {
+                    "name": "Xiaomi MiMo V2.6 Flash Free (TokenHarbor)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
+                },
+                "tokenreply/beam-free": {
+                    "name": "Beam Free (TokenReply Ultrafast)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
+                },
+                "tokenreply/nemotron-3.5-lightning-free": {
+                    "name": "Nemotron 3.5 Lightning Free (TokenReply)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
+                    "reasoning": true
+                },
+                "tokenreply/deepseek-v4.1-flash": {
+                    "name": "DeepSeek V4.1 Flash (TokenReply)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
+                    "reasoning": true
+                },
+                "mnn-ai/gemini-3.1-flash-lite": {
+                    "name": "Gemini 3.1 Flash Lite (MNN AI)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
+                },
+                "mnn-ai/gpt-4.1-mini": {
+                    "name": "GPT-4.1 Mini (MNN AI)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
+                },
+                "mnn-ai/qwen-3.5-397b-a17b": {
+                    "name": "Qwen 3.5 397B A17B MoE (MNN AI)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
+                    "reasoning": true
+                },
+                "mnn-ai/nemotron-3.5-lightning": {
+                    "name": "Nemotron 3.5 Lightning (MNN AI)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
+                    "reasoning": true
+                },
+                "aion/aion-labs/aion-3.0": {
+                    "name": "Aion 3.0 (Aion Labs)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
+                    "reasoning": true
+                },
+                "aion/aion-labs/aion-3.0-mini": {
+                    "name": "Aion 3.0 Mini (Aion Labs Fast)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
+                },
+                "agnes/agnes-2.5-flash": {
+                    "name": "Agnes 2.5 Flash",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
+                },
+                "llm-kiwi/auto": {
+                    "name": "LLM Kiwi Auto Free",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
+                },
+                "llm-kiwi/minimax-m2.5": {
+                    "name": "MiniMax M2.5 (LLM Kiwi)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
+                },
+                "llm7/deepseek-v4.1-flash": {
+                    "name": "DeepSeek V4.1 Flash (LLM7)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
+                    "reasoning": true
+                },
+                "llm7/gemini-3.8-flash-high": {
+                    "name": "Gemini 3.8 Flash High (LLM7)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
+                    "reasoning": true
+                },
+                "void-ai/deepseek-v4.1-flash": {
+                    "name": "DeepSeek V4.1 Flash (Void AI)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
+                    "reasoning": true
+                },
+                "void-ai/qwen3-coder-480b-a35b-instruct": {
+                    "name": "Qwen 3 Coder 480B A35B (Void AI MoE)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
+                    "reasoning": true
+                },
+                "void-ai/sonar": {
+                    "name": "Perplexity Sonar Web Search (Void AI)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
+                },
+                "void-ai/gpt-4.1-mini": {
+                    "name": "GPT-4.1 Mini (Void AI - 15ms)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
+                },
+                "void-ai/gemini-2.5-flash": {
+                    "name": "Gemini 2.5 Flash (Void AI)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
+                },
+                "tokenreply/nemotron-3.5-super-vl-free": {
+                    "name": "Nemotron 3.5 Super VL Free (TokenReply)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
+                    "reasoning": true
+                },
+                "dahl/MiniMaxAI/MiniMax-M2.7": {
+                    "name": "MiniMax M2.7 (Dahl - 1025ms)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    },
+                    "reasoning": true
+                },
+                "agnes/agnes-3.0-flash": {
+                    "name": "Agnes 3.0 Flash (Agnes - 996ms)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
+                },
+                "agnes/agnes-3.0-flash-none": {
+                    "name": "Agnes 3.0 Flash None (Agnes - 604ms)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
+                },
+                "kilocode/liquid/lfm-3-1.7b:free": {
+                    "name": "Liquid LFM 3 1.7B Free (KiloCode - 846ms)",
+                    "limit": {
+                        "context": 131072,
+                        "output": 8192
+                    }
+                },
+                "fastrouter/deepseek/deepseek-v4.1-flash-1017": {
+                    "name": "DeepSeek V4.1 Flash 1017 (FastRouter - 948ms)",
                     "limit": {
                         "context": 131072,
                         "output": 8192
@@ -457,8 +750,18 @@
             "agent": "build"
         },
         "health": {
-            "template": "Audit OmniRoute upstream health status: check active connections for Kiro, AGY, NVIDIA, Mistral, and LiteRouter via local gateway.",
-            "description": "Check AI provider health and status",
+            "template": "Audit OmniRoute upstream health status: run omniroute_get_health, check active connections across all 23 providers via omniroute_check_quota, and test live combo latency.",
+            "description": "Check AI provider health and status across all providers",
+            "agent": "devops"
+        },
+        "combos": {
+            "template": "List all active OmniRoute combos, their model chains, fallback sequences, and routing strategies using omniroute_list_combos.",
+            "description": "Inspect active OmniRoute model combos and fallbacks",
+            "agent": "devops"
+        },
+        "speed": {
+            "template": "Analyze live provider latency percentiles and pick the fastest available models using omniroute_pick_fastest_model.",
+            "description": "Rank fastest reliable providers from live telemetry",
             "agent": "devops"
         },
         "audit-codebase": {
